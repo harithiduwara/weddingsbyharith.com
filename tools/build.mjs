@@ -17,6 +17,7 @@ import { fileURLToPath } from 'node:url';
 import { renderTemplate } from './template.mjs';
 import { optimizeAll } from './optimize-images.mjs';
 import { picture, preloadLink, fullSrc } from './media.mjs';
+import { applyBasePath } from './basepath.mjs';
 import siteConfig, { isTodo } from '../site.config.mjs';
 import collections from '../content/collections.mjs';
 import packages from '../content/packages.mjs';
@@ -31,6 +32,18 @@ const DIST = join(ROOT, 'dist');
 const args = new Set(process.argv.slice(2));
 const PRODUCTION = args.has('--production');
 const SKIP_IMAGES = args.has('--skip-images');
+
+/**
+ * --preview-url=<url> builds for a staging origin, typically the GitHub project
+ * page, so the site can be looked at before the custom domain's DNS is cut over.
+ * It rewrites internal URLs for the sub-path, points canonicals at the staging
+ * origin, omits CNAME (which would otherwise redirect the staging URL away),
+ * and marks every page noindex so it cannot compete with the real site.
+ */
+const previewArg = [...args].find((a) => a.startsWith('--preview-url='));
+const PREVIEW = previewArg ? new URL(previewArg.slice('--preview-url='.length)) : null;
+const BASE_PATH = PREVIEW ? PREVIEW.pathname.replace(/\/+$/, '') : '';
+const ORIGIN = PREVIEW ? PREVIEW.origin : siteConfig.url;
 
 const BUDGETS = { js: 20 * 1024, css: 48 * 1024 }; // NFR-03
 
@@ -177,7 +190,11 @@ function jsonLd(page, ctx) {
 /* ── Main ──────────────────────────────────────────────────────────────── */
 
 const started = Date.now();
-log(`\n▸ Building ${siteConfig.name} ${PRODUCTION ? '(production)' : '(preview)'}`);
+log(
+  `\n▸ Building ${siteConfig.name} ` +
+    `${PRODUCTION ? '(production)' : '(preview content)'}` +
+    `${PREVIEW ? ` → staging at ${ORIGIN}${BASE_PATH}` : ''}`,
+);
 
 const placeholders = findPlaceholders();
 
@@ -422,7 +439,8 @@ for (const page of pages) {
     })),
     page: {
       ...page,
-      canonical: `${siteConfig.url}${page.route === '/404' ? '/404' : page.route}`,
+      canonical: `${ORIGIN}${BASE_PATH}${page.route === '/404' ? '/404' : page.route}`,
+      noindex: PREVIEW ? true : page.noindex,
       fullTitle:
         page.route === '/'
           ? `${siteConfig.name} — ${siteConfig.tagline}`
@@ -431,6 +449,7 @@ for (const page of pages) {
     ogImage: fullSrc(ogEntry),
   };
   ctx.ogImage = fullSrc(ogEntry);
+  ctx.ogImageAbs = `${ORIGIN}${BASE_PATH}${fullSrc(ogEntry)}`;
   ctx.page.jsonLd = jsonLd(page, ctx);
   ctx.page.preload = page.route === '/' ? globals.heroPreload : '';
 
@@ -442,7 +461,7 @@ for (const page of pages) {
   }
   // Conditional blocks leave ragged line ends behind; trimming them keeps the
   // output diffable and satisfies the validator's no-trailing-whitespace rule.
-  const html = renderTemplate(layout, { ...ctx, content }, partials)
+  const html = applyBasePath(renderTemplate(layout, { ...ctx, content }, partials), BASE_PATH)
     .split('\n')
     .map((line) => line.trimEnd())
     .filter((line, i, all) => !(line === '' && all[i - 1] === ''))
@@ -468,9 +487,13 @@ const css = await bundle(
 const js = await bundle('scripts', ['enhance.js'], '.js');
 
 await mkdir(join(DIST, 'assets'), { recursive: true });
-await writeFile(join(DIST, 'assets', 'site.css'), css);
+await writeFile(join(DIST, 'assets', 'site.css'), applyBasePath(css, BASE_PATH));
 await writeFile(join(DIST, 'assets', 'site.js'), js);
 await cp(join(SRC, 'assets'), join(DIST, 'assets'), { recursive: true });
+if (BASE_PATH) {
+  const manifestPath = join(DIST, 'assets', 'site.webmanifest');
+  await writeFile(manifestPath, applyBasePath(await readFile(manifestPath, 'utf8'), BASE_PATH));
+}
 
 const cssBytes = Buffer.byteLength(css);
 const jsBytes = Buffer.byteLength(js);
@@ -485,7 +508,7 @@ const sitemap =
   indexable
     .map(
       (p) =>
-        `  <url><loc>${siteConfig.url}${p.route}</loc>` +
+        `  <url><loc>${ORIGIN}${BASE_PATH}${p.route}</loc>` +
         `<changefreq>${p.route === '/' ? 'weekly' : 'monthly'}</changefreq>` +
         `<priority>${p.route === '/' ? '1.0' : p.route.startsWith('/portfolio') ? '0.8' : '0.6'}</priority>` +
         '</url>',
@@ -496,9 +519,17 @@ await writeFile(join(DIST, 'sitemap.xml'), sitemap);
 
 await writeFile(
   join(DIST, 'robots.txt'),
-  `User-agent: *\nAllow: /\n\nSitemap: ${siteConfig.url}/sitemap.xml\n`,
+  PREVIEW
+    ? `User-agent: *\nDisallow: /\n`
+    : `User-agent: *\nAllow: /\n\nSitemap: ${siteConfig.url}/sitemap.xml\n`,
 );
-await writeFile(join(DIST, 'CNAME'), `${siteConfig.domain}\n`);
+// A CNAME on a preview build would redirect the staging URL to the custom
+// domain, which is the one thing a preview must not do.
+if (PREVIEW) {
+  await rm(join(DIST, 'CNAME'), { force: true });
+} else {
+  await writeFile(join(DIST, 'CNAME'), `${siteConfig.domain}\n`);
+}
 await writeFile(join(DIST, '.nojekyll'), '');
 
 /* Gates --------------------------------------------------------------------- */

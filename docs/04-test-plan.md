@@ -24,7 +24,7 @@ running preview server.
 
 | Suite                          | Count    | Status       |
 | ------------------------------ | -------- | ------------ |
-| Unit                           | 55       | Passing      |
+| Unit                           | 69       | Passing      |
 | HTML validity                  | 15 pages | 0 errors     |
 | End-to-end (desktop + mobile)  | 184      | Passing      |
 | Internal links                 | 573      | 0 broken     |
@@ -53,6 +53,12 @@ testimonial containing a `<` character.
 mandatory (an empty alt requires an explicit `decorative: true`), intrinsic
 `width`/`height` are always stamped, AVIF precedes WebP precedes JPEG, and eager
 images are never also lazy.
+
+**`tests/unit/basepath.test.mjs`** — the base-path rewriter runs over every
+finished document, so a mistake breaks every URL at once. Most of the suite is
+about what it must _not_ touch: absolute and protocol-relative URLs, `mailto:`,
+fragments, relative paths, slashes in ordinary prose, and — most importantly —
+the base64 `data:` URIs carrying each image's blur placeholder.
 
 **`tests/unit/content.test.mjs`** — catches the mistakes a photographer will
 actually make when publishing a wedding: referencing a photograph that is not in

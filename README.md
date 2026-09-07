@@ -11,13 +11,23 @@ npm ci
 npm run build     # → dist/
 npm run dev       # → http://localhost:4321
 npm test          # unit + HTML validity + end-to-end
+
+npm run deploy           # publish to the custom domain
+npm run deploy:staging   # publish to the github.io project URL instead
 ```
+
+**Live staging build:** <https://harithiduwara.github.io/weddingsbyharith.com/>
 
 > **Status: preview.** Every photograph is an Unsplash placeholder, the
 > testimonials are sample copy, the prices are indicative and the contact details
 > are unset. Every page carries a red ribbon saying so, and
 > `npm run build -- --production` refuses to build until they are replaced.
 > See [`docs/06-maintenance.md`](docs/06-maintenance.md) for the go-live checklist.
+>
+> The custom domain is **not** pointed here yet, and deliberately so:
+> `weddingsbyharith.com` currently redirects to Instagram. The cutover is a
+> business decision, documented in
+> [the runbook](docs/05-deployment-runbook.md#32-dns-for-the-custom-domain).
 
 ## What it does
 
@@ -32,7 +42,7 @@ investment, FAQ, journal with three articles, contact, privacy and a 404.
 | Cookies                  | none                                                      |
 | Accessibility            | WCAG 2.2 AA, 0 axe violations across 11 routes × 2 themes |
 | Works without JavaScript | entirely                                                  |
-| Tests                    | 55 unit + 184 end-to-end, 573 links checked               |
+| Tests                    | 69 unit + 184 end-to-end, 573 links checked               |
 | Hosting cost             | £0                                                        |
 
 Every photograph is served as AVIF with WebP and JPEG fallbacks at five widths,

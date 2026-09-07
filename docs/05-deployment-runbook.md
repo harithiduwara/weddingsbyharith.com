@@ -31,6 +31,27 @@ deliberately — to show the client, for instance:
 npm run deploy -- --force
 ```
 
+## 2b. Staging deploy
+
+The custom domain is not yet pointed at this site, so it is published to the
+GitHub project URL instead:
+
+**<https://harithiduwara.github.io/weddingsbyharith.com/>**
+
+```bash
+npm run deploy:staging
+```
+
+That runs `build --preview-url=…`, which differs from a normal build in four
+ways: internal URLs are rewritten for the `/weddingsbyharith.com` sub-path;
+canonicals and `og:image` point at the staging origin; `robots.txt` disallows
+everything and every page is `noindex`, so staging cannot compete with the real
+site in search; and **no `CNAME` is written** — a CNAME would make GitHub
+redirect the staging URL straight back to the custom domain.
+
+Switching to the custom domain later is `npm run deploy` plus the DNS work in
+§3.2. Nothing else changes.
+
 ## 3. First-time setup (one-off)
 
 ### 3.1 Enable Pages

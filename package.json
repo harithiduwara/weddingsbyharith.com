@@ -2,7 +2,7 @@
   "name": "weddingsbyharith.com",
   "version": "1.0.0",
   "private": true,
-  "description": "Marketing and portfolio website for Weddings by Harith — wedding photography.",
+  "description": "Marketing and portfolio website for Weddings by Harith \u2014 wedding photography.",
   "type": "module",
   "engines": {
     "node": ">=20.11.0"
@@ -10,6 +10,7 @@
   "scripts": {
     "build": "node tools/build.mjs",
     "build:clean": "rm -rf dist .cache && node tools/build.mjs",
+    "build:staging": "node tools/build.mjs --preview-url=https://harithiduwara.github.io/weddingsbyharith.com",
     "images": "node tools/optimize-images.mjs",
     "photos:fetch": "node tools/fetch-photos.mjs",
     "dev": "node tools/dev-server.mjs",
@@ -20,7 +21,8 @@
     "test:links": "linkinator http://localhost:4321 --recurse --silent --skip \"^https?://(?!localhost)\"",
     "format": "prettier --write \"**/*.{mjs,js,css,json,md}\"",
     "format:check": "prettier --check \"**/*.{mjs,js,css,json,md}\"",
-    "deploy": "node tools/deploy.mjs"
+    "deploy": "node tools/deploy.mjs",
+    "deploy:staging": "npm run build:staging && node tools/deploy.mjs --force"
   },
   "dependencies": {
     "sharp": "^0.33.5"

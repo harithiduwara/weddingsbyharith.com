@@ -69,3 +69,15 @@ someone could fall into again:
   none of which the generic instructions covered.
 - Held `html-validate` major updates in Dependabot: v9+ requires Node 22 and CI
   pins Node 20.
+
+### Added (post-deploy)
+
+- Base-path support (`npm run build:staging`, `npm run deploy:staging`), so the
+  site can be published to the GitHub project URL while the custom domain still
+  points elsewhere. Staging builds rewrite internal URLs for the sub-path, point
+  canonicals at the staging origin, omit `CNAME`, and mark every page `noindex`.
+
+### Fixed (post-deploy)
+
+- The home page pinned `og:image` to `hero-01`, the soft-focus frame that was
+  rejected as the hero. Every social share would have used it.
