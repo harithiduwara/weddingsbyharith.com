@@ -50,12 +50,13 @@ export default {
   // ── Credentials ────────────────────────────────────────────────────────
   about: {
     degree: 'BSc in Computer Science, University of Colombo',
-    graduated: 2023,
-    school: 'D. S. Senanayake College',
-    firstCamera: 2014,
-    firstPaidWork: 2016,
-    weddingsSince: 2019,
+    university: 'UCSC',
+    societyRole: 'Head of Photography for Pahasara, the UCSC Media Unit',
+    startedAge: 5,
+    firstWedding: 'December 2020',
+    weddingsSince: 2020,
     shootsCovered: '1,000+',
+    teamSize: '1–3 photographers',
     // Harith has assisted and second-shot for internationally recognised
     // wedding photographers. Names to be supplied; see docs/06-maintenance.md.
     mentors: TODO('names of the photographers you have worked with'),

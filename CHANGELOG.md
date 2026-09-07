@@ -4,6 +4,32 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project uses
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.5.0] — 2026-09-08
+
+### Changed
+
+- **The About page is now Harith's own copy**, in his own words, lightly set
+  rather than rewritten. It closes on his line: "Because your wedding happens
+  once. Your memories shouldn't."
+- Timeline corrected throughout: a camera in hand from around age five, Head of
+  Photography for Pahasara at UCSC, years of assisting, and the **first wedding
+  in December 2020**.
+
+### Fixed
+
+- The site said weddings had been photographed **since 2019**. The correct date
+  is December 2020. It appeared on the home page statistics, in the home
+  introduction and in the About narrative.
+- Removed the last "since 2017" framing along with it.
+
+### Note
+
+Details Harith mentioned earlier are not in his final copy and were therefore
+dropped rather than merged in: the Photographic Society at D. S. Senanayake
+College, winning Pilibimbu, saving bus fare for the Canon EOS 60D in 2014, and
+the first paid shoot for Cafe Noir in 2016. They are strong credentials and can
+be folded back in on request.
+
 ## [1.4.0] — 2026-09-08
 
 ### Changed
