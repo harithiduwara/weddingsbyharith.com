@@ -901,6 +901,15 @@ body:not(.has-hero) .header::before {
  text-transform: uppercase;
  color: var(--ink-faint);
 }
+.quote--closing {
+ border-left: 2px solid var(--clay);
+ padding-left: var(--sp-m);
+ margin-block: var(--sp-m);
+ max-width: none;
+}
+.quote--closing .quote__text {
+ font-style: normal;
+}
 .quote-rail {
  display: grid;
  grid-auto-flow: column;
