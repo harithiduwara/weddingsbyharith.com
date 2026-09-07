@@ -391,6 +391,7 @@ for (const p of decoratedJournal) {
 
 const formConfigured = !isTodo(siteConfig.forms.endpoint);
 const emailConfigured = !isTodo(siteConfig.contact.email);
+const mentorsKnown = !isTodo(siteConfig.about.mentors);
 
 const globals = {
   site: siteConfig,
@@ -403,6 +404,7 @@ const globals = {
   year: new Date().getFullYear(),
   formConfigured,
   emailConfigured,
+  mentorsKnown,
   isPreview: placeholders.length > 0,
   placeholderCount: placeholders.length,
   heroHtml: picture(img('barn-04'), {

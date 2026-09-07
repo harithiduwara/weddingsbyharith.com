@@ -63,7 +63,7 @@ test('every content image declares intrinsic dimensions', async ({ page }) => {
 });
 
 test('modern image formats are offered ahead of JPEG', async ({ page }) => {
-  await page.goto('/portfolio/cliffside-vows/');
+  await page.goto('/portfolio/ramparts-at-six/');
   const types = await page.evaluate(() =>
     [...document.querySelectorAll('.gallery__item source')].map((s) => s.type),
   );

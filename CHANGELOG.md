@@ -4,6 +4,48 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project uses
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] — 2026-09-07
+
+Real business details, and the site relocated from placeholder Britain to Sri
+Lanka. The copy was also rewritten throughout to sound like a person wrote it.
+
+### Changed
+
+- Business identity: **Harith Iduwara Weddings** (also _Weddings by Harith_),
+  nine years' experience, BSc in Computer Science from the University of
+  Colombo, phone and WhatsApp on 071 603 3886.
+- **Relocated to Sri Lanka.** The placeholder portfolio was entirely British —
+  Cornwall, Somerset, the Dolomites, £ pricing, UK GDPR — which was wrong for a
+  Sri Lankan photographer. Galleries are now Galle Fort, a tea bungalow in
+  Dickoya and a ridge above Ella.
+- Pricing moved from GBP to **LKR** (Rs 150,000 / 350,000 / 650,000), and the
+  tiers were restructured around how Sri Lankan weddings actually work: the
+  third tier is now _Wedding and Homecoming_ rather than a Western
+  "whole weekend".
+- FAQ and journal rewritten around real local conditions: nekath times fixing
+  the ceremony, sunset at six all year near the equator rather than the UK's
+  four-hour seasonal swing, and the two monsoons.
+- Privacy notice now cites Sri Lanka's Personal Data Protection Act No. 9 of
+  2022, retaining the GDPR note for overseas couples.
+- The Investment page moved from `/investment/` to **`/packages/`**, keeping
+  "Investment" as the navigation label.
+- Copy rewritten site-wide for a human voice: contractions, uneven sentence
+  rhythm, concrete detail, far fewer em-dashes, and none of the tidy aphorisms
+  that were closing every section.
+- Instagram set from the redirect the domain already points at; worth
+  confirming before launch.
+
+### Fixed
+
+- Phone numbers now use non-breaking spaces so they cannot wrap mid-digit, and
+  `tel:` links contain only the number — surrounding words inside the link were
+  failing the validator's `tel-non-breaking` rule.
+- The About page's sticky portrait was vertically centred by `.split`, leaving a
+  large dead gap above it.
+- A sentence opened with a numeral ("9 years later").
+- The smoke test asserted every page title contained "Weddings by Harith", which
+  the home page no longer does now that it leads with the business name.
+
 ## [1.0.0] — 2026-09-07
 
 First complete build. Not yet published with real content — see

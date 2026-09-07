@@ -79,7 +79,7 @@ describe('routing', () => {
     const routes = new Set([
       '/portfolio/',
       '/about/',
-      '/investment/',
+      '/packages/',
       '/journal/',
       '/faq/',
       '/contact/',

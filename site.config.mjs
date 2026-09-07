@@ -10,35 +10,50 @@ export const isTodo = (v) => typeof v === 'string' && v.startsWith('‹TODO:');
 
 export default {
   // ── Identity ───────────────────────────────────────────────────────────
-  name: 'Weddings by Harith',
-  shortName: 'WBH',
-  legalName: TODO('registered business name'),
+  name: 'Harith Iduwara Weddings',
+  altName: 'Weddings by Harith',
+  shortName: 'HIW',
+  legalName: TODO('registered business name, if different'),
   domain: 'weddingsbyharith.com',
   url: 'https://weddingsbyharith.com',
-  locale: 'en_GB',
+  locale: 'en_LK',
   lang: 'en',
 
-  tagline: 'Wedding photography, quietly observed.',
+  tagline: 'Wedding photography in Sri Lanka.',
   description:
-    'Documentary wedding photography for couples who would rather be in their ' +
-    'wedding than posed through it. Full-day coverage, unhurried and honest.',
+    'Documentary wedding photography across Sri Lanka and wherever else you are ' +
+    'getting married. Nine years of full days, photographed as they happened.',
 
   // ── Contact ────────────────────────────────────────────────────────────
   contact: {
-    email: TODO('enquiries@weddingsbyharith.com'),
-    phone: TODO('+44 20 0000 0000'),
-    phoneHref: TODO('+442000000000'),
-    baseCity: TODO('London'),
-    baseRegion: TODO('England'),
-    baseCountry: TODO('GB'),
-    serviceArea: TODO('the UK, Sri Lanka and anywhere a plane goes'),
-    responseTime: 'within two working days',
+    email: TODO('hello@weddingsbyharith.com'),
+    // Non-breaking spaces: a phone number must never wrap mid-digit.
+    phone: '071\u00A0603\u00A03886',
+    phoneIntl: '+94\u00A071\u00A0603\u00A03886',
+    phoneHref: '+94716033886',
+    whatsapp: '94716033886', // wa.me format, no plus
+    baseCity: TODO('the city you are based in, e.g. Colombo'),
+    baseRegion: 'Sri Lanka',
+    baseCountry: 'LK',
+    serviceArea: 'all of Sri Lanka, and abroad on request',
+    responseTime: 'within a day or two',
   },
 
   social: {
-    instagram: TODO('https://instagram.com/your-handle'),
+    // Confirmed indirectly: weddingsbyharith.com currently redirects here.
+    // Worth double-checking before launch.
+    instagram: 'https://www.instagram.com/weddingsbyharith',
     pinterest: null,
     vimeo: null,
+  },
+
+  // ── Credentials ────────────────────────────────────────────────────────
+  about: {
+    yearsExperience: 9,
+    degree: 'BSc in Computer Science, University of Colombo',
+    // Harith has assisted and second-shot for internationally recognised
+    // wedding photographers. Names to be supplied; see docs/06-maintenance.md.
+    mentors: TODO('names of the photographers you have worked with'),
   },
 
   // ── Enquiry form (ADR-0003) ────────────────────────────────────────────
@@ -61,12 +76,12 @@ export default {
   nav: [
     { label: 'Portfolio', href: '/portfolio/' },
     { label: 'About', href: '/about/' },
-    { label: 'Investment', href: '/investment/' },
+    { label: 'Investment', href: '/packages/' },
     { label: 'Journal', href: '/journal/' },
     { label: 'FAQ', href: '/faq/' },
   ],
 
   cta: { label: 'Check your date', href: '/contact/' },
 
-  founded: '2016',
+  founded: '2017',
 };

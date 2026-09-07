@@ -1,7 +1,7 @@
 <!--
 {
   "title": "About",
-  "description": "Harith is a documentary wedding photographer. Quiet on the day, thorough before it, and reachable afterwards.",
+  "description": "Harith Iduwara is a documentary wedding photographer based in Sri Lanka. Nine years, a Computer Science degree he never used, and a habit of arriving early.",
   "bodyClass": "page--about",
   "breadcrumb": [{ "label": "About", "href": "/about/" }],
   "ogImage": "about-01"
@@ -18,23 +18,72 @@
   <div class="shell">
     <div class="split split--wide-last">
       <figure class="about__portrait reveal">
-        {{{aboutHtml}}}
-        {{#if isPreview}}<figcaption class="card__meta">Placeholder — a portrait of Harith belongs here.</figcaption>{{/if}}
+        {{{aboutHtml}}} {{#if isPreview}}<figcaption class="card__meta">
+          Placeholder. A photograph of Harith belongs here.
+        </figcaption>{{/if}}
       </figure>
-      <div class="stack stack--m reveal">
-        <p class="lede">I have been photographing weddings since {{site.founded}}. Before that I shot news, which is where the habit of standing still and waiting comes from.</p>
-        <p>Documentary photography is not a style you apply in editing. It is a set of decisions you make on the day: to use the light that is there rather than the light you brought, to keep working while everyone eats, and to trust that the real thing happening in front of you is more interesting than anything you could arrange.</p>
-        <p>What that means in practice is that I am early, quiet, and slightly obsessive about preparation. I will have walked your venue. I will know what time the sun clears the treeline. I will have your timeline in my pocket. None of which you should ever have to think about.</p>
-        <p>Family groups are the one exception, and I do them gladly — quickly, in one place, from a list we agree in advance. Fifteen minutes, not an hour. You will want them in twenty years.</p>
-        <p>Away from weddings I am usually walking somewhere with a film camera and no particular plan, which is a habit that has never once made me money and has never once felt wasted.</p>
 
-        <h2 class="mt-l">The practical part</h2>
+      <div class="stack stack--m reveal">
+        <p class="lede">
+          I have a {{site.about.degree}}, and I have never really used it.
+        </p>
+        <p>
+          That is not entirely fair. Four years of Computer Science taught me how to sit with a
+          problem for a long time without panicking, and how to build things that keep working
+          when nobody is watching them. Both of those turn out to be most of this job. The
+          programming itself I gave up somewhere around 2017, which is when I started
+          photographing weddings and stopped doing anything else.
+        </p>
+        <p>
+          That was {{site.about.yearsExperience}} years ago. I still get a slightly sick feeling
+          in the car on the way to a ceremony, which I have decided is a good sign.
+        </p>
+
+        {{#if mentorsKnown}}
+        <p>
+          Most of what I know I learned standing behind {{site.about.mentors}}, carrying bags and
+          being told to move. Assisting is the only real apprenticeship this trade has.
+        </p>
+        {{else}}
+        <p>
+          Most of what I know I learned assisting and second-shooting for photographers a great
+          deal better than I was, carrying their bags and being told where not to stand. It is
+          the only real apprenticeship this trade has, and I would not trust anybody who skipped
+          it.
+        </p>
+        {{/if}}
+
+        <h2 class="mt-l">How I actually work</h2>
+        <p>
+          Documentary is not a filter you apply in Lightroom. It is a set of decisions you make
+          on the day: use the light that is in the room rather than the light you brought, keep
+          working while everyone eats, and trust that what is happening in front of you is more
+          interesting than anything you could arrange.
+        </p>
+        <p>
+          In practice that means I turn up early and I am quiet. I will have walked your venue. I
+          will know roughly what time the sun clears the wall and which corner of the hall goes
+          dark first. You should never have to think about any of it.
+        </p>
+        <p>
+          Family groups are the exception and I do them gladly. Quickly, in one place, from a
+          list we agree beforehand. Fifteen minutes, not an hour. You will want them in twenty
+          years even if you resent them on the day.
+        </p>
+        <p>
+          I work all over the island and I will travel further if you are getting married
+          somewhere else. I have photographed poruwa ceremonies before six in the morning,
+          churches in the rain, and one wedding where the generator failed during the speeches
+          and everybody carried on by phone torch. That one was excellent.
+        </p>
+
+        <h2 class="mt-l">The boring but important part</h2>
         <ul class="credentials" role="list">
-          <li>Fully insured — professional indemnity and public liability</li>
           <li>Two camera bodies, both recording to two cards at once</li>
-          <li>Every wedding backed up to three locations before I sleep</li>
-          <li>Photographs never published without your written consent</li>
-          <li>Available across {{site.contact.serviceArea}}</li>
+          <li>Every wedding copied to three places before I sleep</li>
+          <li>Nothing published without your written permission</li>
+          <li>Working across {{site.contact.serviceArea}}</li>
+          <li>Reachable on {{site.contact.phone}}, including by WhatsApp</li>
         </ul>
         <p><a class="link-arrow" href="/contact/">{{site.cta.label}}</a></p>
       </div>

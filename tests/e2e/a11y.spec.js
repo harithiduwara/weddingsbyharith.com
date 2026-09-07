@@ -24,7 +24,7 @@ test.describe('automated accessibility audit', () => {
 });
 
 test('the lightbox dialog is accessible when open', async ({ page }) => {
-  await page.goto('/portfolio/cliffside-vows/');
+  await page.goto('/portfolio/ramparts-at-six/');
   await page.locator('.gallery__item').first().click();
   await expect(page.locator('#lightbox')).toBeVisible();
 
@@ -49,7 +49,7 @@ test('a skip link is the first thing a keyboard reaches', async ({ page }) => {
 });
 
 test('every focusable control shows a visible focus ring', async ({ page }) => {
-  await page.goto('/investment/');
+  await page.goto('/packages/');
   await page.locator('.tier a.btn').first().focus();
   const outline = await page.locator(':focus').evaluate((el) => {
     const s = getComputedStyle(el);
@@ -90,7 +90,7 @@ test('NFR-11: the dark colour scheme is supported and legible', async ({ page })
 });
 
 test('every image on a gallery page carries alt text', async ({ page }) => {
-  await page.goto('/portfolio/cliffside-vows/');
+  await page.goto('/portfolio/ramparts-at-six/');
   const missing = await page.evaluate(() =>
     [...document.images].filter((i) => !i.hasAttribute('alt')).map((i) => i.src),
   );

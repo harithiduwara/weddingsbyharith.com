@@ -1,43 +1,43 @@
 /** FAQ content (FR-09). Also emitted as FAQPage JSON-LD (FR-14). */
 export default [
   {
-    q: 'How far in advance should we book?',
-    a: 'Most couples book twelve to eighteen months out, and Saturdays between May and September go first. That said, I keep a small amount of room for short-notice weddings — if your date is close, ask anyway rather than assuming it has gone.',
+    q: 'How far ahead do people usually book?',
+    a: 'Nine months to a year, and the December–January dates go first. April is the other crush. That said, I keep a bit of room for short-notice weddings, so if your date is close, ask anyway instead of assuming it has gone.',
   },
   {
-    q: 'What does "documentary" actually mean in practice?',
-    a: 'It means I photograph what happens rather than arranging what happens. In practice: no shot list to work through, no stopping the day to pose, and no asking forty people to look at a hedge. The exception is family groups, which I will happily do — quickly, and in one place — because you will want them in twenty years.',
+    q: 'My nekath is at 6:42 in the morning. Is that a problem?',
+    a: 'No, and thank you for telling me the exact minute, because plenty of people do not. Auspicious times are the one fixed point in the whole day and everything else gets built around them. I have photographed poruwa ceremonies at quarter past five in the morning. I will be there before you are.',
   },
   {
-    q: 'Do you travel?',
-    a: 'Yes, regularly and gladly. Travel within sixty miles is included; beyond that it is charged at cost and agreed in writing before you book, so there is never a surprise line on an invoice.',
+    q: 'Do you shoot poruwa, church, Nikah and Hindu ceremonies?',
+    a: 'All of them. I have worked enough weddings in this country to know when to put the camera down, where not to stand, and which parts you will want photographed even though nobody thinks to ask. If your family has a custom I am unlikely to have seen, tell me on the call and I will read up beforehand.',
   },
   {
-    q: 'How many photographs do we get, and when?',
-    a: 'A full day is typically around 700 edited photographs. A sneak-peek gallery of thirty or so arrives within 72 hours; the full gallery within six weeks, and usually sooner outside of peak season.',
+    q: 'What about the homecoming?',
+    a: 'Book it. I know it costs more and I know it feels like the day that matters is the first one, but the homecoming is where everybody finally relaxes. It is consistently the better set of photographs. You can add it to a single-day booking later if you would rather decide nearer the time.',
   },
   {
-    q: 'Can we print the photographs ourselves?',
-    a: 'Yes. Every package includes a personal print licence and full-resolution downloads, so you can print whatever you like, wherever you like, forever. I will happily recommend a lab.',
+    q: 'What does "documentary" mean in practice?',
+    a: 'I photograph what happens instead of arranging what happens. No shot list to grind through, no stopping the day to pose, and no lining forty people up in front of a hedge. Family groups are the exception and I do those gladly: quickly, in one place, from a list we agree in advance, because you will want them in twenty years.',
   },
   {
-    q: 'What happens if you are ill on the day?',
-    a: 'I carry professional indemnity and public liability insurance, and I am part of a network of photographers who cover for one another. If I genuinely cannot be there, a photographer whose work I trust will be, and you would be refunded the difference. In nine years it has not happened.',
+    q: 'What if it rains?',
+    a: 'It will, at some point, and it is genuinely fine. Overcast light is the best light there is, and a downpour pushes everyone into fewer rooms which is better for photographs, not worse. Buy ten plain umbrellas, agree an indoor spot for family groups in advance, then stop checking the forecast. It will not change what happens.',
   },
   {
-    q: 'Do you use backup equipment?',
-    a: 'Two camera bodies on me at all times, both writing to two memory cards simultaneously. Cards are backed up to two separate drives before I go to bed, and to encrypted offsite storage the following day. Nothing has ever lived in only one place.',
+    q: 'How many photographs, and when do we get them?',
+    a: 'A full day is usually around 700 edited photographs. About thirty come back within three days so you have something to look at while you are still on a high, and the full gallery lands within six weeks. Outside the December rush it is normally sooner.',
   },
   {
-    q: 'We are quite private. Will our photographs end up online?',
-    a: 'Only with your explicit, written permission — it is opt-in in the contract, not opt-out. Plenty of the weddings I am proudest of are not on this website for exactly that reason.',
+    q: 'Can we print them ourselves?',
+    a: 'Yes. Full resolution downloads and a personal print licence come with every package, so you can print what you like, where you like, for as long as you like. Ask me and I will point you at a lab that will not wreck the colour.',
   },
   {
-    q: 'What do you need from us on the day?',
-    a: 'Almost nothing. A rough timeline in advance, somebody who can point out which relative is which, and permission to keep working while you eat. That is genuinely it.',
+    q: 'What happens if you get sick, or a card fails?',
+    a: 'Two camera bodies on me all day, both writing to two cards at once, so nothing has ever existed in only one place. Everything is copied to two drives before I sleep and to offsite storage the next day. If I am genuinely unable to be there I have photographers I trust who will cover, and you get the difference back. It has not come up yet.',
   },
   {
-    q: 'How do we book?',
-    a: 'Send an enquiry with your date and venue. If I am free we will have a call — no pitch, just working out whether we get on. After that a contract and a 25% retainer hold the date, and the balance is due four weeks before the wedding.',
+    q: 'Will our photographs end up on Instagram?',
+    a: 'Only if you say yes in writing. It is opt-in in the contract, not opt-out, and you can change your mind afterwards. Some of the weddings I am proudest of are not on this website for exactly that reason.',
   },
 ];

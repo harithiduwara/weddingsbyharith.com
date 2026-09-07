@@ -1,76 +1,86 @@
 /**
- * Investment tiers (FR-06). Prices are placeholders — see docs/06-maintenance.md.
+ * Package tiers (FR-06).
+ *
+ * Prices are indicative and flagged as placeholder until Harith confirms them.
+ * They are plain numbers so they stay sortable; the build formats them.
  */
 export default {
-  currency: 'GBP',
-  symbol: '£',
+  currency: 'LKR',
+  symbol: 'Rs ',
   placeholder: true,
   note:
-    'Every wedding is quoted individually. These are the shapes most couples ' +
-    'start from, not a menu you have to choose off.',
+    'Sri Lankan weddings come in a lot of shapes, so I quote every one separately. ' +
+    'These three are just the shapes I get asked for most.',
   tiers: [
     {
-      slug: 'elopement',
-      name: 'The Elopement',
-      price: 1450,
+      slug: 'small',
+      name: 'The Small One',
+      price: 150000,
       priceNote: 'from',
       summary:
-        'For the two of you, a witness or two, and a very good reason to be somewhere beautiful.',
+        'Registrations, a poruwa in your parents’ garden, a church service with forty people in it. Small is not less.',
       hours: 'Up to 4 hours',
       includes: [
-        'Up to four hours of coverage',
-        'Pre-wedding planning call and location scouting notes',
+        'Up to four hours, whenever in the day you need them',
+        'A call beforehand to work out the running order',
         'Around 250 edited photographs',
-        'Private online gallery, downloadable at full resolution',
-        'Personal print licence',
+        'Private online gallery, full resolution, downloadable',
+        'Print however many you like, forever',
       ],
       excludes: ['Second photographer', 'Album'],
       popular: false,
     },
     {
-      slug: 'signature',
-      name: 'The Signature',
-      price: 2950,
+      slug: 'wedding-day',
+      name: 'The Wedding Day',
+      price: 350000,
       priceNote: 'from',
-      summary: 'Full-day documentary coverage. What most couples book, and what I would book.',
+      summary:
+        'The whole day. Getting ready, the ceremony, the hotel, the dancing, the bit at midnight when everyone has stopped performing.',
       hours: '10 hours',
       includes: [
-        'Ten hours, from getting ready to the dance floor',
-        'Two planning calls and a venue walkthrough',
+        'Ten hours from the first hairpin to the last song',
+        'Two planning calls and a visit to your venue before the day',
         'Around 700 edited photographs',
-        'Private online gallery, downloadable at full resolution',
-        'Personal print licence',
-        'Sneak-peek gallery within 72 hours',
+        'Private online gallery, full resolution, downloadable',
+        'Print however many you like, forever',
+        'Thirty or so photographs back within three days',
       ],
       excludes: ['Album'],
       popular: true,
     },
     {
-      slug: 'weekend',
-      name: 'The Whole Weekend',
-      price: 4800,
+      slug: 'wedding-and-homecoming',
+      name: 'Wedding and Homecoming',
+      price: 650000,
       priceNote: 'from',
-      summary: 'Multi-day weddings, welcome dinners, and the morning after — covered end to end.',
-      hours: 'Two to three days',
+      summary:
+        'Both days, properly. Most couples who book one day end up wishing they had booked the homecoming too.',
+      hours: 'Two days',
       includes: [
-        'Coverage across two or three days',
-        'Second photographer throughout the wedding day',
-        'Unlimited planning calls',
+        'Full coverage of the wedding day and the homecoming',
+        'A second photographer with me on the wedding day',
+        'As many planning calls as you want',
         'Around 1,400 edited photographs',
-        'Private online gallery, downloadable at full resolution',
-        'Personal print licence',
-        'Sneak-peek gallery within 72 hours',
-        'A 40-page fine-art album, designed with you',
+        'Private online gallery, full resolution, downloadable',
+        'Print however many you like, forever',
+        'Thirty or so photographs back within three days',
+        'A 40-page album, laid out with you rather than at you',
       ],
       excludes: [],
       popular: false,
     },
   ],
   addons: [
-    { name: 'Second photographer', price: 550, unit: 'per day' },
-    { name: 'Fine-art album, 40 pages', price: 690, unit: '' },
-    { name: 'Parent album duplicates', price: 240, unit: 'each' },
-    { name: 'Rehearsal dinner coverage', price: 480, unit: 'up to 3 hours' },
-    { name: 'Travel beyond 60 miles', price: null, unit: 'at cost, agreed upfront' },
+    { name: 'Second photographer', price: 45000, unit: 'per day' },
+    { name: 'Homecoming, added to a single-day booking', price: 180000, unit: '' },
+    { name: 'Album, 40 pages', price: 65000, unit: '' },
+    { name: 'Extra album for the parents', price: 22000, unit: 'each' },
+    {
+      name: 'Travel outside the Western Province',
+      price: null,
+      unit: 'at cost, agreed before you book',
+    },
+    { name: 'Overseas weddings', price: null, unit: 'flights and accommodation only' },
   ],
 };

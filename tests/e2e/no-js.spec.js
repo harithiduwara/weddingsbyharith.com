@@ -37,7 +37,7 @@ test('the header is legible on pages without a hero', async ({ page }) => {
 });
 
 test('FR-04: gallery images are still reachable as plain links', async ({ page }) => {
-  await page.goto('/portfolio/cliffside-vows/');
+  await page.goto('/portfolio/ramparts-at-six/');
   const href = await page.locator('.gallery__item').first().getAttribute('href');
   expect(href).toMatch(/^\/assets\/img\/.+\.jpg$/);
   const res = await page.request.get(href);

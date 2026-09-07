@@ -6,7 +6,7 @@ test.describe('every page renders', () => {
     test(`${name} (${path}) loads with a heading and a title`, async ({ page }) => {
       const res = await page.goto(path);
       expect(res.status()).toBe(200);
-      await expect(page).toHaveTitle(/Weddings by Harith/);
+      await expect(page).toHaveTitle(/Harith/);
       await expect(page.locator('h1')).toHaveCount(1);
       await expect(page.locator('h1')).not.toBeEmpty();
     });
@@ -35,7 +35,7 @@ test('FR-02: the portfolio lists every collection and each one opens', async ({ 
 });
 
 test('FR-03: a collection page shows its full gallery', async ({ page }) => {
-  await page.goto('/portfolio/cliffside-vows/');
+  await page.goto('/portfolio/ramparts-at-six/');
   await expect(page.locator('.gallery__item')).toHaveCount(16);
   await expect(page.locator('.collection__story p')).toHaveCount(3);
 });
@@ -58,14 +58,14 @@ test('FR-09: FAQ answers expand', async ({ page }) => {
 });
 
 test('FR-06: pricing shows three tiers with formatted prices', async ({ page }) => {
-  await page.goto('/investment/');
+  await page.goto('/packages/');
   await expect(page.locator('.tier')).toHaveCount(3);
-  await expect(page.locator('.tier__price').first()).toContainText('£1,450');
+  await expect(page.locator('.tier__price').first()).toContainText('Rs 150,000');
   await expect(page.locator('.tier--popular')).toHaveCount(1);
 });
 
 test('FR-04: the lightbox opens, advances, and closes on Escape', async ({ page }) => {
-  await page.goto('/portfolio/cliffside-vows/');
+  await page.goto('/portfolio/ramparts-at-six/');
   const dialog = page.locator('#lightbox');
   await expect(dialog).toBeHidden();
 

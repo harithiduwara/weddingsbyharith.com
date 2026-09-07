@@ -4,43 +4,37 @@
  * ⚠️  EVERY ENTRY BELOW IS PLACEHOLDER COPY. These are not real reviews from
  * real clients. They exist so the layout can be designed and tested.
  *
- * Publishing fabricated testimonials on a live commercial site is dishonest
- * and, in the UK, a breach of the Consumer Protection from Unfair Trading
- * Regulations. The build enforces this: `--production` fails while any entry
- * is flagged `placeholder: true`. Replace with real, permissioned quotes.
+ * Publishing invented testimonials on a live commercial site is dishonest and
+ * breaches Sri Lanka's Consumer Affairs Authority Act on misleading claims.
+ * The build enforces this: `--production` fails while any entry is flagged
+ * `placeholder: true`. Replace them with real, permissioned quotes.
  */
 export default [
   {
     placeholder: true,
     quote:
-      'We told him we hated having our photo taken. He said that was fine and ' +
-      'then more or less disappeared for nine hours. The gallery came back and ' +
-      'my mother cried at a photograph of her own hands.',
+      'We told him we hated having our photo taken and he said that was fine, then more or less vanished for nine hours. My mother cried at a photograph of her own hands.',
     author: 'Placeholder — replace with a real client quote',
     meta: 'Venue, month year',
   },
   {
     placeholder: true,
     quote:
-      'The thing I did not expect was how calm the day felt. He had already ' +
-      'walked the venue, already knew where the light would be at six, and so ' +
-      'nobody had to think about photographs at any point.',
+      'Our nekath was at 5:15am. He was at the house before the makeup artist, which I did not think was possible, and he had already worked out where the light was going to come from.',
     author: 'Placeholder — replace with a real client quote',
     meta: 'Venue, month year',
   },
   {
     placeholder: true,
     quote:
-      'Seven hundred photographs and not one of them is a line of people ' +
-      'standing in front of a hedge. It looks exactly like the day felt.',
+      'Seven hundred photographs and not one of them is a row of relatives standing in front of a hedge. It looks like the day felt, which is all we asked for.',
     author: 'Placeholder — replace with a real client quote',
     meta: 'Venue, month year',
   },
   {
     placeholder: true,
     quote:
-      'Booked eight weeks out after our original photographer cancelled. He ' +
-      'replied the same evening, and honestly the panic stopped there.',
+      'We nearly skipped the homecoming to save money. He talked us into it. The homecoming photographs are the ones on our wall.',
     author: 'Placeholder — replace with a real client quote',
     meta: 'Venue, month year',
   },

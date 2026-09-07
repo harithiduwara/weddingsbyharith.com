@@ -2,7 +2,8 @@
 
 ## 1. Business context
 
-Harith is a wedding photographer trading as **Weddings by Harith**. The website is the
+Harith Iduwara is a documentary wedding photographer based in Sri Lanka, trading as
+**Harith Iduwara Weddings** (also **Weddings by Harith**), with nine years' experience. The website is the
 top of the sales funnel: a couple discovers it via search, Instagram, or a venue
 referral, spends 2–6 minutes evaluating the work, and either submits an enquiry or
 leaves. There is no e-commerce, no login, and no user-generated content.
@@ -56,7 +57,7 @@ evidence of shooting at real venues.
 | FR-03 | Each collection has its own page with a full gallery of images and a short narrative                                            | US-1       | Must     |
 | FR-04 | Gallery images open in a keyboard-navigable lightbox with next/previous and Escape-to-close                                     | US-1, US-6 | Must     |
 | FR-05 | About page covers the photographer, approach, and credentials                                                                   | US-4       | Must     |
-| FR-06 | Investment page lists three packages with inclusions and a starting price                                                       | US-2       | Must     |
+| FR-06 | Investment page (`/packages/`) lists three tiers with inclusions and a starting price                                           | US-2       | Must     |
 | FR-07 | Contact page provides a validated enquiry form capturing name, email, date, venue, and message                                  | US-3       | Must     |
 | FR-08 | Enquiry form degrades to a working `mailto:` link when no form backend is configured                                            | US-3       | Must     |
 | FR-09 | FAQ page answers the ten most common pre-booking questions                                                                      | US-2, US-4 | Should   |
@@ -95,7 +96,8 @@ static site to an application; see [ADR-0001](adr/0001-static-site-over-framewor
 - **C1** Hosting is GitHub Pages: static files only, no server-side execution.
 - **C2** The domain `weddingsbyharith.com` is owned by the client and its DNS is
   under their control. DNS records are documented but not applied by this project.
-- **C3** Photography in this repository is Unsplash-licensed placeholder work. It is
+- **C3** Photography in this repository is Unsplash-licensed placeholder work, and the
+  couples, venues and testimonials are invented. It is
   clearly marked in `content/collections.mjs` and `photos/CREDITS.md` and **must** be
   replaced with the photographer's own work before commercial launch.
 - **C4** Business contact details are placeholders pending client input; the build

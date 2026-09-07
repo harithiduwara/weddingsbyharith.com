@@ -2,11 +2,11 @@
 export const ROUTES = [
   { path: '/', name: 'home' },
   { path: '/portfolio/', name: 'portfolio' },
-  { path: '/portfolio/cliffside-vows/', name: 'collection' },
+  { path: '/portfolio/ramparts-at-six/', name: 'collection' },
   { path: '/portfolio/long-table-low-light/', name: 'collection 2' },
   { path: '/portfolio/two-witnesses/', name: 'collection 3' },
   { path: '/about/', name: 'about' },
-  { path: '/investment/', name: 'investment' },
+  { path: '/packages/', name: 'investment' },
   { path: '/faq/', name: 'faq' },
   { path: '/journal/', name: 'journal' },
   { path: '/journal/timeline-that-actually-works/', name: 'article' },

@@ -39,12 +39,26 @@ Replace them with genuine, permissioned quotes from real clients and set
 `placeholder: false`.
 
 > Publishing invented testimonials on a live commercial site is dishonest, and
-> in the UK it breaches the Consumer Protection from Unfair Trading Regulations.
+> it breaches Sri Lanka's Consumer Affairs Authority Act on misleading claims.
 > The build gate exists to make shipping them require a deliberate act.
 
 ### 1.5 Set real prices
 
 `content/packages.mjs`. Then set `placeholder: false`.
+
+### 1.5b Two things only Harith can supply
+
+`site.config.mjs → about.mentors` is a placeholder for the names of the
+photographers you assisted. Fill it in and the About page swaps its generic
+paragraph for a specific credential line; leave it and the generic version
+stands, which is honest but weaker.
+
+`contact.baseCity` is likewise unset. Everything else on that page is real.
+
+The About page narrative is written from the facts you gave me — the Computer
+Science degree, nine years, the assisting. The connective tissue between those
+facts is my phrasing, not your biography. Read it once and make it sound like
+you, because it is the page that decides whether a couple trusts you.
 
 ### 1.6 Ship it
 
@@ -80,7 +94,7 @@ Add an entry to `content/journal.mjs`. The `body` is an array of
 ### Change prices, FAQs or packages
 
 `content/packages.mjs`, `content/faqs.mjs`. Nothing else to touch. Prices are
-plain numbers; the build formats them (`2950` → `£2,950`).
+plain numbers; the build formats them (`350000` → `Rs 350,000`).
 
 ## 3. Keeping it healthy
 

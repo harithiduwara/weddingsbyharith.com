@@ -6,33 +6,26 @@
  * run `npm run build`. No markup changes required (US-5).
  *
  * NOTE: all imagery here is Unsplash-licensed placeholder work — see
- * photos/CREDITS.md. Couple names are placeholders.
+ * photos/CREDITS.md — and the couples are invented. Replace both before launch.
  */
 export default [
   {
-    slug: 'cliffside-vows',
-    title: 'The Cliffside Vows',
+    slug: 'ramparts-at-six',
+    title: 'The Ramparts at Six',
     couple: 'Amara & Rohan',
     placeholder: true,
-    venue: 'A headland chapel above the Atlantic',
-    location: 'Cornwall, England',
-    season: 'Late September',
+    venue: 'Galle Fort, and a courtyard behind it',
+    location: 'Galle',
+    season: 'February',
     guests: 68,
     cover: 'coastal-03',
     featured: true,
     excerpt:
-      'Wind off the water, a borrowed veil, and eighty seconds of complete ' +
-      'silence before anyone remembered to clap.',
+      'Everyone wants the fort walls at six. We got there at half five and shared them with two other weddings.',
     story: [
-      'They had planned for a garden. The forecast had other ideas, and by ten ' +
-        'that morning the whole thing had moved to a chapel on the headland with ' +
-        'a door that would not stay shut.',
-      'Nobody minded. The wind took the ceremony readings and gave them back ' +
-        'louder. Amara walked in on her grandmother’s arm, both of them ' +
-        'laughing at the state of their hair, and the room turned like a tide.',
-      'I photographed most of the day from the edges. The frames I keep coming ' +
-        'back to are not the vows — they are the ninety minutes afterwards, ' +
-        'when everyone stood outside in the cold because nobody wanted it to end.',
+      'They wanted the ramparts at six, which is the right answer and also the answer every photographer in this country will give you.',
+      'The trouble with Galle in February is that everybody else wants it too. We were up on the wall by half five and shared it with two other weddings and roughly sixty tourists waiting for the same sunset. Amara did not care even slightly. She had been up since four getting her hair done and said the wind was the first thing all day that had felt good.',
+      'Most of what I actually like from this wedding happened later, after the light had gone and people had stopped arranging themselves. There is a photograph in here of Rohan’s father asleep in a plastic chair at eleven at night, still holding a plate. That one is my favourite.',
     ],
     images: [
       'coastal-03',
@@ -58,23 +51,19 @@ export default [
     title: 'Long Table, Low Light',
     couple: 'Priya & Tom',
     placeholder: true,
-    venue: 'A working barn with the doors open',
-    location: 'Somerset, England',
-    season: 'Midsummer',
+    venue: 'The veranda of a tea bungalow',
+    location: 'Dickoya, hill country',
+    season: 'March',
     guests: 120,
     cover: 'barn-02',
     featured: true,
     excerpt:
-      'One table, a hundred and twenty people, and a speech that ran forty ' +
-      'minutes over because nobody would sit down.',
+      'One table. A hundred and twenty people. Her mother thought it was a terrible idea for four months.',
     story: [
-      'Priya wanted one table. Not a top table — one table, everyone on it, ' +
-        'end to end down the middle of a barn that still smelled faintly of hay.',
-      'It worked because it forced people together. By nine the light had gone ' +
-        'amber and low, the kind that makes a photographer stop talking, and the ' +
-        'speeches had stopped being speeches and started being a conversation.',
-      'This is the gallery I send to couples who tell me they hate being ' +
-        'photographed. Almost nobody in it is looking at me.',
+      'Priya wanted one table. Not a top table. One table, a hundred and twenty people, running end to end down the veranda of a tea bungalow outside Dickoya.',
+      'Her mother thought this was a disaster waiting to happen, held that position for about four months, and then changed her mind somewhere around nine o’clock on the night. I have that on record, because I photographed her saying so.',
+      'What nobody planned for was the cold. It drops hard up there once the sun goes, and half the guests in these photographs are wearing somebody else’s shawl. The speeches ran forty minutes over. Not one person got up to leave.',
+      'If you hate having your photograph taken, this is the gallery I would send you. Hardly anyone in it is looking at me.',
     ],
     images: [
       'barn-02',
@@ -100,24 +89,17 @@ export default [
     title: 'Two Witnesses and a Mountain',
     couple: 'Elena & Jonah',
     placeholder: true,
-    venue: 'A ridge, four hours’ walk from the road',
-    location: 'The Dolomites, Italy',
-    season: 'Early October',
+    venue: 'A ridge above Ella, reached on foot',
+    location: 'Ella',
+    season: 'August',
     guests: 4,
     cover: 'elope-02',
     featured: true,
-    excerpt:
-      'Four people, one registrar who was a better hiker than any of us, and ' +
-      'a ceremony that lasted eleven minutes.',
+    excerpt: 'The ceremony lasted eleven minutes. That is shorter than the drive to the trailhead.',
     story: [
-      'They emailed in March asking whether I would be willing to carry my own ' +
-        'kit up a mountain. I said yes before I had properly looked at the route.',
-      'We left the refuge at four in the morning. The ceremony was at sunrise, ' +
-        'eleven minutes long, witnessed by Elena’s brother and a registrar ' +
-        'who out-walked all of us on the way back down.',
-      'An elopement is not a smaller wedding. It is a different thing entirely, ' +
-        'and it asks a different thing of the photographer — mostly, to stop ' +
-        'directing and start keeping up.',
+      'They emailed in March to ask whether I would be willing to walk up a mountain carrying my own kit. I said yes before I properly looked at the route, which is a habit I should probably break.',
+      'We left Ella at four in the morning in the dark. The ceremony was at sunrise and it lasted eleven minutes, which is shorter than the drive to the trailhead. Four people were there, and one of them was me.',
+      'An elopement is not a small wedding. It is a different job entirely. You stop directing, you start keeping up, and you carry your own water.',
     ],
     images: [
       'elope-02',

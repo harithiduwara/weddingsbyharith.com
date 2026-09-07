@@ -43,7 +43,7 @@ investment, FAQ, journal with three articles, contact, privacy and a 404.
 | Accessibility            | WCAG 2.2 AA, 0 axe violations across 11 routes × 2 themes |
 | Works without JavaScript | entirely                                                  |
 | Tests                    | 69 unit + 184 end-to-end, 573 links checked               |
-| Hosting cost             | £0                                                        |
+| Hosting cost             | Nothing                                                   |
 
 Every photograph is served as AVIF with WebP and JPEG fallbacks at five widths,
 with an inline blur placeholder and intrinsic dimensions — so a phone downloads

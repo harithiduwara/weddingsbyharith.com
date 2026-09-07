@@ -1,9 +1,9 @@
 <!--
 {
   "title": "Investment",
-  "description": "Wedding photography packages: elopement coverage, full-day documentary coverage, and multi-day weekends. Transparent starting prices.",
+  "description": "Wedding photography packages for Sri Lanka: half-day coverage, full wedding days, and wedding plus homecoming. Starting prices published, no enquiry required.",
   "bodyClass": "page--investment",
-  "breadcrumb": [{ "label": "Investment", "href": "/investment/" }]
+  "breadcrumb": [{ "label": "Investment", "href": "/packages/" }]
 }
 -->
 <section class="pagehead">
@@ -24,13 +24,15 @@
           <h2 class="card__title">{{name}}</h2>
           <p class="tier__hours">{{hours}}</p>
         </div>
-        <p class="tier__price"><small>{{priceNote}}</small>{{@root.packages.symbol}}{{priceDisplay}}</p>
+        <p class="tier__price">
+          <small>{{priceNote}}</small>{{@root.packages.symbol}}{{priceDisplay}}
+        </p>
         <p class="card__excerpt">{{summary}}</p>
         <ul class="tier__list" role="list">
           {{#each includes}}<li>{{this}}</li>{{/each}}
           {{#each excludes}}<li class="is-excluded">{{this}}</li>{{/each}}
         </ul>
-        <a class="btn btn--ghost btn--block" href="/contact/?package={{slug}}">Enquire</a>
+        <a class="btn btn--ghost btn--block" href="/contact/?package={{slug}}">Ask about this one</a>
       </div>
       {{/each}}
     </div>
@@ -45,12 +47,19 @@
     </div>
     <table class="addons">
       <caption class="sr-only">Optional additions and their prices</caption>
-      <thead><tr><th scope="col">Addition</th><th scope="col">Price</th></tr></thead>
+      <thead>
+        <tr>
+          <th scope="col">Addition</th>
+          <th scope="col">Price</th>
+        </tr>
+      </thead>
       <tbody>
         {{#each packages.addons}}
         <tr>
           <td>{{name}}</td>
-          <td>{{#if price}}{{@root.packages.symbol}}{{priceDisplay}}{{#if unit}} {{unit}}{{/if}}{{else}}{{unit}}{{/if}}</td>
+          <td>
+            {{#if price}}{{@root.packages.symbol}}{{priceDisplay}}{{#if unit}} {{unit}}{{/if}}{{else}}{{unit}}{{/if}}
+          </td>
         </tr>
         {{/each}}
       </tbody>
@@ -58,8 +67,20 @@
 
     <div class="stack stack--m mt-xl">
       <h2>How booking works</h2>
-      <p>A 25% retainer and a signed contract hold your date. The balance is due four weeks before the wedding, and I am happy to split it across however many payments suit you. There are no hidden extras — travel beyond sixty miles is the only variable, and it is agreed in writing before you commit.</p>
-      <p><a class="link-arrow" href="/faq/">Read the FAQ</a></p>
+      <p>
+        A signed contract and 25% holds your date. The rest is due four weeks before, and I am
+        happy to split that across as many payments as suits you. Say so on the call; it is a
+        normal thing to ask and I would rather you asked than quietly booked somebody cheaper.
+      </p>
+      <p>
+        There are no extras hiding anywhere. Travel outside the Western Province is the only
+        variable and it is agreed in writing before you commit, at cost, with no markup on it.
+      </p>
+      <p>
+        If none of these three shapes fits your wedding, that is normal and not a problem. Tell
+        me what you are actually doing and I will quote it.
+      </p>
+      <p><a class="link-arrow" href="/faq/">Questions people ask first</a></p>
     </div>
   </div>
 </section>

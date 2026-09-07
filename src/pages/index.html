@@ -1,7 +1,7 @@
 <!--
 {
   "title": "Home",
-  "description": "Documentary wedding photography for couples who would rather be in their wedding than posed through it. Full-day coverage, unhurried and honest.",
+  "description": "Documentary wedding photography in Sri Lanka. Nine years of full wedding days photographed as they actually happened, from Galle to the hill country.",
   "bodyClass": "page--home",
   "hasHero": true,
   "ogImage": "barn-04"
@@ -10,7 +10,7 @@
 <section class="hero">
   <div class="hero__media">{{{heroHtml}}}</div>
   <div class="shell hero__body">
-    <p class="eyebrow">Wedding photography</p>
+    <p class="eyebrow">Wedding photography · Sri Lanka</p>
     <h1 class="hero__title">The day, as it actually happened.</h1>
     <p class="hero__sub">{{site.description}}</p>
     <p><a class="btn btn--on-image" href="/portfolio/">See the work</a></p>
@@ -23,9 +23,20 @@
     <div class="split split--wide-first">
       <div class="stack stack--m reveal">
         <p class="eyebrow">The short version</p>
-        <h2>You will barely notice me. You will absolutely notice the photographs.</h2>
-        <p class="lede">I photograph weddings the way a documentary is filmed: I turn up early, work out where the light and the people are going to be, and then get out of the way.</p>
-        <p>There is no shot list to grind through and no hour spent arranging strangers in front of a hedge. What you get back is the actual texture of the day — your uncle mid-anecdote, the ten seconds before the doors opened, your mother's hands.</p>
+        <h2>You will barely notice me. You will notice the photographs.</h2>
+        <p class="lede">
+          I photograph weddings the way a documentary gets filmed. I turn up early, work out
+          where the light and the people are going to be, and then get out of the way.
+        </p>
+        <p>
+          There is no shot list to grind through and no hour spent arranging relatives in front
+          of a hedge. What comes back is the actual texture of the day. Your uncle mid-anecdote.
+          The ninety seconds before the doors opened. Your mother’s hands.
+        </p>
+        <p>
+          Nine years of this, all over the island, and I have still never photographed two
+          weddings that were the same shape.
+        </p>
         <p><a class="link-arrow" href="/about/">How I work</a></p>
       </div>
       <div class="reveal">{{{aboutHtml}}}</div>
@@ -38,7 +49,10 @@
     <div class="section__head reveal">
       <p class="eyebrow">Recent weddings</p>
       <h2>Whole days, start to finish</h2>
-      <p class="lede">Not a highlight reel stitched from forty weddings — complete galleries, so you can see what a full day with me actually looks like.</p>
+      <p class="lede">
+        Not a highlight reel stitched together from forty weddings. Complete galleries, so you
+        can see what an entire day with me actually looks like.
+      </p>
     </div>
 
     <div class="grid-3">
@@ -46,7 +60,9 @@
       <a class="card reveal" href="{{href}}">
         <div class="card__media">{{{coverHtml}}}</div>
         <h3 class="card__title">{{title}}</h3>
-        <p class="card__meta meta-list"><span>{{location}}</span><span>{{season}}</span></p>
+        <p class="card__meta meta-list">
+          <span>{{location}}</span><span>{{season}}</span>
+        </p>
         <p class="card__excerpt">{{excerpt}}</p>
       </a>
       {{/each}}
@@ -65,15 +81,26 @@
     <div class="approach">
       <div class="approach__item reveal">
         <h3>We talk first</h3>
-        <p>A call with no pitch in it. We work out what your day looks like, what you actually want photographed, and whether we get on — which matters more than any portfolio, given I will be next to you for ten hours.</p>
+        <p>
+          A call with no pitch in it. What your day actually looks like, what you want
+          photographed, and whether we get on. That last one matters more than any portfolio,
+          given I will be standing next to you for ten hours.
+        </p>
       </div>
       <div class="approach__item reveal">
         <h3>I do the homework</h3>
-        <p>I walk your venue, find where the light lands at six, and build a rough timeline with you. By the morning of the wedding there is nothing left to decide.</p>
+        <p>
+          I visit your venue, find where the light lands at five, and build a rough running
+          order with you around your nekath. By the morning of the wedding there is nothing left
+          to decide.
+        </p>
       </div>
       <div class="approach__item reveal">
         <h3>Then I disappear</h3>
-        <p>On the day I am quiet, early, and mostly behind you. Family groups take fifteen minutes because we planned them. The rest is yours.</p>
+        <p>
+          On the day I am early, quiet, and mostly behind you. Family groups take fifteen
+          minutes because we planned them properly. The rest of it is yours.
+        </p>
       </div>
     </div>
   </div>
@@ -102,13 +129,23 @@
       <div class="stack stack--m reveal">
         <p class="eyebrow">Investment</p>
         <h2>From {{packages.symbol}}{{packages.tiers.0.priceDisplay}}</h2>
-        <p class="lede">Three shapes of coverage, from a four-hour elopement to a whole weekend. Every wedding is quoted individually.</p>
-        <p><a class="link-arrow" href="/investment/">See what is included</a></p>
+        <p class="lede">
+          Three shapes of coverage, from a four-hour morning to a wedding and homecoming
+          together. Everything gets quoted individually anyway.
+        </p>
+        <p><a class="link-arrow" href="/packages/">See what is included</a></p>
       </div>
       <div class="stat-rail reveal">
-        <div class="stat"><span class="stat__n">{{site.founded}}</span><span class="stat__l">Photographing since</span></div>
-        <div class="stat"><span class="stat__n">700+</span><span class="stat__l">Photos, a full day</span></div>
-        <div class="stat"><span class="stat__n">6 wks</span><span class="stat__l">Typical delivery</span></div>
+        <div class="stat">
+          <span class="stat__n">{{site.about.yearsExperience}}</span
+          ><span class="stat__l">Years photographing</span>
+        </div>
+        <div class="stat">
+          <span class="stat__n">700+</span><span class="stat__l">Photos, a full day</span>
+        </div>
+        <div class="stat">
+          <span class="stat__n">6 wks</span><span class="stat__l">Typical delivery</span>
+        </div>
       </div>
     </div>
   </div>
