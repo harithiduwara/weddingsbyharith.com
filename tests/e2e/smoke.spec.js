@@ -65,6 +65,41 @@ test('FR-06: pricing shows every package with formatted prices', async ({ page }
   await expect(page.locator('.addons tbody tr')).toHaveCount(6);
 });
 
+test('every package CTA opens a WhatsApp chat naming that package', async ({ page }) => {
+  await page.goto('/packages/');
+  const ctas = page.locator('.tier a.btn');
+  await expect(ctas).toHaveCount(11);
+
+  const links = await ctas.evaluateAll((els) =>
+    els.map((a) => ({
+      href: a.href,
+      target: a.getAttribute('target'),
+      rel: a.getAttribute('rel'),
+      name: a.textContent.replace(/\s+/g, ' ').trim(),
+    })),
+  );
+
+  const messages = new Set();
+  for (const l of links) {
+    const url = new URL(l.href);
+    expect(url.origin + url.pathname).toBe('https://wa.me/94716033886');
+    expect(l.target).toBe('_blank');
+    // Without noopener the opened tab can navigate this one away.
+    expect(l.rel).toContain('noopener');
+
+    const text = url.searchParams.get('text');
+    expect(text, `no prefilled message on ${l.href}`).toBeTruthy();
+    messages.add(text);
+
+    // Eleven links reading only "Ask about this one" would be useless to a
+    // screen reader, so each must carry its package name.
+    expect(l.name).toMatch(/Ask about this one — .+/);
+  }
+
+  // Every package must produce its own distinct message.
+  expect(messages.size).toBe(11);
+});
+
 test('FR-04: the lightbox opens, advances, and closes on Escape', async ({ page }) => {
   await page.goto('/portfolio/weddings/');
   const dialog = page.locator('#lightbox');

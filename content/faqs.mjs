@@ -26,7 +26,7 @@ export default [
   },
   {
     q: 'How many photographs, and when do we get them?',
-    a: 'A full day is usually around 700 edited photographs. About thirty come back within three days so you have something to look at while you are still on a high, and the full gallery lands within six weeks. Outside the December rush it is normally sooner.',
+    a: 'It depends on the package: 150 on Lite, up to 500 on Gold, all edited and all at full resolution. A handful come back within a few days so you have something to look at while you are still on a high, and the full gallery lands within six weeks. Outside the December rush it is normally sooner.',
   },
   {
     q: 'Can we print them ourselves?',

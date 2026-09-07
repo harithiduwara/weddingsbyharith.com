@@ -4,6 +4,42 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project uses
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.0] — 2026-09-08
+
+### Changed
+
+- **Package CTAs open WhatsApp** instead of the contact form, each with the
+  package already named in the message. Built in `build.mjs` rather than the
+  template, because the message needs percent-encoding and the template engine
+  only does HTML escaping.
+- **The About page is now Harith's actual story**: his father's camera, a PSP
+  with a camera bolted to it, three years of saved bus fare, a Canon EOS 60D in
+  grade 11, the Photographic Society at D. S. Senanayake College, winning
+  Pilibimbu, a first paid food shoot for Cafe Noir in 2016, a Sony A7 III in
+  2019, and a Computer Science degree begun in a pandemic. It replaces the
+  version I had written from three bare facts.
+- Home page statistics now cite 1,000+ shoots and weddings since 2019.
+
+### Fixed
+
+- Copy claimed "around 700 edited photographs" for a full day. The real
+  packages deliver 150 to 500, so the site was over-promising against its own
+  price list. Corrected in the FAQ and on the home page.
+- "Nine years" appeared in several places on an inconsistent basis. Replaced
+  with the actual dates: paid work since 2016, weddings since 2019.
+- The generated WhatsApp message read "the Package I package (Engagements)",
+  since the non-wedding tiers are literally named "Package I".
+- WhatsApp URLs no longer contain HTML entities: `encodeURIComponent` leaves
+  apostrophes alone, which then became `&#39;` inside the href. Browsers decode
+  that correctly but it made the attribute ambiguous to read and to test.
+
+### Added
+
+- End-to-end test asserting all eleven package CTAs point at wa.me, open in a
+  new tab with `noopener`, carry a distinct prefilled message, and have an
+  accessible name that includes the package — eleven links reading only "Ask
+  about this one" would be useless to a screen reader.
+
 ## [1.3.0] — 2026-09-07
 
 Tooling to turn the Instagram account into real, named portfolio galleries.

@@ -22,7 +22,7 @@ export default {
   tagline: 'Wedding photography in Sri Lanka.',
   description:
     'Documentary wedding photography across Sri Lanka and wherever else you are ' +
-    'getting married. Nine years of full days, photographed as they happened.',
+    'getting married. Over a thousand shoots, photographed as they happened.',
 
   // ── Contact ────────────────────────────────────────────────────────────
   contact: {
@@ -49,8 +49,13 @@ export default {
 
   // ── Credentials ────────────────────────────────────────────────────────
   about: {
-    yearsExperience: 9,
     degree: 'BSc in Computer Science, University of Colombo',
+    graduated: 2023,
+    school: 'D. S. Senanayake College',
+    firstCamera: 2014,
+    firstPaidWork: 2016,
+    weddingsSince: 2019,
+    shootsCovered: '1,000+',
     // Harith has assisted and second-shot for internationally recognised
     // wedding photographers. Names to be supplied; see docs/06-maintenance.md.
     mentors: TODO('names of the photographers you have worked with'),
@@ -83,5 +88,5 @@ export default {
 
   cta: { label: 'Check your date', href: '/contact/' },
 
-  founded: '2017',
+  founded: '2016',
 };

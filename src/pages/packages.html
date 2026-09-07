@@ -29,16 +29,19 @@
           <h3 class="card__title">{{name}}</h3>
           <p class="tier__hours meta-list"><span>{{hours}}</span><span>{{team}}</span></p>
         </div>
-        <p class="tier__price"><small>from {{@root.packages.currency}}</small>
-          {{priceDisplay}}</p>
+        <p class="tier__price"><small>from {{@root.packages.currency}}</small> {{priceDisplay}}</p>
         <p class="card__excerpt">{{summary}}</p>
         <ul class="tier__list" role="list">
           {{#each includes}}
           <li>{{this}}</li>
           {{/each}}
         </ul>
-        <a class="btn btn--ghost btn--block" href="/contact/?package={{slug}}"
-          >Ask about this one</a
+        <a
+          class="btn btn--ghost btn--block"
+          href="{{whatsappHref}}"
+          target="_blank"
+          rel="noopener noreferrer"
+          >Ask about this one<span class="sr-only"> — {{name}}, on WhatsApp</span></a
         >
       </div>
       {{/each}}

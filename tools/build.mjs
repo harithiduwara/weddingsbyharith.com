@@ -261,10 +261,31 @@ const decoratedCollections = collections.map((c) => {
 // Prices are grouped for display (£2,950 not £2950) but kept as numbers in
 // content/packages.mjs so they stay sortable and machine-readable.
 const money = new Intl.NumberFormat('en-GB');
+// encodeURIComponent leaves ! ' ( ) * alone. They are legal in a query string,
+// but an apostrophe then gets HTML-escaped into &#39; inside the href, which
+// browsers do decode correctly but which makes the raw attribute ambiguous to
+// read and to test. Encoding them too keeps the URL free of anything that
+// needs HTML escaping at all.
+const encodeStrict = (s) =>
+  encodeURIComponent(s).replace(
+    /[!'()*]/g,
+    (c) => '%' + c.charCodeAt(0).toString(16).toUpperCase(),
+  );
+const waLink = (text) => `https://wa.me/${siteConfig.contact.whatsapp}?text=${encodeStrict(text)}`;
 const withPrice = (t) => ({ ...t, priceDisplay: money.format(t.price) });
 const decoratedPackages = {
   ...packages,
-  groups: packages.groups.map((g) => ({ ...g, tiers: g.tiers.map(withPrice) })),
+  groups: packages.groups.map((g) => ({
+    ...g,
+    tiers: g.tiers.map((t) => ({
+      ...withPrice(t),
+      // Phrased to read correctly for both "Gold" and "Package I", since the
+      // non-wedding tiers are literally named "Package I", "Package II".
+      whatsappHref: waLink(
+        `Hi Harith, I saw the ${t.name} option under ${g.name} on your website. Is my date free?`,
+      ),
+    })),
+  })),
   extras: packages.extras.map(withPrice),
   // Flattened for the enquiry form's package selector.
   allTiers: packages.groups.flatMap((g) =>
