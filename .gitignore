@@ -8,3 +8,7 @@ blob-report/
 *.log
 .env
 .env.*
+
+# Draft written by tools/import-instagram.mjs; review it, then move it over
+# content/collections.mjs. It is an artefact, not source.
+content/collections.generated.mjs

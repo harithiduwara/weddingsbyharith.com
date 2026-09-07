@@ -90,6 +90,58 @@ own entry:
 The portfolio index, home page, footer, sitemap and structured data all update
 themselves. No markup changes are required.
 
+### Import weddings from Instagram
+
+The posts on `@weddingsbyharith` are already-published weddings with the couples
+named in the captions, which makes them the natural source for real portfolio
+galleries. See [ADR-0006](adr/0006-instagram-content.md) for why this is an
+import rather than a feed widget.
+
+**1. Request the export.** In the Instagram app or on the web:
+
+> Settings → Accounts Centre → Your information and permissions →
+> Download your information → Download or transfer information →
+> select your account → **Some of your information** → tick **Posts** →
+> Download to device
+
+Then, and this matters:
+
+- **Format: JSON.** Not HTML. The importer needs the structured captions, and
+  it will stop with a clear message if it finds HTML instead.
+- **Media quality: High.** This is what gives you the original uploads rather
+  than compressed copies.
+
+The archive arrives by email, usually within a few hours.
+
+**2. Run the import.**
+
+```bash
+npm run instagram:import -- ~/Downloads/instagram-weddingsbyharith.zip
+```
+
+It copies the photographs into `photos/raw/`, prints a report of what it found,
+and writes a draft to `content/collections.generated.mjs`. It deliberately does
+**not** overwrite `content/collections.mjs` — grouping by caption is a guess and
+these are real, named clients.
+
+The report lists three things worth reading: the weddings it grouped, couples it
+skipped for having fewer than three photographs, and captions it could not read
+as a couple at all. Anything in the last two lists needs you, not the script.
+
+**3. Finish the draft.** Every generated entry has TODOs in it:
+
+- Write a real excerpt and story for each wedding.
+- **Rewrite the alt text.** What the importer generates is truthful but generic
+  ("Ruchith & Sandali on their wedding day — photograph 3"). It should describe
+  what is actually in the frame.
+- Pick a better cover than the first photograph if one exists.
+- **Confirm each couple is happy to be named and shown on the site.** They are
+  on your public Instagram already, but a portfolio page under their names is a
+  different thing, and the privacy page promises you ask.
+
+Then move the file over `content/collections.mjs` and run
+`npm run build && npm test`.
+
 ### Write a journal post
 
 Add an entry to `content/journal.mjs`. The `body` is an array of

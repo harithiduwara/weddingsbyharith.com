@@ -14,6 +14,8 @@ npm test          # unit + HTML validity + end-to-end
 
 npm run deploy           # publish to the custom domain
 npm run deploy:staging   # publish to the github.io project URL instead
+
+npm run instagram:import -- <export.zip>   # build galleries from an Instagram export
 ```
 
 **Live staging build:** <https://harithiduwara.github.io/weddingsbyharith.com/>
@@ -105,6 +107,7 @@ Architecture decision records:
 - [ADR-0003](docs/adr/0003-form-handling.md) — form relay with a `mailto:` fallback
 - [ADR-0004](docs/adr/0004-image-pipeline.md) — build-time responsive images
 - [ADR-0005](docs/adr/0005-bespoke-template-engine.md) — the template engine
+- [ADR-0006](docs/adr/0006-instagram-content.md) — Instagram via data export, not a widget
 
 ## Licence
 

@@ -4,6 +4,32 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project uses
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.0] — 2026-09-07
+
+Tooling to turn the Instagram account into real, named portfolio galleries.
+
+### Added
+
+- `tools/instagram-export.mjs` and `tools/import-instagram.mjs`, plus
+  `npm run instagram:import`. Reads an Instagram "Download Your Information"
+  archive, groups posts into weddings by the couple named in the caption,
+  copies the photographs into `photos/raw/`, and writes a reviewable draft to
+  `content/collections.generated.mjs`.
+- 21 unit tests covering the parsing, including Instagram's long-standing bug
+  of writing captions as UTF-8 bytes re-encoded as Latin-1 — so `🤍` arrives as
+  `ð¤` and has to be decoded back.
+- [ADR-0006](docs/adr/0006-instagram-content.md) recording why this is an
+  import rather than an embedded feed widget.
+
+### Notes
+
+- Instagram's CDN URLs were measured as expiring **4.4 days** out, so any
+  approach referencing them rots within a week. Self-hosting is not a
+  preference here, it is the only durable option.
+- The importer never writes `content/collections.mjs` directly. Grouping by
+  caption is a guess and these are real, named clients, so a person confirms it.
+- Generated alt text is truthful but generic and is flagged for rewriting.
+
 ## [1.2.0] — 2026-09-07
 
 Harith supplied his 2024/25 price guide. Real prices, real photographs, and the
