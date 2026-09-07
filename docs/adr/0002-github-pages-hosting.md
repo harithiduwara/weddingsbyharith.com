@@ -8,12 +8,17 @@
 The client asked for GitHub hosting. GitHub Pages offers three publishing modes:
 deploy-from-branch (root), deploy-from-branch (`/docs`), and GitHub Actions.
 
-Two constraints shaped the choice. First, the build emits a `dist/` folder, so
-serving `main` at root would mean either committing build output onto `main` or
-restructuring the source to be servable directly. Second, the deploying account's
-OAuth token lacks the `workflow` scope, so a push containing `.github/workflows/`
-is rejected outright — an Actions-based deploy could not be established without a
-credential change by the client.
+The deciding constraint is that the build emits a `dist/` folder. Serving `main`
+at root would mean either committing build output onto `main` — making every
+diff unreviewable — or restructuring the source to be servable directly, which
+would rule out a build step and therefore the image pipeline.
+
+A second constraint was anticipated and turned out not to exist: the deploying
+account's token reports only `gist, read:org, repo`, and pushes containing
+`.github/workflows/` are commonly rejected without the `workflow` scope. In
+practice GitHub accepted the push, and CI runs normally. The workflows are
+therefore live, and the migration path below is available immediately rather
+than being gated on a credential change.
 
 ## Decision
 
@@ -39,6 +44,7 @@ Actions-based deploy can be switched on later without rework.
 - Pages cannot set HTTP response headers, so CSP must be delivered via a `<meta>`
   tag and header-only protections (HSTS, `X-Frame-Options`) are unavailable.
 
-**Migration path:** run `gh auth refresh -s workflow`, push
-`.github/workflows/deploy.yml`, and switch the Pages source to GitHub Actions. The
-workflow is already written and committed.
+**Migration path:** `.github/workflows/deploy.yml` is already committed and CI
+already runs on every pull request. Adopting Actions-based deployment is just
+uncommenting its `push` trigger and switching Settings → Pages → Source to
+"GitHub Actions"; `npm run deploy` then becomes redundant.

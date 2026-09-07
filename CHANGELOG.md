@@ -57,3 +57,15 @@ someone could fall into again:
   gain.
 - The accessibility audit skipped all below-the-fold content, because
   scroll-revealed elements are transparent and axe ignores them.
+
+### Documentation
+
+- Corrected ADR-0002 and the deployment runbook: they claimed workflow files
+  could not be pushed without the `workflow` OAuth scope. GitHub accepted the
+  push and CI runs normally, so the claim was wrong.
+- Rewrote the DNS section for the domain's actual configuration. It is on
+  Cloudflare and currently 301-redirects to Instagram, which means a cutover has
+  to remove a redirect rule and disable the proxy for certificate issuance —
+  none of which the generic instructions covered.
+- Held `html-validate` major updates in Dependabot: v9+ requires Node 22 and CI
+  pins Node 20.

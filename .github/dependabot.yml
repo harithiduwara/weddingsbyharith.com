@@ -8,6 +8,12 @@ updates:
     groups:
       dev-dependencies:
         dependency-type: development
+    ignore:
+      # html-validate v9+ calls fs.globSync, which does not exist before Node
+      # 22, while CI pins Node 20. Raise engines.node and the CI node-version
+      # together, then remove this. See docs/05-deployment-runbook.md.
+      - dependency-name: html-validate
+        update-types: [version-update:semver-major]
   - package-ecosystem: github-actions
     directory: /
     schedule:
