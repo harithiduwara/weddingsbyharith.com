@@ -24,7 +24,7 @@ test.describe('automated accessibility audit', () => {
 });
 
 test('the lightbox dialog is accessible when open', async ({ page }) => {
-  await page.goto('/portfolio/ramparts-at-six/');
+  await page.goto('/portfolio/weddings/');
   await page.locator('.gallery__item').first().click();
   await expect(page.locator('#lightbox')).toBeVisible();
 
@@ -90,7 +90,7 @@ test('NFR-11: the dark colour scheme is supported and legible', async ({ page })
 });
 
 test('every image on a gallery page carries alt text', async ({ page }) => {
-  await page.goto('/portfolio/ramparts-at-six/');
+  await page.goto('/portfolio/weddings/');
   const missing = await page.evaluate(() =>
     [...document.images].filter((i) => !i.hasAttribute('alt')).map((i) => i.src),
   );

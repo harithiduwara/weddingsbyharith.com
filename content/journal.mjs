@@ -5,7 +5,7 @@ export default [
     title: 'A wedding timeline that actually works',
     date: '2026-06-14',
     readingTime: 7,
-    cover: 'barn-05',
+    cover: 'wedding-04',
     excerpt:
       'The nekath fixes your ceremony and the sun sets at six whatever you do. Everything else is negotiable, and most timelines fail in the same three places.',
     tags: ['planning', 'timelines'],
@@ -54,7 +54,7 @@ export default [
     title: 'How to tell documentary from posed',
     date: '2026-04-02',
     readingTime: 6,
-    cover: 'coastal-07',
+    cover: 'wedding-03',
     excerpt:
       'Every photographer’s website says natural and relaxed. Here is how to read a portfolio and work out what you would actually be getting.',
     tags: ['choosing a photographer'],
@@ -89,7 +89,7 @@ export default [
     title: 'In defence of a wet wedding',
     date: '2026-02-11',
     readingTime: 5,
-    cover: 'elope-03',
+    cover: 'couples-02',
     excerpt:
       'Rain is the thing couples worry about most and the thing I worry about least. A short argument for stopping.',
     tags: ['planning', 'weather'],

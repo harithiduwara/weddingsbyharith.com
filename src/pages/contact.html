@@ -11,8 +11,8 @@
     <p class="eyebrow">Contact</p>
     <h1 class="pagehead__title">Let us check your date</h1>
     <p class="lede">
-      Tell me roughly what you are planning. Nothing here is binding and no detail is too small.
-      If it is easier to just call, call.
+      Tell me roughly what you are planning. Nothing here is binding and no detail is too small. If
+      it is easier to just call, call.
     </p>
   </div>
 </section>
@@ -61,8 +61,8 @@
           <label for="f-package">What you have in mind</label>
           <select id="f-package" name="package">
             <option value="">Not sure yet</option>
-            {{#each packages.tiers}}
-            <option value="{{slug}}">{{name}} — {{hours}}</option>
+            {{#each packages.allTiers}}
+            <option value="{{slug}}">{{label}} — {{hours}}</option>
             {{/each}}
           </select>
         </div>
@@ -135,9 +135,8 @@
 
       <h2>Before you write</h2>
       <p>
-        It helps to know your date, roughly where, and whether there is a homecoming. If you do
-        not have any of that yet, write anyway. Plenty of couples book me before they book the
-        hall.
+        It helps to know your date, roughly where, and whether there is a homecoming. If you do not
+        have any of that yet, write anyway. Plenty of couples book me before they book the hall.
       </p>
       <p><a class="link-arrow" href="/faq/">Read the FAQ first</a></p>
     </aside>

@@ -96,10 +96,11 @@ static site to an application; see [ADR-0001](adr/0001-static-site-over-framewor
 - **C1** Hosting is GitHub Pages: static files only, no server-side execution.
 - **C2** The domain `weddingsbyharith.com` is owned by the client and its DNS is
   under their control. DNS records are documented but not applied by this project.
-- **C3** Photography in this repository is Unsplash-licensed placeholder work, and the
-  couples, venues and testimonials are invented. It is
-  clearly marked in `content/collections.mjs` and `photos/CREDITS.md` and **must** be
-  replaced with the photographer's own work before commercial launch.
+- **C3** Photography is Harith's own work, extracted from the 2024/25 price
+  guide PDF. It is low resolution (800 × 1200 at best) and shows real,
+  identifiable clients, which constrains both the layout and the copy: no
+  full-bleed hero, and no invented couples or stories attached to real faces.
+
 - **C4** Business contact details are placeholders pending client input; the build
   fails loudly if placeholders reach a production build (see `tools/build.mjs`).
 - **A1** Enquiry volume is low enough (< 100/month) that a free third-party form

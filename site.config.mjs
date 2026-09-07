@@ -26,7 +26,7 @@ export default {
 
   // ── Contact ────────────────────────────────────────────────────────────
   contact: {
-    email: TODO('hello@weddingsbyharith.com'),
+    email: 'weddingsbyharith@gmail.com',
     // Non-breaking spaces: a phone number must never wrap mid-digit.
     phone: '071\u00A0603\u00A03886',
     phoneIntl: '+94\u00A071\u00A0603\u00A03886',
@@ -68,7 +68,7 @@ export default {
   // ── SEO ────────────────────────────────────────────────────────────────
   seo: {
     titleTemplate: '%s · Weddings by Harith',
-    defaultImage: 'barn-04',
+    defaultImage: 'wedding-02',
     twitterCard: 'summary_large_image',
   },
 

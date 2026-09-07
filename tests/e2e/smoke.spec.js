@@ -28,15 +28,15 @@ test('FR-13: primary navigation reaches every section', async ({ page, isMobile 
 test('FR-02: the portfolio lists every collection and each one opens', async ({ page }) => {
   await page.goto('/portfolio/');
   const cards = page.locator('.card');
-  await expect(cards).toHaveCount(3);
+  await expect(cards).toHaveCount(2);
   await cards.first().click();
   await expect(page).toHaveURL(/\/portfolio\/[a-z-]+\/$/);
   await expect(page.locator('.gallery__item')).not.toHaveCount(0);
 });
 
 test('FR-03: a collection page shows its full gallery', async ({ page }) => {
-  await page.goto('/portfolio/ramparts-at-six/');
-  await expect(page.locator('.gallery__item')).toHaveCount(16);
+  await page.goto('/portfolio/weddings/');
+  await expect(page.locator('.gallery__item')).toHaveCount(6);
   await expect(page.locator('.collection__story p')).toHaveCount(3);
 });
 
@@ -57,27 +57,28 @@ test('FR-09: FAQ answers expand', async ({ page }) => {
   await expect(second.locator('.faq__a')).toBeVisible();
 });
 
-test('FR-06: pricing shows three tiers with formatted prices', async ({ page }) => {
+test('FR-06: pricing shows every package with formatted prices', async ({ page }) => {
   await page.goto('/packages/');
-  await expect(page.locator('.tier')).toHaveCount(3);
-  await expect(page.locator('.tier__price').first()).toContainText('Rs 150,000');
-  await expect(page.locator('.tier--popular')).toHaveCount(1);
+  // 4 wedding + 3 engagement + 2 homecoming + 2 casual
+  await expect(page.locator('.tier')).toHaveCount(11);
+  await expect(page.locator('.tier__price').first()).toContainText('LKR 230,000');
+  await expect(page.locator('.addons tbody tr')).toHaveCount(6);
 });
 
 test('FR-04: the lightbox opens, advances, and closes on Escape', async ({ page }) => {
-  await page.goto('/portfolio/ramparts-at-six/');
+  await page.goto('/portfolio/weddings/');
   const dialog = page.locator('#lightbox');
   await expect(dialog).toBeHidden();
 
   await page.locator('.gallery__item').first().click();
   await expect(dialog).toBeVisible();
-  await expect(page.locator('.lightbox__count')).toHaveText('1 / 16');
+  await expect(page.locator('.lightbox__count')).toHaveText('1 / 6');
 
   await page.locator('.lightbox__nav--next').click();
-  await expect(page.locator('.lightbox__count')).toHaveText('2 / 16');
+  await expect(page.locator('.lightbox__count')).toHaveText('2 / 6');
 
   await page.keyboard.press('ArrowLeft');
-  await expect(page.locator('.lightbox__count')).toHaveText('1 / 16');
+  await expect(page.locator('.lightbox__count')).toHaveText('1 / 6');
 
   await page.keyboard.press('Escape');
   await expect(dialog).toBeHidden();

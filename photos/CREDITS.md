@@ -1,32 +1,40 @@
 # Photography credits
 
-> **Every photograph in this repository is a placeholder.** None of it was taken
-> by Harith. It exists so the site could be designed, measured and tested against
-> real photographic content rather than grey boxes.
+Every photograph in `photos/raw/` is **Harith Iduwara's own work**, supplied by
+him and used with his permission. It is not stock, and it is not licensed for
+reuse by anyone else — see [`LICENSE`](../LICENSE).
 
-## Source and licence
+There are nine photographs, extracted from the *Weddings by Harith Price Guide
+2024/25*.
 
-All 50 images in `photos/raw/` are from [Unsplash](https://unsplash.com) and are
-covered by the [Unsplash License](https://unsplash.com/license): free to use,
-including commercially, with no permission or attribution required. Attribution
-is given here anyway, because not crediting photographers is a poor look for a
-photographer's website.
+## Two things worth knowing
 
-The mapping from local filename to Unsplash photo ID is in
-[`tools/photos.manifest.mjs`](../tools/photos.manifest.mjs). Any individual
-photograph can be traced with:
+**1. They are low resolution.** They came out of a Canva PDF export, so the
+largest is 800 × 1200 and most are around 410 × 615. The build never upscales
+past a source's own pixels, and the hero was deliberately laid out as an
+editorial split rather than a full-bleed banner so that the largest photograph
+renders at 1.00× rather than being stretched to fill a viewport.
 
-```
-https://unsplash.com/photos/<id>
-```
+To improve this, drop the full-resolution originals into `photos/raw/` under the
+same filenames and run `npm run build`. Nothing else needs to change, and every
+derivative regenerates automatically. Around 2400 px on the long edge is plenty.
 
-## Replacing them with real work
+**2. They show real, identifiable clients.** Do not attach invented couple
+names, venues or stories to them — `content/collections.mjs` says so at the top,
+and the galleries are grouped by kind of work precisely to avoid it. Confirm you
+hold each couple's permission before publishing, which matters more here than
+usual because the site's own privacy notice promises exactly that.
 
-1. Put your own JPEGs in `photos/raw/`, roughly 1800–2400 px on the long edge.
-2. Keep the existing filenames to swap images in place, or use new names and
-   update `content/collections.mjs` to reference them.
-3. Run `npm run build`. The pipeline regenerates every derivative automatically.
-4. Delete this file's warning once no placeholder images remain.
+## Filenames
 
-`npm run photos:fetch` never overwrites an existing file, so it cannot clobber
-your photographs if it is run again by accident.
+| File | What it shows |
+|---|---|
+| `wedding-01` | Forehead kiss, traditional headpiece and white saree |
+| `wedding-02` | Couple under a large tree, train spread on the grass — the sharpest file, used as the hero |
+| `wedding-03` | Laughing against a white wall, white roses |
+| `wedding-04` | On open grass, water and trees behind |
+| `wedding-05` | Low-light portrait, red saree |
+| `wedding-06` | Red saree at a white doorway — the only landscape file, used for the closing band |
+| `couples-01` | In the sea, orange saree |
+| `couples-02` | Walking through the surf at sunset |
+| `couples-03` | Along the shoreline, late afternoon |

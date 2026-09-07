@@ -1,119 +1,94 @@
 /**
- * Portfolio collections (FR-02, FR-03).
+ * Portfolio galleries (FR-02, FR-03).
  *
- * `cover` and `images` reference filenames in photos/raw/ without extension.
- * To publish a new wedding: drop photos into photos/raw/, add an entry here,
- * run `npm run build`. No markup changes required (US-5).
+ * These are grouped by the kind of work rather than by individual wedding,
+ * because the photographs currently on file come from Harith's 2024/25 price
+ * guide rather than from complete single-wedding galleries.
  *
- * NOTE: all imagery here is Unsplash-licensed placeholder work — see
- * photos/CREDITS.md — and the couples are invented. Replace both before launch.
+ * IMPORTANT: these are photographs of real, identifiable clients. Do not
+ * attach invented couple names, venues or stories to them. When Harith
+ * supplies a full gallery from one wedding, with that couple's permission,
+ * add it here as its own entry with their real details.
+ *
+ * Each image carries its own alt text. `picture()` refuses to build without it.
  */
 export default [
   {
-    slug: 'ramparts-at-six',
-    title: 'The Ramparts at Six',
-    couple: 'Amara & Rohan',
-    placeholder: true,
-    venue: 'Galle Fort, and a courtyard behind it',
-    location: 'Galle',
-    season: 'February',
-    guests: 68,
-    cover: 'coastal-03',
+    slug: 'weddings',
+    title: 'Weddings',
+    kind: 'Full-day coverage',
+    cover: 'wedding-01',
     featured: true,
     excerpt:
-      'Everyone wants the fort walls at six. We got there at half five and shared them with two other weddings.',
+      'Poruwa ceremonies, church services, hotel receptions and the long gap in the middle that nobody photographs.',
+    facts: [
+      { label: 'Coverage', value: '7 to 10 hours' },
+      { label: 'Team', value: 'Two or three photographers' },
+      { label: 'Delivered', value: '150 to 500 edited images' },
+    ],
     story: [
-      'They wanted the ramparts at six, which is the right answer and also the answer every photographer in this country will give you.',
-      'The trouble with Galle in February is that everybody else wants it too. We were up on the wall by half five and shared it with two other weddings and roughly sixty tourists waiting for the same sunset. Amara did not care even slightly. She had been up since four getting her hair done and said the wind was the first thing all day that had felt good.',
-      'Most of what I actually like from this wedding happened later, after the light had gone and people had stopped arranging themselves. There is a photograph in here of Rohan’s father asleep in a plastic chair at eleven at night, still holding a plate. That one is my favourite.',
+      'A Sri Lankan wedding is not one event. It is three or four stacked on top of each other, and at least one of them starts before six in the morning because that is when the nekath falls.',
+      'So the day is long and the light changes completely between the start of it and the end. Morning ceremonies are bright and hard. Hotel receptions are dark and warm and full of people who have stopped performing. Both need photographing properly, and they need different things from a photographer.',
+      'That is most of why I bring two or three of us on a full day. Not to hover, but so that nobody has to choose between the bride getting ready and the groom arriving, and so the room still gets covered while I am outside doing portraits.',
     ],
     images: [
-      'coastal-03',
-      'coastal-01',
-      'coastal-07',
-      'coastal-02',
-      'coastal-09',
-      'coastal-04',
-      'detail-01',
-      'coastal-05',
-      'portrait-02',
-      'coastal-08',
-      'coastal-06',
-      'detail-05',
-      'coastal-10',
-      'coastal-11',
-      'coastal-12',
-      'portrait-06',
+      {
+        slug: 'wedding-01',
+        alt: 'A groom kisses his bride on the forehead. She wears a white saree and a traditional headpiece.',
+      },
+      {
+        slug: 'wedding-02',
+        alt: 'A couple hold each other under a large tree, the bride’s train spread across the grass.',
+      },
+      {
+        slug: 'wedding-03',
+        alt: 'A bride and groom laughing together against a white wall, she is holding a bouquet of white roses.',
+      },
+      {
+        slug: 'wedding-04',
+        alt: 'A couple standing together on open grass with water and trees behind them.',
+      },
+      {
+        slug: 'wedding-05',
+        alt: 'A close portrait in low light. The bride in a red saree, the groom just behind her.',
+      },
+      {
+        slug: 'wedding-06',
+        alt: 'A woman in a red saree standing at a white doorway, framed by decorative elephants on the wall.',
+      },
     ],
   },
   {
-    slug: 'long-table-low-light',
-    title: 'Long Table, Low Light',
-    couple: 'Priya & Tom',
-    placeholder: true,
-    venue: 'The veranda of a tea bungalow',
-    location: 'Dickoya, hill country',
-    season: 'March',
-    guests: 120,
-    cover: 'barn-02',
+    slug: 'engagements',
+    title: 'Engagements & couple shoots',
+    kind: 'Half-day and casual sessions',
+    cover: 'couples-01',
     featured: true,
     excerpt:
-      'One table. A hundred and twenty people. Her mother thought it was a terrible idea for four months.',
+      'Usually the first time a couple has been photographed together properly, and usually the most nervous either of them will be.',
+    facts: [
+      { label: 'Coverage', value: '3 to 6 hours' },
+      { label: 'Team', value: 'One or two photographers' },
+      { label: 'Delivered', value: '100 to 250 edited images' },
+    ],
     story: [
-      'Priya wanted one table. Not a top table. One table, a hundred and twenty people, running end to end down the veranda of a tea bungalow outside Dickoya.',
-      'Her mother thought this was a disaster waiting to happen, held that position for about four months, and then changed her mind somewhere around nine o’clock on the night. I have that on record, because I photographed her saying so.',
-      'What nobody planned for was the cold. It drops hard up there once the sun goes, and half the guests in these photographs are wearing somebody else’s shawl. The speeches ran forty minutes over. Not one person got up to leave.',
-      'If you hate having your photograph taken, this is the gallery I would send you. Hardly anyone in it is looking at me.',
+      'Almost every couple tells me on the phone that they are bad at this. They are not. They are just being photographed on purpose for the first time, which is a genuinely strange thing to do.',
+      'The fix is not better posing instructions. It is giving people something to actually do, then waiting. Walk down there and come back. Tell him the thing you were telling me in the car. Most of the photographs I like from these sessions were taken between the moments anybody thought was the moment.',
+      'They are also the best possible rehearsal. By the wedding you will have forgotten I am holding a camera, which is exactly where I want you.',
     ],
     images: [
-      'barn-02',
-      'barn-01',
-      'detail-02',
-      'barn-04',
-      'barn-03',
-      'barn-05',
-      'detail-06',
-      'barn-06',
-      'portrait-03',
-      'barn-07',
-      'barn-08',
-      'detail-03',
-      'barn-09',
-      'barn-10',
-      'detail-08',
-      'portrait-05',
-    ],
-  },
-  {
-    slug: 'two-witnesses',
-    title: 'Two Witnesses and a Mountain',
-    couple: 'Elena & Jonah',
-    placeholder: true,
-    venue: 'A ridge above Ella, reached on foot',
-    location: 'Ella',
-    season: 'August',
-    guests: 4,
-    cover: 'elope-02',
-    featured: true,
-    excerpt: 'The ceremony lasted eleven minutes. That is shorter than the drive to the trailhead.',
-    story: [
-      'They emailed in March to ask whether I would be willing to walk up a mountain carrying my own kit. I said yes before I properly looked at the route, which is a habit I should probably break.',
-      'We left Ella at four in the morning in the dark. The ceremony was at sunrise and it lasted eleven minutes, which is shorter than the drive to the trailhead. Four people were there, and one of them was me.',
-      'An elopement is not a small wedding. It is a different job entirely. You stop directing, you start keeping up, and you carry your own water.',
-    ],
-    images: [
-      'elope-02',
-      'elope-01',
-      'elope-03',
-      'elope-05',
-      'portrait-01',
-      'elope-04',
-      'elope-06',
-      'detail-07',
-      'elope-07',
-      'elope-08',
-      'portrait-04',
-      'detail-04',
+      {
+        slug: 'couples-01',
+        alt: 'A couple embracing in shallow sea water, her orange saree floating around them.',
+      },
+      {
+        slug: 'couples-02',
+        alt: 'A couple walking hand in hand through the surf at sunset, holding each other at arm’s length.',
+      },
+      {
+        slug: 'couples-03',
+        alt: 'A couple walking along the shoreline in the late afternoon, a hat in his hand.',
+      },
     ],
   },
 ];

@@ -308,70 +308,55 @@ body:not(.has-hero) .header::before {
   }
 }
 
-/* ── Hero ──────────────────────────────────────────────────────────────── */
+/* ── Hero ──────────────────────────────────────────────────────────────
+   An editorial split rather than a full-bleed banner. Two reasons, and the
+   second is the real one: the work is overwhelmingly portrait-orientation, and
+   a 100vh banner would have to upscale a portrait photograph by roughly 2x to
+   fill it. A photography site cannot afford a soft hero. Displaying the
+   photograph near its native size is both sharper and more distinctive. */
 
 .hero {
-  position: relative;
-  min-height: 100svh;
+  padding-block: calc(var(--header-h) + var(--sp-2xl)) var(--sp-3xl);
+}
+
+.hero__grid {
   display: grid;
-  align-items: end;
-  color: var(--on-image);
-  isolation: isolate;
+  gap: var(--sp-xl);
+  align-items: center;
 }
-.hero__media {
-  position: absolute;
-  inset: 0;
-  z-index: -2;
+@media (min-width: 62rem) {
+  .hero__grid {
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: var(--sp-2xl);
+  }
 }
-.hero__media .photo,
-.hero__media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.hero::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background:
-    linear-gradient(to top, var(--overlay-deep) 0%, transparent 55%),
-    linear-gradient(to bottom, rgb(15 12 10 / 0.35), transparent 30%);
-}
+
 .hero__body {
-  padding-block: var(--sp-2xl) var(--sp-xl);
   display: grid;
   gap: var(--sp-m);
+  align-content: center;
 }
 .hero__title {
   font-size: var(--step-6);
-  max-width: 16ch;
+  max-width: 13ch;
 }
 .hero__sub {
   font-size: var(--step-1);
-  max-width: 44ch;
-  opacity: 0.92;
+  color: var(--ink-soft);
+  max-width: 42ch;
   font-weight: 300;
 }
-.hero .eyebrow {
-  color: rgb(255 255 255 / 0.72);
-  margin: 0;
-}
 
-.hero__scroll {
-  position: absolute;
-  inset-block-end: var(--sp-m);
-  inset-inline-end: var(--gutter);
-  font-size: var(--step--1);
-  letter-spacing: var(--tracking-wide);
-  text-transform: uppercase;
-  writing-mode: vertical-rl;
-  opacity: 0.75;
-  text-decoration: none;
+/* Capped so the photograph is never asked to render much beyond its own
+   pixels, whatever the viewport does. */
+.hero__figure {
+  margin: 0;
+  max-width: 34rem;
+  margin-inline: auto;
 }
-@media (max-width: 48rem) {
-  .hero__scroll {
-    display: none;
+@media (min-width: 62rem) {
+  .hero__figure {
+    margin-inline: auto 0;
   }
 }
 
@@ -516,6 +501,9 @@ body:not(.has-hero) .header::before {
 .tier {
   display: grid;
   gap: var(--sp-m);
+  /* header · price · summary · inclusions · button — the inclusions row takes
+     up the slack so every "Ask about this one" lines up across the row. */
+  grid-template-rows: auto auto auto 1fr auto;
   align-content: start;
   padding: var(--sp-l);
   border: 1px solid var(--line);

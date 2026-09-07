@@ -18,10 +18,11 @@ npm run deploy:staging   # publish to the github.io project URL instead
 
 **Live staging build:** <https://harithiduwara.github.io/weddingsbyharith.com/>
 
-> **Status: preview.** Every photograph is an Unsplash placeholder, the
-> testimonials are sample copy, the prices are indicative and the contact details
-> are unset. Every page carries a red ribbon saying so, and
-> `npm run build -- --production` refuses to build until they are replaced.
+> **Status: preview.** The photographs, prices, phone, email and Instagram are
+> all real. What is not: the testimonials are written samples rather than real
+> client quotes, and four config fields are unset. Every page carries a red
+> ribbon saying so, and `npm run build -- --production` refuses to build until
+> they are dealt with.
 > See [`docs/06-maintenance.md`](docs/06-maintenance.md) for the go-live checklist.
 >
 > The custom domain is **not** pointed here yet, and deliberately so:
@@ -42,13 +43,15 @@ investment, FAQ, journal with three articles, contact, privacy and a 404.
 | Cookies                  | none                                                      |
 | Accessibility            | WCAG 2.2 AA, 0 axe violations across 11 routes × 2 themes |
 | Works without JavaScript | entirely                                                  |
-| Tests                    | 69 unit + 184 end-to-end, 573 links checked               |
+| Tests                    | 72 unit + 176 end-to-end, links checked                   |
 | Hosting cost             | Nothing                                                   |
 
-Every photograph is served as AVIF with WebP and JPEG fallbacks at five widths,
-with an inline blur placeholder and intrinsic dimensions — so a phone downloads
-about 29 KB per gallery image instead of 1.5 MB, and cumulative layout shift
-stays at zero.
+Every photograph is served as AVIF with WebP and JPEG fallbacks at up to five
+widths, with an inline blur placeholder and intrinsic dimensions, so cumulative
+layout shift stays at zero and no image is ever upscaled past its own pixels.
+The source photographs are low resolution — they came out of a Canva PDF — which
+is why the home page hero is an editorial split rather than a full-bleed banner;
+see [`photos/CREDITS.md`](photos/CREDITS.md).
 
 ## How it is put together
 

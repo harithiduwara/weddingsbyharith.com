@@ -4,6 +4,54 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project uses
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0] — 2026-09-07
+
+Harith supplied his 2024/25 price guide. Real prices, real photographs, and the
+last of the invented content removed.
+
+### Added
+
+- **Harith's own photographs** replace all fifty Unsplash placeholders. Nine
+  images extracted from the price guide PDF, each with hand-written alt text.
+- **Real pricing**, transcribed in full: four wedding packages (LKR 120,000 to
+  230,000), three engagement, two homecoming and two casual-shoot packages, plus
+  six extras. Previously three invented tiers.
+- Real email (`weddingsbyharith@gmail.com`), confirming the Instagram handle.
+
+### Changed
+
+- **The home page hero is now an editorial split rather than a full-bleed
+  banner.** The photographs are portrait-orientation and top out at 800 × 1200;
+  a 100vh banner would have upscaled one by roughly 2×, which a photography site
+  cannot afford. The hero now renders at 1.00×.
+- **Galleries are grouped by kind of work, not by wedding.** The three invented
+  weddings — couples, venues, guest counts, anecdotes — are gone. They were
+  harmless against stock photography and unacceptable against photographs of
+  real, identifiable clients.
+- Copy acknowledges that a full day is covered by two or three photographers,
+  which the packages commit to and the first-person copy previously ignored.
+- Investment page restructured for four package groups; the enquiry form's
+  selector lists all eleven.
+- `photos/CREDITS.md` and `LICENSE` now state that the photographs are Harith's
+  own and reserved, not Unsplash-licensed.
+
+### Removed
+
+- `tools/fetch-photos.mjs`, `tools/photos.manifest.mjs` and the `photos:fetch`
+  script. With real client work in `photos/raw/`, a command that drops stock
+  photography into that folder is a liability rather than a convenience.
+
+### Fixed
+
+- Collection pages titled "Weddings — undefined" after the `couple` field was
+  removed.
+- Package group intros were being set as display headings; "LKR" orphaned onto
+  its own line above each price; and the price read "from LKR230,000" with no
+  space to a screen reader.
+- Package card buttons now align across a row.
+- The preview ribbon still claimed stock photography and indicative pricing,
+  both of which are now real.
+
 ## [1.1.0] — 2026-09-07
 
 Real business details, and the site relocated from placeholder Britain to Sri

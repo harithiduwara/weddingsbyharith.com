@@ -2,9 +2,8 @@
 export const ROUTES = [
   { path: '/', name: 'home' },
   { path: '/portfolio/', name: 'portfolio' },
-  { path: '/portfolio/ramparts-at-six/', name: 'collection' },
-  { path: '/portfolio/long-table-low-light/', name: 'collection 2' },
-  { path: '/portfolio/two-witnesses/', name: 'collection 3' },
+  { path: '/portfolio/weddings/', name: 'collection' },
+  { path: '/portfolio/engagements/', name: 'collection 2' },
   { path: '/about/', name: 'about' },
   { path: '/packages/', name: 'investment' },
   { path: '/faq/', name: 'faq' },

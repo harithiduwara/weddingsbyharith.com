@@ -1,7 +1,7 @@
 <!--
 {
   "title": "Investment",
-  "description": "Wedding photography packages for Sri Lanka: half-day coverage, full wedding days, and wedding plus homecoming. Starting prices published, no enquiry required.",
+  "description": "Wedding, engagement, homecoming and casual shoot packages for Sri Lanka. Full prices published, from LKR 35,000 to LKR 230,000.",
   "bodyClass": "page--investment",
   "breadcrumb": [{ "label": "Investment", "href": "/packages/" }]
 }
@@ -14,52 +14,60 @@
   </div>
 </section>
 
-<section class="section section--tight">
+{{#each packages.groups}}
+<section class="section section--tight{{#if @index}} section--sunk{{/if}}">
   <div class="shell">
+    <div class="section__head">
+      <h2>{{name}}</h2>
+      <p class="lede">{{intro}}</p>
+    </div>
+
     <div class="grid-3">
-      {{#each packages.tiers}}
-      <div class="tier reveal{{#if popular}} tier--popular{{/if}}">
-        {{#if popular}}<p class="tier__flag">Most booked</p>{{/if}}
+      {{#each tiers}}
+      <div class="tier reveal">
         <div>
-          <h2 class="card__title">{{name}}</h2>
-          <p class="tier__hours">{{hours}}</p>
+          <h3 class="card__title">{{name}}</h3>
+          <p class="tier__hours meta-list"><span>{{hours}}</span><span>{{team}}</span></p>
         </div>
-        <p class="tier__price">
-          <small>{{priceNote}}</small>{{@root.packages.symbol}}{{priceDisplay}}
-        </p>
+        <p class="tier__price"><small>from {{@root.packages.currency}}</small>
+          {{priceDisplay}}</p>
         <p class="card__excerpt">{{summary}}</p>
         <ul class="tier__list" role="list">
-          {{#each includes}}<li>{{this}}</li>{{/each}}
-          {{#each excludes}}<li class="is-excluded">{{this}}</li>{{/each}}
+          {{#each includes}}
+          <li>{{this}}</li>
+          {{/each}}
         </ul>
-        <a class="btn btn--ghost btn--block" href="/contact/?package={{slug}}">Ask about this one</a>
+        <a class="btn btn--ghost btn--block" href="/contact/?package={{slug}}"
+          >Ask about this one</a
+        >
       </div>
       {{/each}}
     </div>
   </div>
 </section>
+{{/each}}
 
 <section class="section section--tight">
   <div class="shell shell--narrow">
     <div class="section__head">
-      <p class="eyebrow">Additions</p>
-      <h2>Everything else</h2>
+      <p class="eyebrow">Extras</p>
+      <h2>Added to any package</h2>
     </div>
     <table class="addons">
-      <caption class="sr-only">Optional additions and their prices</caption>
+      <caption class="sr-only">
+        Optional extras and their prices
+      </caption>
       <thead>
         <tr>
-          <th scope="col">Addition</th>
+          <th scope="col">Extra</th>
           <th scope="col">Price</th>
         </tr>
       </thead>
       <tbody>
-        {{#each packages.addons}}
+        {{#each packages.extras}}
         <tr>
           <td>{{name}}</td>
-          <td>
-            {{#if price}}{{@root.packages.symbol}}{{priceDisplay}}{{#if unit}} {{unit}}{{/if}}{{else}}{{unit}}{{/if}}
-          </td>
+          <td>{{@root.packages.symbol}}{{priceDisplay}}</td>
         </tr>
         {{/each}}
       </tbody>
@@ -68,17 +76,17 @@
     <div class="stack stack--m mt-xl">
       <h2>How booking works</h2>
       <p>
-        A signed contract and 25% holds your date. The rest is due four weeks before, and I am
-        happy to split that across as many payments as suits you. Say so on the call; it is a
-        normal thing to ask and I would rather you asked than quietly booked somebody cheaper.
+        A signed contract and an advance holds your date. The balance is due before the wedding, and
+        I am happy to split it across as many payments as suits you. Ask. It is a normal thing to
+        ask and I would much rather you did than quietly booked somebody cheaper.
       </p>
       <p>
-        There are no extras hiding anywhere. Travel outside the Western Province is the only
-        variable and it is agreed in writing before you commit, at cost, with no markup on it.
+        Travel outside the Western Province is charged at cost and agreed in writing before you
+        commit. Nothing else is hiding anywhere.
       </p>
       <p>
-        If none of these three shapes fits your wedding, that is normal and not a problem. Tell
-        me what you are actually doing and I will quote it.
+        Prices shown are from the {{packages.guideYear}} guide. If you are reading this a long way
+        into the future, message me and I will confirm where they stand.
       </p>
       <p><a class="link-arrow" href="/faq/">Questions people ask first</a></p>
     </div>

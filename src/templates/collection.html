@@ -1,6 +1,6 @@
 <section class="pagehead">
   <div class="shell">
-    <p class="eyebrow">{{collection.couple}}</p>
+    <p class="eyebrow">{{collection.kind}}</p>
     <h1 class="pagehead__title">{{collection.title}}</h1>
     <p class="lede">{{collection.excerpt}}</p>
   </div>
@@ -8,17 +8,21 @@
 
 <div class="shell">
   <dl class="collection__meta">
-    <div><dt class="sr-only">Venue</dt><dd class="plain">{{collection.venue}}</dd></div>
-    <div><dt class="sr-only">Location</dt><dd class="plain">{{collection.location}}</dd></div>
-    <div><dt class="sr-only">Season</dt><dd class="plain">{{collection.season}}</dd></div>
-    <div><dt class="sr-only">Guests</dt><dd class="plain">{{collection.guests}} guests</dd></div>
+    {{#each collection.facts}}
+    <div>
+      <dt class="sr-only">{{label}}</dt>
+      <dd class="plain">{{value}}</dd>
+    </div>
+    {{/each}}
   </dl>
 </div>
 
 <section class="section section--tight">
   <div class="shell">
     <div class="collection__story">
-      {{#each collection.story}}<p>{{this}}</p>{{/each}}
+      {{#each collection.story}}
+      <p>{{this}}</p>
+      {{/each}}
     </div>
   </div>
 </section>
@@ -27,9 +31,7 @@
   <div class="shell">
     <div class="gallery">
       {{#each collection.gallery}}
-      <a class="gallery__item" href="{{full}}" data-alt="{{@root.collection.couple}} — photograph {{@number}}">
-        {{{html}}}
-      </a>
+      <a class="gallery__item" href="{{full}}" data-alt="{{alt}}">{{{html}}}</a>
       {{/each}}
     </div>
   </div>

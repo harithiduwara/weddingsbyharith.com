@@ -2,84 +2,90 @@
 
 This is the document to read first if you have never touched this repository.
 
-## 1. Going live: the short list
+## 1. Going live: what is actually left
 
-The site currently builds as a **preview**, with a red ribbon on every page,
-because it contains placeholder content. To make it real:
+Most of the site is now real. Harith's own photographs, his real prices from the
+2024/25 guide, his phone, email and Instagram are all in. Four things remain.
 
-### 1.1 Fill in the business details
+### 1.1 Four config fields
 
-Edit [`site.config.mjs`](../site.config.mjs). Every value wrapped in `TODO(...)`
-needs replacing:
+In [`site.config.mjs`](../site.config.mjs), the values still wrapped in `TODO()`:
 
-- `contact.email`, `contact.phone`, `contact.phoneHref`
-- `contact.baseCity`, `baseRegion`, `baseCountry`, `serviceArea`
-- `social.instagram`
+- `contact.baseCity` — the city you are based in
+- `about.mentors` — the photographers you assisted. Fill this in and the About
+  page swaps its generic paragraph for a specific credential line
 - `forms.endpoint` — see §1.3
-- `legalName`
+- `legalName` — only if the registered name differs from the trading name
 
-### 1.2 Replace the photographs
+### 1.2 Real testimonials
 
-Every image is an Unsplash placeholder — see [`photos/CREDITS.md`](../photos/CREDITS.md).
-Drop your own JPEGs into `photos/raw/` keeping the same filenames, then
-`npm run build`. Finally set `placeholder: false` on each entry in
-`content/collections.mjs`.
+`content/testimonials.mjs` is the last piece of invented content on the site.
+The quotes are written samples, not real reviews, and each is flagged
+`placeholder: true`. Replace them with genuine, permissioned client quotes and
+set the flag to `false`.
+
+> Publishing invented testimonials on a live commercial site is dishonest, and
+> it breaches Sri Lanka's Consumer Affairs Authority Act on misleading claims.
+> The build gate exists so that shipping them requires a deliberate act.
 
 ### 1.3 Connect the enquiry form
 
 Create a form at [Formspree](https://formspree.io) (or Basin, or Web3Forms) and
-put the endpoint URL in `forms.endpoint`. Until you do, the contact page renders
-a `mailto:` block instead — the enquiry route is never broken, but it is also
-never as good as a form.
+put the endpoint in `forms.endpoint`. Until you do, the contact page renders a
+WhatsApp and phone block instead, so the enquiry route is never broken — it is
+just less convenient than a form for people who prefer typing.
 
-### 1.4 Replace the testimonials
+### 1.4 Confirm the prices
 
-`content/testimonials.mjs` contains **placeholder quotes, not real reviews**.
-Replace them with genuine, permissioned quotes from real clients and set
-`placeholder: false`.
+The prices in `content/packages.mjs` are transcribed from the **2024/25** guide.
+Confirm they still stand before launch. A published price is a contractual
+signal and a stale one is worse than none. The Investment page says which guide
+year they came from, which limits the damage but is not a substitute for
+checking.
 
-> Publishing invented testimonials on a live commercial site is dishonest, and
-> it breaches Sri Lanka's Consumer Affairs Authority Act on misleading claims.
-> The build gate exists to make shipping them require a deliberate act.
+### 1.5 Better photographs, when you can
 
-### 1.5 Set real prices
+Everything in `photos/raw/` came out of the Canva PDF, so the largest file is
+800 × 1200 and most are around 410 × 615. The build never upscales past a
+source's own pixels, and the home page hero is laid out as an editorial split
+specifically so the largest photograph renders at 1.00× instead of being
+stretched across a full-bleed banner.
 
-`content/packages.mjs`. Then set `placeholder: false`.
+Drop the full-resolution originals in under the same filenames and run
+`npm run build`. Nothing else changes. Around 2400 px on the long edge is
+plenty, and it would let the hero become full-bleed if you wanted it to.
 
-### 1.5b Two things only Harith can supply
-
-`site.config.mjs → about.mentors` is a placeholder for the names of the
-photographers you assisted. Fill it in and the About page swaps its generic
-paragraph for a specific credential line; leave it and the generic version
-stands, which is honest but weaker.
-
-`contact.baseCity` is likewise unset. Everything else on that page is real.
-
-The About page narrative is written from the facts you gave me — the Computer
-Science degree, nine years, the assisting. The connective tissue between those
-facts is my phrasing, not your biography. Read it once and make it sound like
-you, because it is the page that decides whether a couple trusts you.
+More photographs would also let the portfolio go back to what it is really for:
+one complete wedding, start to finish. See §2.
 
 ### 1.6 Ship it
 
 ```bash
 npm run build -- --production   # fails while any placeholder remains
 npm test
-npm run deploy
+npm run deploy                  # or deploy:staging until DNS moves
 ```
 
-The `--production` flag is the gate: it lists exactly what is still a placeholder
-and refuses to build until none are.
+The `--production` flag is the gate: it lists exactly what is still a
+placeholder and refuses to build until none are.
 
 ## 2. Routine tasks
 
 ### Publish a new wedding
 
+The galleries are currently grouped by _kind_ of shoot rather than by wedding,
+because the photographs on file came from the price guide. Once you have a full
+gallery from one wedding, and that couple's written permission, add it as its
+own entry:
+
 1. Put the photographs in `photos/raw/` with a shared prefix, e.g. `mira-01.jpg`.
-2. Add an entry to `content/collections.mjs` — slug, couple, venue, location,
-   season, cover, a two-or-three paragraph story, and the image list.
-3. `npm run build && npm test`
-4. `npm run deploy`
+2. Add an entry to `content/collections.mjs` — slug, title, kind, cover, an
+   excerpt, a few `facts`, a two-or-three paragraph story, and the image list.
+3. **Write real alt text for every photograph.** `picture()` throws without it,
+   and `tests/unit/content.test.mjs` fails if it is under 25 characters. These
+   are real, identifiable people; "photograph 3 of 9" is not good enough.
+4. Never attach invented names, venues or stories to a real client's face.
+5. `npm run build && npm test && npm run deploy`
 
 The portfolio index, home page, footer, sitemap and structured data all update
 themselves. No markup changes are required.

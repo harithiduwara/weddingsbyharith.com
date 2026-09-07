@@ -9,10 +9,11 @@
 <section class="pagehead">
   <div class="shell">
     <p class="eyebrow">Portfolio</p>
-    <h1 class="pagehead__title">Complete days, not highlight reels</h1>
+    <h1 class="pagehead__title">Selected work</h1>
     <p class="lede">
-      Every gallery here is one whole wedding, beginning to end. That is deliberate. It is the
-      only honest way to judge a photographer, and it is what I would want to see.
+      Grouped by the kind of shoot rather than by wedding. If you want to see one whole day start to
+      finish, which is the only honest way to judge a photographer, ask me and I will send you a
+      full gallery.
     </p>
   </div>
 </section>
@@ -24,7 +25,9 @@
       <a class="card reveal" href="{{href}}">
         <div class="card__media">{{{coverHtml}}}</div>
         <h2 class="card__title">{{title}}</h2>
-        <p class="card__meta meta-list"><span>{{location}}</span><span>{{season}}</span><span>{{imageCount}} photographs</span></p>
+        <p class="card__meta meta-list">
+          <span>{{kind}}</span><span>{{imageCount}} photographs</span>
+        </p>
         <p class="card__excerpt">{{excerpt}}</p>
       </a>
       {{/each}}

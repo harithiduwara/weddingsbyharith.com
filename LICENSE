@@ -24,11 +24,9 @@ SOFTWARE.
 
 This licence covers the source code only.
 
-Photographs in photos/raw/ are placeholders from Unsplash, used under the
-Unsplash License (https://unsplash.com/license); see photos/CREDITS.md.
-
-Photographs subsequently added by the site owner are NOT covered by this
-licence and remain all rights reserved.
+Photographs in photos/raw/ are the copyright of Harith Iduwara. They are NOT
+covered by this licence and are reserved entirely; they may not be copied,
+reused or redistributed. See photos/CREDITS.md.
 
 The webfonts in src/assets/fonts/ (Cormorant Garamond, Jost) are licensed
 under the SIL Open Font License 1.1.

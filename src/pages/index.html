@@ -3,19 +3,22 @@
   "title": "Home",
   "description": "Documentary wedding photography in Sri Lanka. Nine years of full wedding days photographed as they actually happened, from Galle to the hill country.",
   "bodyClass": "page--home",
-  "hasHero": true,
-  "ogImage": "barn-04"
+  "ogImage": "wedding-02"
 }
 -->
 <section class="hero">
-  <div class="hero__media">{{{heroHtml}}}</div>
-  <div class="shell hero__body">
-    <p class="eyebrow">Wedding photography · Sri Lanka</p>
-    <h1 class="hero__title">The day, as it actually happened.</h1>
-    <p class="hero__sub">{{site.description}}</p>
-    <p><a class="btn btn--on-image" href="/portfolio/">See the work</a></p>
+  <div class="shell hero__grid">
+    <div class="hero__body">
+      <p class="eyebrow">Wedding photography · Sri Lanka</p>
+      <h1 class="hero__title">The day, as it actually happened.</h1>
+      <p class="hero__sub">{{site.description}}</p>
+      <p class="cluster">
+        <a class="btn" href="/portfolio/">See the work</a>
+        <a class="link-arrow" href="/packages/">Prices</a>
+      </p>
+    </div>
+    <figure class="hero__figure">{{{heroHtml}}}</figure>
   </div>
-  <a class="hero__scroll" href="#intro">Scroll</a>
 </section>
 
 <section class="section" id="intro">
@@ -25,17 +28,17 @@
         <p class="eyebrow">The short version</p>
         <h2>You will barely notice me. You will notice the photographs.</h2>
         <p class="lede">
-          I photograph weddings the way a documentary gets filmed. I turn up early, work out
-          where the light and the people are going to be, and then get out of the way.
+          I photograph weddings the way a documentary gets filmed. I turn up early, work out where
+          the light and the people are going to be, and then get out of the way.
         </p>
         <p>
-          There is no shot list to grind through and no hour spent arranging relatives in front
-          of a hedge. What comes back is the actual texture of the day. Your uncle mid-anecdote.
-          The ninety seconds before the doors opened. Your mother’s hands.
+          There is no shot list to grind through and no hour spent arranging relatives in front of a
+          hedge. What comes back is the actual texture of the day. Your uncle mid-anecdote. The
+          ninety seconds before the doors opened. Your mother’s hands.
         </p>
         <p>
-          Nine years of this, all over the island, and I have still never photographed two
-          weddings that were the same shape.
+          Nine years of this, all over the island, and I have still never photographed two weddings
+          that were the same shape.
         </p>
         <p><a class="link-arrow" href="/about/">How I work</a></p>
       </div>
@@ -50,8 +53,8 @@
       <p class="eyebrow">Recent weddings</p>
       <h2>Whole days, start to finish</h2>
       <p class="lede">
-        Not a highlight reel stitched together from forty weddings. Complete galleries, so you
-        can see what an entire day with me actually looks like.
+        A selection, grouped by the kind of shoot. Ask and I will send you one whole wedding start
+        to finish, which is the only honest way to judge any of this.
       </p>
     </div>
 
@@ -61,7 +64,7 @@
         <div class="card__media">{{{coverHtml}}}</div>
         <h3 class="card__title">{{title}}</h3>
         <p class="card__meta meta-list">
-          <span>{{location}}</span><span>{{season}}</span>
+          <span>{{kind}}</span><span>{{imageCount}} photographs</span>
         </p>
         <p class="card__excerpt">{{excerpt}}</p>
       </a>
@@ -82,24 +85,24 @@
       <div class="approach__item reveal">
         <h3>We talk first</h3>
         <p>
-          A call with no pitch in it. What your day actually looks like, what you want
-          photographed, and whether we get on. That last one matters more than any portfolio,
-          given I will be standing next to you for ten hours.
+          A call with no pitch in it. What your day actually looks like, what you want photographed,
+          and whether we get on. That last one matters more than any portfolio, given I will be
+          standing next to you for ten hours.
         </p>
       </div>
       <div class="approach__item reveal">
         <h3>I do the homework</h3>
         <p>
-          I visit your venue, find where the light lands at five, and build a rough running
-          order with you around your nekath. By the morning of the wedding there is nothing left
-          to decide.
+          I visit your venue, find where the light lands at five, and build a rough running order
+          with you around your nekath. By the morning of the wedding there is nothing left to
+          decide.
         </p>
       </div>
       <div class="approach__item reveal">
         <h3>Then I disappear</h3>
         <p>
-          On the day I am early, quiet, and mostly behind you. Family groups take fifteen
-          minutes because we planned them properly. The rest of it is yours.
+          On the day there are two or three of us, early and quiet and mostly behind you. Family
+          groups take fifteen minutes because we planned them properly. The rest of it is yours.
         </p>
       </div>
     </div>
@@ -128,10 +131,10 @@
     <div class="split">
       <div class="stack stack--m reveal">
         <p class="eyebrow">Investment</p>
-        <h2>From {{packages.symbol}}{{packages.tiers.0.priceDisplay}}</h2>
+        <h2>From {{packages.symbol}}{{packages.fromDisplay}}</h2>
         <p class="lede">
-          Three shapes of coverage, from a four-hour morning to a wedding and homecoming
-          together. Everything gets quoted individually anyway.
+          Four wedding packages, plus engagements, homecomings and casual shoots. All of them are
+          customisable, and none of them is a menu you have to order off.
         </p>
         <p><a class="link-arrow" href="/packages/">See what is included</a></p>
       </div>

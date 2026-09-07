@@ -229,42 +229,48 @@ const SIZES = {
   card: '(min-width: 900px) 40vw, 100vw',
 };
 
-const decoratedCollections = collections.map((c) => ({
-  ...c,
-  href: `/portfolio/${c.slug}/`,
-  coverHtml: picture(img(c.cover), {
-    alt: `${c.couple} — ${c.venue}, ${c.location}`,
-    sizes: SIZES.card,
-    className: 'photo--cover',
-  }),
-  gallery: c.images.map((slug, i) => {
-    const e = img(slug);
-    return {
-      slug,
-      full: fullSrc(e),
-      width: e.width,
-      height: e.height,
-      orientation: e.orientation,
-      html: picture(e, {
-        alt: `${c.couple} at ${c.venue} — photograph ${i + 1} of ${c.images.length}`,
-        sizes: SIZES.grid,
-        eager: i < 2,
-      }),
-    };
-  }),
-  imageCount: c.images.length,
-}));
+// Every photograph carries its own alt text written by hand: these are real,
+// identifiable clients, not stock, so a generated "photograph 3 of 9" would be
+// both useless to a screen reader and faintly disrespectful.
+const decoratedCollections = collections.map((c) => {
+  const coverAlt = c.images.find((im) => im.slug === c.cover)?.alt ?? c.title;
+  return {
+    ...c,
+    href: `/portfolio/${c.slug}/`,
+    coverHtml: picture(img(c.cover), {
+      alt: coverAlt,
+      sizes: SIZES.card,
+      className: 'photo--cover',
+    }),
+    gallery: c.images.map((im, i) => {
+      const e = img(im.slug);
+      return {
+        slug: im.slug,
+        alt: im.alt,
+        full: fullSrc(e),
+        width: e.width,
+        height: e.height,
+        orientation: e.orientation,
+        html: picture(e, { alt: im.alt, sizes: SIZES.grid, eager: i < 2 }),
+      };
+    }),
+    imageCount: c.images.length,
+  };
+});
 
 // Prices are grouped for display (£2,950 not £2950) but kept as numbers in
 // content/packages.mjs so they stay sortable and machine-readable.
 const money = new Intl.NumberFormat('en-GB');
+const withPrice = (t) => ({ ...t, priceDisplay: money.format(t.price) });
 const decoratedPackages = {
   ...packages,
-  tiers: packages.tiers.map((t) => ({ ...t, priceDisplay: money.format(t.price) })),
-  addons: packages.addons.map((a) => ({
-    ...a,
-    priceDisplay: a.price === null ? null : money.format(a.price),
-  })),
+  groups: packages.groups.map((g) => ({ ...g, tiers: g.tiers.map(withPrice) })),
+  extras: packages.extras.map(withPrice),
+  // Flattened for the enquiry form's package selector.
+  allTiers: packages.groups.flatMap((g) =>
+    g.tiers.map((t) => ({ ...t, groupName: g.name, label: `${g.name} — ${t.name}` })),
+  ),
+  fromDisplay: money.format(Math.min(...packages.groups[0].tiers.map((t) => t.price))),
 };
 
 const decoratedJournal = journal
@@ -334,7 +340,7 @@ for (const { dir, file, prefix } of pageFiles) {
 const collectionTpl = await readFile(join(SRC, 'templates', 'collection.html'), 'utf8');
 for (const c of decoratedCollections) {
   pages.push({
-    title: `${c.title} — ${c.couple}`,
+    title: c.title,
     description: c.excerpt,
     route: c.href,
     ogImage: c.cover,
@@ -407,18 +413,17 @@ const globals = {
   mentorsKnown,
   isPreview: placeholders.length > 0,
   placeholderCount: placeholders.length,
-  heroHtml: picture(img('barn-04'), {
-    alt: 'Guests holding sparklers around a couple at the end of a wedding reception',
-    sizes: SIZES.hero,
+  heroHtml: picture(img('wedding-02'), {
+    alt: 'A couple hold each other under a large tree, the bride’s train spread across the grass.',
+    sizes: '(min-width: 62rem) 34rem, 100vw',
     eager: true,
-    className: 'photo--hero',
   }),
-  heroPreload: preloadLink(img('barn-04'), SIZES.hero),
-  aboutHtml: picture(img('about-01'), {
-    alt: 'A couple photographed among trees in late afternoon light',
+  heroPreload: preloadLink(img('wedding-02'), '(min-width: 62rem) 34rem, 100vw'),
+  aboutHtml: picture(img('wedding-05'), {
+    alt: 'A close portrait in low light. The bride in a red saree, the groom just behind her.',
     sizes: SIZES.card,
   }),
-  ctaHtml: picture(img('hero-04'), {
+  ctaHtml: picture(img('wedding-06'), {
     alt: '',
     decorative: true,
     sizes: SIZES.hero,

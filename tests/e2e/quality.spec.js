@@ -63,7 +63,7 @@ test('every content image declares intrinsic dimensions', async ({ page }) => {
 });
 
 test('modern image formats are offered ahead of JPEG', async ({ page }) => {
-  await page.goto('/portfolio/ramparts-at-six/');
+  await page.goto('/portfolio/weddings/');
   const types = await page.evaluate(() =>
     [...document.querySelectorAll('.gallery__item source')].map((s) => s.type),
   );
@@ -73,7 +73,7 @@ test('modern image formats are offered ahead of JPEG', async ({ page }) => {
 
 test('below-the-fold images are lazy, the hero is not', async ({ page }) => {
   await page.goto('/');
-  const hero = page.locator('.hero__media img');
+  const hero = page.locator('.hero__figure img');
   await expect(hero).toHaveAttribute('fetchpriority', 'high');
   expect(await hero.getAttribute('loading')).toBeNull();
 });

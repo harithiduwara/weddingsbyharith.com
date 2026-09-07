@@ -31,7 +31,7 @@ describe('photographs (FR-02, FR-03)', () => {
   test('every referenced photograph exists in photos/raw/', () => {
     const missing = [];
     for (const c of collections) {
-      for (const slug of [c.cover, ...c.images]) {
+      for (const slug of [c.cover, ...c.images.map((i) => i.slug)]) {
         if (!available.has(slug)) missing.push(`${c.slug} → ${slug}`);
       }
     }
@@ -46,13 +46,37 @@ describe('photographs (FR-02, FR-03)', () => {
 
   test('no collection repeats a photograph within its own gallery', () => {
     for (const c of collections) {
-      assert.equal(new Set(c.images).size, c.images.length, `${c.slug} has duplicate images`);
+      const slugs = c.images.map((i) => i.slug);
+      assert.equal(new Set(slugs).size, slugs.length, `${c.slug} has duplicate images`);
     }
   });
 
-  test('every collection has enough photographs to be a real gallery', () => {
+  test('every collection has enough photographs to be worth opening', () => {
+    // Three is the floor, not the target. It is set this low only because the
+    // photographs currently on file come from the price guide rather than from
+    // complete single-wedding galleries. Raise it when real galleries land.
     for (const c of collections) {
-      assert.ok(c.images.length >= 8, `${c.slug} has only ${c.images.length} photographs`);
+      assert.ok(c.images.length >= 3, `${c.slug} has only ${c.images.length} photographs`);
+    }
+  });
+
+  test('every photograph has hand-written alt text', () => {
+    // These are real, identifiable clients. Generated alt text ("photo 3 of 9")
+    // is useless to a screen reader and would be a poor way to treat them.
+    for (const c of collections) {
+      for (const im of c.images) {
+        assert.equal(typeof im.alt, 'string', `${c.slug}/${im.slug} has no alt`);
+        assert.ok(im.alt.length > 25, `${c.slug}/${im.slug} alt is too thin: "${im.alt}"`);
+      }
+    }
+  });
+
+  test('each cover is one of that collection’s own photographs', () => {
+    for (const c of collections) {
+      assert.ok(
+        c.images.some((i) => i.slug === c.cover),
+        `${c.slug} cover ${c.cover} is not in its gallery`,
+      );
     }
   });
 });
@@ -92,7 +116,7 @@ describe('routing', () => {
 describe('required fields', () => {
   test('collections carry everything a page needs', () => {
     for (const c of collections) {
-      for (const k of ['title', 'couple', 'venue', 'location', 'season', 'cover', 'excerpt']) {
+      for (const k of ['title', 'kind', 'cover', 'excerpt']) {
         assert.ok(c[k], `${c.slug} missing ${k}`);
       }
       assert.ok(Array.isArray(c.story) && c.story.length >= 2, `${c.slug} needs a story`);
@@ -100,19 +124,31 @@ describe('required fields', () => {
   });
 
   test('packages are internally consistent', () => {
-    assert.ok(packages.tiers.length >= 3);
-    for (const t of packages.tiers) {
-      assert.equal(typeof t.price, 'number', `${t.slug} price must be a number for formatting`);
-      assert.ok(t.includes.length >= 3, `${t.slug} needs a real inclusion list`);
+    assert.ok(packages.groups.length >= 1);
+    const seen = new Set();
+    for (const g of packages.groups) {
+      assert.ok(g.tiers.length >= 2, `${g.slug} needs at least two tiers`);
+      for (const t of g.tiers) {
+        assert.equal(typeof t.price, 'number', `${t.slug} price must be a number`);
+        assert.ok(t.price > 0, `${t.slug} price must be positive`);
+        assert.ok(t.includes.length >= 3, `${t.slug} needs a real inclusion list`);
+        assert.ok(!seen.has(t.slug), `duplicate tier slug: ${t.slug}`);
+        seen.add(t.slug);
+      }
+      // Tiers read left to right as a descending ladder within each group.
+      const prices = g.tiers.map((t) => t.price);
+      assert.deepEqual(
+        prices,
+        [...prices].sort((a, b) => b - a),
+        `${g.slug} tiers must descend in price`,
+      );
     }
-    // Tiers are displayed left-to-right as an ascending ladder.
-    const prices = packages.tiers.map((t) => t.price);
-    assert.deepEqual(
-      prices,
-      [...prices].sort((a, b) => a - b),
-      'tiers must ascend in price',
-    );
-    assert.equal(packages.tiers.filter((t) => t.popular).length, 1, 'exactly one tier is flagged');
+  });
+
+  test('extras all have a price', () => {
+    for (const e of packages.extras) {
+      assert.equal(typeof e.price, 'number', `${e.name} has no price`);
+    }
   });
 
   test('journal posts have valid ISO dates and bodies', () => {
