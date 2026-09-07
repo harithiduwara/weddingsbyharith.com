@@ -4,6 +4,7 @@
     "no-inline-style": "off",
     "no-redundant-role": "off",
     "attribute-boolean-style": "off",
-    "void-style": "off"
+    "void-style": "off",
+    "doctype-style": "off"
   }
 }

@@ -127,6 +127,9 @@ Automation cannot judge these:
   and non-overflowing would pass.
 - Lighthouse budgets in NFR-01/NFR-02 are asserted indirectly (CLS is measured;
   LCP is not). Wiring Lighthouse CI is the obvious next addition.
+- `doctype-style` is disabled: Prettier always lowercases the doctype and
+  offers no option not to, the HTML spec is case-insensitive there, so the rule
+  is pure style and was doing nothing but fighting the formatter.
 - `no-inline-style` and `no-redundant-role` are disabled in
   `.htmlvalidate.json`. The first because gallery images carry a per-element
   base64 LQIP that cannot live in a stylesheet; the second because `role="list"`
