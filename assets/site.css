@@ -1443,11 +1443,17 @@ body:not(.has-hero) main {
  color: var(--ink-soft);
  text-decoration: none;
 }
+.page--about .split {
+ align-items: start;
+}
 .about__portrait {
  position: sticky;
  top: calc(var(--header-h) + var(--sp-m));
 }
 @media (max-width: 60rem) {
+ .page--about .split {
+ align-items: start;
+ }
  .about__portrait {
  position: static;
  }
