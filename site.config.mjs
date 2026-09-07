@@ -50,8 +50,6 @@ export default {
   // ── Credentials ────────────────────────────────────────────────────────
   about: {
     degree: 'BSc in Computer Science, University of Colombo',
-    university: 'UCSC',
-    societyRole: 'Head of Photography for Pahasara, the UCSC Media Unit',
     startedAge: 5,
     firstWedding: 'December 2020',
     weddingsSince: 2020,
