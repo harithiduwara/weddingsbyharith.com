@@ -1,0 +1,106 @@
+/* ── Layout primitives ─────────────────────────────────────────────────── */
+
+.shell {
+  width: min(100% - (var(--gutter) * 2), var(--shell));
+  margin-inline: auto;
+}
+
+.shell--narrow {
+  width: min(100% - (var(--gutter) * 2), var(--shell-narrow));
+}
+.shell--bleed {
+  width: 100%;
+}
+
+.section {
+  padding-block: var(--sp-3xl);
+}
+.section--tight {
+  padding-block: var(--sp-2xl);
+}
+.section--sunk {
+  background: var(--paper-sunk);
+}
+
+.section__head {
+  display: grid;
+  gap: var(--sp-s);
+  max-width: var(--measure);
+  margin-bottom: var(--sp-xl);
+}
+
+.section__head--center {
+  margin-inline: auto;
+  text-align: center;
+  justify-items: center;
+}
+
+.stack > * + * {
+  margin-block-start: var(--flow, var(--sp-s));
+}
+.stack--l > * + * {
+  --flow: var(--sp-l);
+}
+.stack--m > * + * {
+  --flow: var(--sp-m);
+}
+
+.cluster {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-s) var(--sp-m);
+  align-items: center;
+}
+
+.split {
+  display: grid;
+  gap: var(--sp-xl);
+  align-items: center;
+}
+@media (min-width: 60rem) {
+  .split {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--sp-2xl);
+  }
+  .split--wide-first {
+    grid-template-columns: 1.25fr 1fr;
+  }
+  .split--wide-last {
+    grid-template-columns: 1fr 1.25fr;
+  }
+  .split--reverse > :first-child {
+    order: 2;
+  }
+}
+
+.grid-3 {
+  display: grid;
+  gap: var(--sp-l);
+  grid-template-columns: repeat(auto-fit, minmax(min(19rem, 100%), 1fr));
+}
+
+.center-text {
+  text-align: center;
+}
+
+/* A small set of spacing utilities, so page templates never need inline
+   styles — html-validate forbids them and they are unthemeable. */
+.mt-l {
+  margin-block-start: var(--sp-l);
+}
+.mt-xl {
+  margin-block-start: var(--sp-xl);
+}
+.center-x {
+  justify-content: center;
+}
+.text-fine {
+  font-size: var(--step--1);
+  color: var(--ink-faint);
+}
+.text-body {
+  font-size: var(--step-0);
+}
+.plain {
+  margin: 0;
+}

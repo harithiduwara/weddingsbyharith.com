@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="{{site.lang}}" prefix="og: https://ogp.me/ns#">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{page.fullTitle}}</title>
+<meta name="description" content="{{page.description}}">
+<link rel="canonical" href="{{page.canonical}}">
+
+<!-- Pages cannot set response headers, so the policy is delivered inline (ADR-0002). -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; font-src 'self'; connect-src 'self' {{formOrigin}}; form-action 'self' {{formOrigin}}; base-uri 'none'; object-src 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="robots" content="{{#if page.noindex}}noindex, follow{{else}}index, follow, max-image-preview:large{{/if}}">
+<meta name="theme-color" content="#faf7f2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#141210" media="(prefers-color-scheme: dark)">
+
+<meta property="og:type" content="{{#if page.ogType}}{{page.ogType}}{{else}}website{{/if}}">
+<meta property="og:site_name" content="{{site.name}}">
+<meta property="og:locale" content="{{site.locale}}">
+<meta property="og:title" content="{{page.fullTitle}}">
+<meta property="og:description" content="{{page.description}}">
+<meta property="og:url" content="{{page.canonical}}">
+<meta property="og:image" content="{{site.url}}{{ogImage}}">
+<meta name="twitter:card" content="{{site.seo.twitterCard}}">
+
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="manifest" href="/assets/site.webmanifest">
+
+<link rel="preload" href="/assets/fonts/cormorant-garamond-300-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/jost-300-latin.woff2" as="font" type="font/woff2" crossorigin>
+{{{page.preload}}}
+<link rel="stylesheet" href="/assets/site.css">
+
+<script type="application/ld+json">{{{page.jsonLd}}}</script>
+</head>
+
+<body class="{{page.bodyClass}}{{#if page.hasHero}} has-hero{{/if}}">
+<a class="skip-link" href="#main">Skip to content</a>
+{{> preview-ribbon }}
+{{> header }}
+
+<main id="main">
+{{{content}}}
+</main>
+
+{{> footer }}
+{{> lightbox }}
+<script src="/assets/site.js" defer></script>
+</body>
+</html>

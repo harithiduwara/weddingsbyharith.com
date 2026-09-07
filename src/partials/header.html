@@ -1,0 +1,25 @@
+<header class="header">
+  <div class="shell header__inner">
+    <a class="brand" href="/">Harith<span>Wedding Photography</span></a>
+
+    <nav class="nav" aria-label="Primary">
+      <ul class="nav__list">
+        {{#each navItems}}
+        <li><a class="nav__link" href="{{href}}"{{#if current}} aria-current="page"{{/if}}>{{label}}</a></li>
+        {{/each}}
+      </ul>
+    </nav>
+
+    <a class="btn btn--on-image header__cta" href="{{site.cta.href}}">{{site.cta.label}}</a>
+
+    <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-drawer">
+      <span></span><span></span><span></span>
+      <span class="sr-only">Menu</span>
+    </button>
+  </div>
+</header>
+
+<div class="drawer" id="nav-drawer" hidden>
+  {{#each site.nav}}<a href="{{href}}">{{label}}</a>{{/each}}
+  <a href="{{site.cta.href}}">{{site.cta.label}}</a>
+</div>

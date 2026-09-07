@@ -1,0 +1,36 @@
+<footer class="footer">
+  <div class="shell">
+    <div class="footer__grid">
+      <div class="stack">
+        <h2>{{site.name}}</h2>
+        <p class="lede text-body">{{site.description}}</p>
+        {{#if emailConfigured}}
+        <p><a href="mailto:{{site.contact.email}}">{{site.contact.email}}</a></p>
+        {{else}}
+        <p><em>Contact details to be confirmed.</em></p>
+        {{/if}}
+      </div>
+
+      <div class="stack">
+        <h2>Explore</h2>
+        <ul class="footer__list" role="list">
+          <li><a href="/">Home</a></li>
+          {{#each site.nav}}<li><a href="{{href}}">{{label}}</a></li>{{/each}}
+          <li><a href="/contact/">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="stack">
+        <h2>Collections</h2>
+        <ul class="footer__list" role="list">
+          {{#each collections}}<li><a href="{{href}}">{{title}}</a></li>{{/each}}
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__legal">
+      <p>&copy; <span data-year>{{year}}</span> {{site.name}}. Photographs may not be reproduced without permission.</p>
+      <p><a href="/privacy/">Privacy</a></p>
+    </div>
+  </div>
+</footer>

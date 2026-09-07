@@ -1,0 +1,32 @@
+<!--
+{
+  "title": "Portfolio",
+  "description": "Complete wedding galleries — coastal ceremonies, barn receptions and mountain elopements, photographed start to finish.",
+  "bodyClass": "page--portfolio",
+  "breadcrumb": [{ "label": "Portfolio", "href": "/portfolio/" }]
+}
+-->
+<section class="pagehead">
+  <div class="shell">
+    <p class="eyebrow">Portfolio</p>
+    <h1 class="pagehead__title">Complete days, not highlight reels</h1>
+    <p class="lede">Every gallery here is one wedding from beginning to end. That is deliberate — it is the only honest way to judge a photographer.</p>
+  </div>
+</section>
+
+<section class="section section--tight">
+  <div class="shell">
+    <div class="grid-3">
+      {{#each collections}}
+      <a class="card reveal" href="{{href}}">
+        <div class="card__media">{{{coverHtml}}}</div>
+        <h2 class="card__title">{{title}}</h2>
+        <p class="card__meta meta-list"><span>{{location}}</span><span>{{season}}</span><span>{{imageCount}} photographs</span></p>
+        <p class="card__excerpt">{{excerpt}}</p>
+      </a>
+      {{/each}}
+    </div>
+  </div>
+</section>
+
+{{> cta-band }}

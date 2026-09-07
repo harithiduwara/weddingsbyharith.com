@@ -1,0 +1,35 @@
+{
+  "name": "weddingsbyharith.com",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Marketing and portfolio website for Weddings by Harith — wedding photography.",
+  "type": "module",
+  "engines": {
+    "node": ">=20.11.0"
+  },
+  "scripts": {
+    "build": "node tools/build.mjs",
+    "build:clean": "rm -rf dist .cache && node tools/build.mjs",
+    "images": "node tools/optimize-images.mjs",
+    "photos:fetch": "node tools/fetch-photos.mjs",
+    "dev": "node tools/dev-server.mjs",
+    "test": "npm run test:unit && npm run test:html && npm run test:e2e",
+    "test:unit": "node --test tests/unit/*.test.mjs",
+    "test:html": "html-validate \"dist/**/*.html\"",
+    "test:e2e": "playwright test",
+    "test:links": "linkinator http://localhost:4321 --recurse --silent --skip \"^https?://(?!localhost)\"",
+    "format": "prettier --write \"**/*.{mjs,js,css,json,md}\"",
+    "format:check": "prettier --check \"**/*.{mjs,js,css,json,md}\"",
+    "deploy": "node tools/deploy.mjs"
+  },
+  "dependencies": {
+    "sharp": "^0.33.5"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.10.1",
+    "@playwright/test": "^1.49.1",
+    "html-validate": "^8.27.0",
+    "linkinator": "^6.1.2",
+    "prettier": "^3.4.2"
+  }
+}

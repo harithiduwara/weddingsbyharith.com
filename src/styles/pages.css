@@ -1,0 +1,262 @@
+/* ── Page-specific composition ─────────────────────────────────────────── */
+
+/* Scroll reveal. Opt-in via JS adding .js to <html>; without JS everything is
+   simply visible, which is the whole point (NFR-05). */
+.js .reveal {
+  opacity: 0;
+  transform: translateY(1.25rem);
+}
+.js .reveal.is-in {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity var(--dur-slow) var(--ease),
+    transform var(--dur-slow) var(--ease);
+}
+@media (prefers-reduced-motion: reduce) {
+  .js .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Header offset for every page that does not open with a full-bleed hero. */
+body:not(.has-hero) main {
+  padding-block-start: var(--header-h);
+}
+
+/* ── Home ──────────────────────────────────────────────────────────────── */
+
+.intro__mark {
+  font-family: var(--font-display);
+  font-size: var(--step-3);
+  font-style: italic;
+  color: var(--clay);
+}
+
+.approach {
+  display: grid;
+  gap: var(--sp-xl);
+  counter-reset: step;
+}
+@media (min-width: 56rem) {
+  .approach {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--sp-l);
+  }
+}
+.approach__item {
+  display: grid;
+  gap: var(--sp-xs);
+  align-content: start;
+  counter-increment: step;
+}
+.approach__item::before {
+  content: counter(step, decimal-leading-zero);
+  font-family: var(--font-display);
+  font-size: var(--step-2);
+  color: var(--clay);
+  line-height: 1;
+}
+.approach__item h3 {
+  font-size: var(--step-1);
+}
+.approach__item p {
+  color: var(--ink-soft);
+}
+
+.stat-rail {
+  display: grid;
+  gap: var(--sp-l);
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+}
+.stat {
+  display: grid;
+  gap: var(--sp-3xs);
+}
+.stat__n {
+  font-family: var(--font-display);
+  font-size: var(--step-4);
+  line-height: 1;
+}
+.stat__l {
+  font-size: var(--step--1);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+/* Closing call to action, set over a photograph. */
+.cta-band {
+  position: relative;
+  isolation: isolate;
+  color: var(--on-image);
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding-block: var(--sp-3xl);
+}
+.cta-band__media {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+}
+.cta-band__media .photo,
+.cta-band__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.cta-band::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--overlay-deep);
+}
+.cta-band__body {
+  display: grid;
+  gap: var(--sp-m);
+  justify-items: center;
+  max-width: 40ch;
+}
+
+/* ── Collection page ───────────────────────────────────────────────────── */
+
+.collection__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-xs) var(--sp-l);
+  font-size: var(--step--1);
+  letter-spacing: var(--tracking-mid);
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  padding-block: var(--sp-m);
+  border-block: 1px solid var(--line);
+}
+.collection__story {
+  max-width: var(--measure);
+  display: grid;
+  gap: var(--sp-m);
+}
+.collection__story p:first-child::first-letter {
+  font-family: var(--font-display);
+  font-size: 3.2em;
+  float: left;
+  line-height: 0.82;
+  padding-inline-end: 0.12em;
+  color: var(--clay);
+}
+
+.pager {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--sp-m);
+  padding-block: var(--sp-xl);
+  border-top: 1px solid var(--line);
+}
+
+/* ── Article / journal ─────────────────────────────────────────────────── */
+
+.prose {
+  max-width: var(--measure);
+  display: grid;
+  gap: var(--sp-m);
+  font-size: var(--step-1);
+}
+.prose p {
+  color: var(--ink-soft);
+}
+.prose__h {
+  font-size: var(--step-2);
+  margin-block-start: var(--sp-l);
+  color: var(--ink);
+}
+.article__meta {
+  font-size: var(--step--1);
+  letter-spacing: var(--tracking-mid);
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.tag {
+  display: inline-block;
+  font-size: var(--step--1);
+  letter-spacing: var(--tracking-mid);
+  text-transform: uppercase;
+  padding: 0.25em 0.7em;
+  border: 1px solid var(--line-strong);
+  color: var(--ink-soft);
+  text-decoration: none;
+}
+
+/* ── About ─────────────────────────────────────────────────────────────── */
+
+.about__portrait {
+  position: sticky;
+  top: calc(var(--header-h) + var(--sp-m));
+}
+@media (max-width: 60rem) {
+  .about__portrait {
+    position: static;
+  }
+}
+.credentials {
+  display: grid;
+  gap: var(--sp-s);
+}
+.credentials li {
+  display: grid;
+  grid-template-columns: 1.4em 1fr;
+  gap: var(--sp-2xs);
+  color: var(--ink-soft);
+}
+.credentials li::before {
+  content: '✓';
+  color: var(--clay);
+}
+
+/* ── Contact ───────────────────────────────────────────────────────────── */
+
+.contact-grid {
+  display: grid;
+  gap: var(--sp-2xl);
+}
+@media (min-width: 64rem) {
+  .contact-grid {
+    grid-template-columns: 1.3fr 1fr;
+  }
+}
+.contact-detail {
+  display: grid;
+  gap: var(--sp-3xs);
+  margin-block-end: var(--sp-m);
+}
+.contact-detail dt {
+  font-size: var(--step--1);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.contact-detail dd {
+  margin: 0;
+  font-size: var(--step-1);
+}
+
+/* ── 404 ───────────────────────────────────────────────────────────────── */
+
+.notfound {
+  min-height: 72svh;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding-block: var(--sp-3xl);
+}
+.mx-auto {
+  margin-inline: auto;
+}
+.notfound__code {
+  font-family: var(--font-display);
+  font-size: var(--step-6);
+  line-height: 1;
+  color: var(--clay);
+}

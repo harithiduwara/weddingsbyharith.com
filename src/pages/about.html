@@ -1,0 +1,45 @@
+<!--
+{
+  "title": "About",
+  "description": "Harith is a documentary wedding photographer. Quiet on the day, thorough before it, and reachable afterwards.",
+  "bodyClass": "page--about",
+  "breadcrumb": [{ "label": "About", "href": "/about/" }],
+  "ogImage": "about-01"
+}
+-->
+<section class="pagehead">
+  <div class="shell">
+    <p class="eyebrow">About</p>
+    <h1 class="pagehead__title">I am the one you will forget is there</h1>
+  </div>
+</section>
+
+<section class="section section--tight">
+  <div class="shell">
+    <div class="split split--wide-last">
+      <figure class="about__portrait reveal">
+        {{{aboutHtml}}}
+        {{#if isPreview}}<figcaption class="card__meta">Placeholder — a portrait of Harith belongs here.</figcaption>{{/if}}
+      </figure>
+      <div class="stack stack--m reveal">
+        <p class="lede">I have been photographing weddings since {{site.founded}}. Before that I shot news, which is where the habit of standing still and waiting comes from.</p>
+        <p>Documentary photography is not a style you apply in editing. It is a set of decisions you make on the day: to use the light that is there rather than the light you brought, to keep working while everyone eats, and to trust that the real thing happening in front of you is more interesting than anything you could arrange.</p>
+        <p>What that means in practice is that I am early, quiet, and slightly obsessive about preparation. I will have walked your venue. I will know what time the sun clears the treeline. I will have your timeline in my pocket. None of which you should ever have to think about.</p>
+        <p>Family groups are the one exception, and I do them gladly — quickly, in one place, from a list we agree in advance. Fifteen minutes, not an hour. You will want them in twenty years.</p>
+        <p>Away from weddings I am usually walking somewhere with a film camera and no particular plan, which is a habit that has never once made me money and has never once felt wasted.</p>
+
+        <h2 class="mt-l">The practical part</h2>
+        <ul class="credentials" role="list">
+          <li>Fully insured — professional indemnity and public liability</li>
+          <li>Two camera bodies, both recording to two cards at once</li>
+          <li>Every wedding backed up to three locations before I sleep</li>
+          <li>Photographs never published without your written consent</li>
+          <li>Available across {{site.contact.serviceArea}}</li>
+        </ul>
+        <p><a class="link-arrow" href="/contact/">{{site.cta.label}}</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{{> cta-band }}

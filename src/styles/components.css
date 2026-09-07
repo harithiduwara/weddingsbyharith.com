@@ -1,0 +1,879 @@
+/* ── Photographs ───────────────────────────────────────────────────────── */
+
+/* The LQIP is painted as a background behind the <img>; when the real image
+   decodes it covers the blur. No JS, no layout shift, no flash of empty box. */
+.photo {
+  display: block;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--paper-sunk);
+  overflow: hidden;
+}
+.photo > img {
+  width: 100%;
+  height: auto;
+  animation: photo-in var(--dur-slow) var(--ease) both;
+}
+@keyframes photo-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.photo--cover {
+  aspect-ratio: 4 / 5;
+}
+.photo--cover > img {
+  height: 100%;
+  object-fit: cover;
+}
+.photo--hero {
+  height: 100%;
+}
+.photo--hero > img {
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ── Buttons ───────────────────────────────────────────────────────────── */
+
+.btn {
+  --btn-bg: var(--ink);
+  --btn-fg: var(--paper);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2xs);
+  padding: 0.95em 2em;
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  border: 1px solid var(--btn-bg);
+  font-size: var(--step--1);
+  font-weight: 400;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: var(--radius);
+  transition:
+    background var(--dur-fast) var(--ease),
+    color var(--dur-fast) var(--ease),
+    border-color var(--dur-fast) var(--ease),
+    transform var(--dur-fast) var(--ease);
+}
+.btn:hover {
+  --btn-bg: var(--clay-deep);
+  border-color: var(--clay-deep);
+}
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn--ghost {
+  --btn-bg: transparent;
+  --btn-fg: var(--ink);
+  border-color: var(--line-strong);
+}
+.btn--ghost:hover {
+  --btn-bg: var(--ink);
+  --btn-fg: var(--paper);
+  border-color: var(--ink);
+}
+
+.btn--on-image {
+  --btn-bg: transparent;
+  --btn-fg: var(--on-image);
+  border-color: rgb(255 255 255 / 0.55);
+}
+.btn--on-image:hover {
+  --btn-bg: var(--on-image);
+  --btn-fg: var(--ink);
+  border-color: var(--on-image);
+}
+
+/* The header CTA is .btn--on-image so it reads over the hero. The moment the
+   header goes solid — or on any page with no hero at all — that is white text
+   on a near-white bar, so it flips back to the standard treatment. */
+.header.is-solid .header__cta,
+body:not(.has-hero) .header__cta {
+  --btn-bg: var(--ink);
+  --btn-fg: var(--paper);
+  border-color: var(--ink);
+}
+.header.is-solid .header__cta:hover,
+body:not(.has-hero) .header__cta:hover {
+  --btn-bg: var(--clay-deep);
+  border-color: var(--clay-deep);
+}
+
+.btn--block {
+  width: 100%;
+}
+
+/* A text link with a rule that draws in on hover. */
+.link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  font-size: var(--step--1);
+  letter-spacing: var(--tracking-mid);
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--ink);
+  padding-block-end: 0.35em;
+  border-bottom: 1px solid var(--line-strong);
+  transition:
+    border-color var(--dur) var(--ease),
+    color var(--dur) var(--ease);
+}
+.link-arrow::after {
+  content: '→';
+  transition: transform var(--dur) var(--ease);
+}
+.link-arrow:hover {
+  color: var(--clay);
+  border-color: var(--clay);
+}
+.link-arrow:hover::after {
+  transform: translateX(0.3em);
+}
+
+/* ── Site header ───────────────────────────────────────────────────────── */
+
+.header {
+  position: fixed;
+  inset-block-start: 0;
+  inset-inline: 0;
+  z-index: 100;
+  height: var(--header-h);
+  display: flex;
+  align-items: center;
+  color: var(--on-image);
+  transition:
+    background var(--dur) var(--ease),
+    color var(--dur) var(--ease),
+    box-shadow var(--dur) var(--ease);
+}
+.header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgb(15 12 10 / 0.5), transparent);
+  opacity: 1;
+  transition: opacity var(--dur) var(--ease);
+  pointer-events: none;
+}
+/* Set by enhance.js once the hero has scrolled past; also the default on any
+   page without a hero, so the header is legible with JS disabled. */
+.header.is-solid,
+body:not(.has-hero) .header {
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: 0 1px 0 var(--line);
+}
+.header.is-solid::before,
+body:not(.has-hero) .header::before {
+  opacity: 0;
+}
+
+.header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-m);
+  width: 100%;
+  position: relative;
+}
+
+.brand {
+  font-family: var(--font-display);
+  font-size: var(--step-1);
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  line-height: 1;
+  white-space: nowrap;
+}
+.brand span {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 0.5em;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  opacity: 0.7;
+  margin-top: 0.3em;
+}
+
+.nav {
+  display: none;
+}
+.nav__list {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-m);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.nav__link {
+  font-size: var(--step--1);
+  letter-spacing: var(--tracking-mid);
+  text-transform: uppercase;
+  text-decoration: none;
+  padding-block: 0.4em;
+  border-bottom: 1px solid transparent;
+  transition:
+    border-color var(--dur-fast) var(--ease),
+    opacity var(--dur-fast) var(--ease);
+}
+.nav__link:hover {
+  border-color: currentColor;
+}
+.nav__link[aria-current='page'] {
+  border-color: currentColor;
+}
+
+.header__cta {
+  display: none;
+}
+
+@media (min-width: 64rem) {
+  .nav,
+  .header__cta {
+    display: block;
+  }
+}
+
+/* Mobile drawer. Uses [hidden] so it is genuinely inert without JS. */
+.nav__toggle {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 2.75rem;
+  height: 2.75rem;
+  margin-inline-end: -0.5rem;
+  align-items: center;
+}
+.nav__toggle span {
+  display: block;
+  width: 22px;
+  height: 1px;
+  background: currentColor;
+  transition:
+    transform var(--dur) var(--ease),
+    opacity var(--dur-fast) var(--ease);
+}
+.nav__toggle[aria-expanded='true'] span:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+.nav__toggle[aria-expanded='true'] span:nth-child(2) {
+  opacity: 0;
+}
+.nav__toggle[aria-expanded='true'] span:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+/* Declared after the base rule above, otherwise source order re-shows it. */
+@media (min-width: 64rem) {
+  .nav__toggle {
+    display: none;
+  }
+}
+
+.drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 99;
+  background: var(--paper);
+  color: var(--ink);
+  padding: calc(var(--header-h) + var(--sp-xl)) var(--gutter) var(--sp-xl);
+  display: grid;
+  align-content: start;
+  gap: var(--sp-m);
+  overflow-y: auto;
+}
+.drawer a {
+  font-family: var(--font-display);
+  font-size: var(--step-3);
+  text-decoration: none;
+  border-bottom: 1px solid var(--line);
+  padding-block-end: var(--sp-xs);
+}
+@media (min-width: 64rem) {
+  .drawer {
+    display: none;
+  }
+}
+
+/* ── Hero ──────────────────────────────────────────────────────────────── */
+
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: grid;
+  align-items: end;
+  color: var(--on-image);
+  isolation: isolate;
+}
+.hero__media {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+}
+.hero__media .photo,
+.hero__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(to top, var(--overlay-deep) 0%, transparent 55%),
+    linear-gradient(to bottom, rgb(15 12 10 / 0.35), transparent 30%);
+}
+.hero__body {
+  padding-block: var(--sp-2xl) var(--sp-xl);
+  display: grid;
+  gap: var(--sp-m);
+}
+.hero__title {
+  font-size: var(--step-6);
+  max-width: 16ch;
+}
+.hero__sub {
+  font-size: var(--step-1);
+  max-width: 44ch;
+  opacity: 0.92;
+  font-weight: 300;
+}
+.hero .eyebrow {
+  color: rgb(255 255 255 / 0.72);
+  margin: 0;
+}
+
+.hero__scroll {
+  position: absolute;
+  inset-block-end: var(--sp-m);
+  inset-inline-end: var(--gutter);
+  font-size: var(--step--1);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  writing-mode: vertical-rl;
+  opacity: 0.75;
+  text-decoration: none;
+}
+@media (max-width: 48rem) {
+  .hero__scroll {
+    display: none;
+  }
+}
+
+/* Compact hero for interior pages. */
+.pagehead {
+  padding-block: calc(var(--header-h) + var(--sp-2xl)) var(--sp-xl);
+}
+.pagehead__title {
+  max-width: 18ch;
+}
+.pagehead .lede {
+  margin-top: var(--sp-m);
+}
+
+/* ── Collection cards ──────────────────────────────────────────────────── */
+
+.card {
+  display: grid;
+  gap: var(--sp-2xs);
+  align-content: start;
+  text-decoration: none;
+}
+.card__media {
+  margin-block-end: var(--sp-2xs);
+}
+.card__media {
+  overflow: hidden;
+  background: var(--paper-sunk);
+}
+.card__media .photo > img {
+  transition: transform var(--dur-slow) var(--ease);
+}
+.card:hover .card__media .photo > img {
+  transform: scale(1.035);
+}
+.card__title {
+  font-size: var(--step-2);
+}
+.card__meta {
+  font-size: var(--step--1);
+  letter-spacing: var(--tracking-mid);
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+/* Separators are drawn, not typed. Jost's latin subset has no U+00B7, so a
+   literal "·" rendered as a blank gap. */
+.meta-list > span + span::before {
+  content: '';
+  display: inline-block;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: currentColor;
+  vertical-align: 0.3em;
+  margin-inline: 0.7em;
+  opacity: 0.65;
+}
+.card__excerpt {
+  color: var(--ink-soft);
+  max-width: 42ch;
+}
+
+/* ── Gallery ───────────────────────────────────────────────────────────── */
+
+/* Multi-column masonry: preserves every aspect ratio with no cropping and no
+   JavaScript. Column fill order matches DOM order, so the lightbox index and
+   the visual sequence agree. */
+.gallery {
+  columns: 1;
+  column-gap: var(--sp-m);
+}
+@media (min-width: 40rem) {
+  .gallery {
+    columns: 2;
+  }
+}
+@media (min-width: 72rem) {
+  .gallery {
+    columns: 3;
+    column-gap: var(--sp-l);
+  }
+}
+
+.gallery__item {
+  break-inside: avoid;
+  margin-block-end: var(--sp-m);
+  display: block;
+  position: relative;
+  text-decoration: none;
+}
+@media (min-width: 72rem) {
+  .gallery__item {
+    margin-block-end: var(--sp-l);
+  }
+}
+
+.gallery__item .photo > img {
+  transition: opacity var(--dur) var(--ease);
+}
+.gallery__item:hover .photo > img {
+  opacity: 0.88;
+}
+
+/* ── Testimonials ──────────────────────────────────────────────────────── */
+
+.quote {
+  display: grid;
+  gap: var(--sp-m);
+  max-width: 46ch;
+}
+.quote__text {
+  font-family: var(--font-display);
+  font-size: var(--step-2);
+  line-height: 1.35;
+  font-style: italic;
+  font-weight: 300;
+}
+.quote__attr {
+  font-size: var(--step--1);
+  letter-spacing: var(--tracking-mid);
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.quote-rail {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: min(88%, 34rem);
+  gap: var(--sp-xl);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-block-end: var(--sp-m);
+  scrollbar-width: thin;
+}
+.quote-rail > * {
+  scroll-snap-align: start;
+}
+
+/* ── Pricing ───────────────────────────────────────────────────────────── */
+
+.tier {
+  display: grid;
+  gap: var(--sp-m);
+  align-content: start;
+  padding: var(--sp-l);
+  border: 1px solid var(--line);
+  background: var(--paper-raised);
+  position: relative;
+}
+.tier--popular {
+  border-color: var(--clay);
+}
+.tier__flag {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: var(--sp-l);
+  transform: translateY(-50%);
+  background: var(--clay);
+  color: var(--paper);
+  font-size: var(--step--1);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  padding: 0.3em 0.9em;
+}
+.tier__price {
+  font-family: var(--font-display);
+  font-size: var(--step-4);
+  line-height: 1;
+}
+.tier__price small {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: var(--step--1);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 0.4em;
+}
+.tier__hours {
+  font-size: var(--step--1);
+  letter-spacing: var(--tracking-mid);
+  text-transform: uppercase;
+  color: var(--clay);
+}
+.tier__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: var(--sp-2xs);
+}
+.tier__list li {
+  display: grid;
+  grid-template-columns: 1.2em 1fr;
+  gap: var(--sp-2xs);
+  font-size: var(--step-0);
+  color: var(--ink-soft);
+}
+.tier__list li::before {
+  content: '—';
+  color: var(--clay);
+}
+.tier__list li.is-excluded {
+  color: var(--ink-faint);
+  text-decoration: line-through;
+}
+.tier__list li.is-excluded::before {
+  content: '×';
+  color: var(--ink-faint);
+  text-decoration: none;
+}
+
+.addons {
+  width: 100%;
+  border-collapse: collapse;
+}
+.addons th,
+.addons td {
+  text-align: left;
+  padding: var(--sp-xs) 0;
+  border-bottom: 1px solid var(--line);
+}
+.addons th {
+  font-size: var(--step--1);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  font-weight: 400;
+  color: var(--ink-faint);
+}
+.addons td:last-child {
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* ── Accordion (FAQ) ───────────────────────────────────────────────────── */
+
+.faq {
+  border-top: 1px solid var(--line);
+}
+.faq__item {
+  border-bottom: 1px solid var(--line);
+}
+.faq__q {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--sp-m);
+  padding: var(--sp-m) 0;
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-size: var(--step-2);
+  list-style: none;
+}
+.faq__q::-webkit-details-marker {
+  display: none;
+}
+.faq__q::after {
+  content: '+';
+  font-family: var(--font-sans);
+  font-size: var(--step-1);
+  color: var(--clay);
+  transition: transform var(--dur) var(--ease);
+}
+.faq__item[open] .faq__q::after {
+  transform: rotate(45deg);
+}
+.faq__a {
+  padding-block-end: var(--sp-m);
+  color: var(--ink-soft);
+  max-width: var(--measure);
+}
+
+/* ── Forms ─────────────────────────────────────────────────────────────── */
+
+.form {
+  display: grid;
+  gap: var(--sp-m);
+}
+.field {
+  display: grid;
+  gap: var(--sp-3xs);
+}
+.field > label {
+  font-size: var(--step--1);
+  letter-spacing: var(--tracking-mid);
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.field .req {
+  color: var(--clay);
+}
+.field input,
+.field textarea,
+.field select {
+  width: 100%;
+  padding: 0.85em 1em;
+  background: var(--paper-raised);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  font-size: var(--step-0);
+  transition:
+    border-color var(--dur-fast) var(--ease),
+    box-shadow var(--dur-fast) var(--ease);
+}
+.field input:focus,
+.field textarea:focus,
+.field select:focus {
+  border-color: var(--clay);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--clay) 18%, transparent);
+  outline: none;
+}
+.field textarea {
+  min-height: 9rem;
+  resize: vertical;
+}
+.field__error {
+  font-size: var(--step--1);
+  color: #b3261e;
+  min-height: 1.2em;
+}
+@media (prefers-color-scheme: dark) {
+  .field__error {
+    color: #f2b8b5;
+  }
+}
+.field.is-invalid input,
+.field.is-invalid textarea {
+  border-color: #b3261e;
+}
+
+.form__row {
+  display: grid;
+  gap: var(--sp-m);
+}
+@media (min-width: 40rem) {
+  .form__row {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Honeypot — off-screen, not display:none, so bots still fill it (ADR-0003). */
+.hp {
+  position: absolute;
+  left: -9999px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.form__status {
+  padding: var(--sp-m);
+  border: 1px solid var(--line);
+  background: var(--clay-wash);
+}
+
+.mailto-card {
+  display: grid;
+  gap: var(--sp-m);
+  padding: var(--sp-l);
+  border: 1px solid var(--line);
+  background: var(--paper-raised);
+}
+
+/* ── Footer ────────────────────────────────────────────────────────────── */
+
+.footer {
+  background: var(--paper-sunk);
+  border-top: 1px solid var(--line);
+  padding-block: var(--sp-2xl) var(--sp-l);
+}
+.footer__grid {
+  display: grid;
+  gap: var(--sp-xl);
+}
+@media (min-width: 52rem) {
+  .footer__grid {
+    grid-template-columns: 1.4fr 1fr 1fr;
+  }
+}
+.footer h2 {
+  font-size: var(--step-1);
+}
+.footer__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: var(--sp-2xs);
+}
+.footer__list a {
+  text-decoration: none;
+  color: var(--ink-soft);
+}
+.footer__list a:hover {
+  color: var(--clay);
+}
+.footer__legal {
+  margin-top: var(--sp-xl);
+  padding-top: var(--sp-m);
+  border-top: 1px solid var(--line);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-s) var(--sp-m);
+  justify-content: space-between;
+  font-size: var(--step--1);
+  color: var(--ink-faint);
+}
+.footer__legal a {
+  text-decoration: none;
+}
+
+/* ── Lightbox (progressive enhancement) ────────────────────────────────── */
+
+/* The dialog paints its own dark ground rather than borrowing ::backdrop's.
+   Relying on the backdrop alone put near-white controls on a computed
+   background of --paper: invisible if the backdrop ever fails to paint, and a
+   genuine 1.03:1 contrast failure as far as any auditor is concerned. */
+.lightbox {
+  border: 0;
+  padding: 0;
+  max-width: 100vw;
+  max-height: 100dvh;
+  width: 100vw;
+  height: 100dvh;
+  background: rgb(10 8 7 / 0.96);
+  color: var(--on-image);
+}
+.lightbox::backdrop {
+  background: rgb(10 8 7 / 0.94);
+}
+.lightbox__stage {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  padding: var(--sp-m);
+}
+.lightbox__stage img {
+  max-width: 100%;
+  max-height: 88dvh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+.lightbox__bar {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--sp-s) var(--sp-m);
+  color: var(--on-image);
+  font-size: var(--step--1);
+  letter-spacing: var(--tracking-mid);
+}
+.lightbox__nav {
+  position: absolute;
+  inset-block: 0;
+  width: 22%;
+  display: grid;
+  place-items: center;
+  color: var(--on-image);
+  font-size: var(--step-3);
+  opacity: 0;
+  transition: opacity var(--dur) var(--ease);
+}
+.lightbox__nav:hover,
+.lightbox__nav:focus-visible {
+  opacity: 1;
+}
+.lightbox__nav--prev {
+  inset-inline-start: 0;
+}
+.lightbox__nav--next {
+  inset-inline-end: 0;
+}
+.lightbox__close {
+  color: var(--on-image);
+  font-size: var(--step-1);
+  padding: var(--sp-2xs);
+}
+
+/* ── Preview ribbon ────────────────────────────────────────────────────── */
+
+/* Shown while any placeholder content remains, so nobody can mistake sample
+   testimonials or pricing for the real thing (ADR-0003, content/testimonials). */
+/* Pinned to the bottom rather than the top: the header is position:fixed at
+   top:0, and an in-flow ribbon above it collided with the navigation. */
+.preview-ribbon {
+  position: fixed;
+  inset-inline: 0;
+  inset-block-end: 0;
+  z-index: 150;
+  margin: 0;
+  background: #7a2e2e;
+  color: #fff;
+  padding: 0.7em var(--gutter);
+  font-size: var(--step--1);
+  letter-spacing: 0.03em;
+  text-align: center;
+}
+.preview-ribbon a {
+  color: #fff;
+}
