@@ -12,3 +12,7 @@ blob-report/
 # Draft written by tools/import-instagram.mjs; review it, then move it over
 # content/collections.mjs. It is an artefact, not source.
 content/collections.generated.mjs
+
+# Staging area for new photographs before they are named and sorted.
+photos/incoming/*
+!photos/incoming/README.md
