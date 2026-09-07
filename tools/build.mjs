@@ -420,6 +420,24 @@ const formConfigured = !isTodo(siteConfig.forms.endpoint);
 const emailConfigured = !isTodo(siteConfig.contact.email);
 const mentorsKnown = !isTodo(siteConfig.about.mentors);
 
+// Inline the brand SVG so it can inherit currentColor; fall back to <img> for
+// a raster file, and to the text wordmark when no logo is configured at all.
+const logoFile = siteConfig.brand?.logo ?? null;
+let brandLogo = null;
+if (logoFile) {
+  const logoPath = join(SRC, 'assets', logoFile);
+  if (!(await exists(logoPath))) {
+    throw new Error(`brand.logo is "${logoFile}" but src/assets/${logoFile} does not exist`);
+  }
+  brandLogo = logoFile.endsWith('.svg')
+    ? (await readFile(logoPath, 'utf8'))
+        .replace(/<\?xml[^>]*\?>/g, '')
+        .replace(/<!--[\s\S]*?-->/g, '')
+        .replace(/\s(?:width|height)="[^"]*"/g, '')
+        .trim()
+    : `<img src="/assets/${logoFile}" alt="" width="180" height="48">`;
+}
+
 const globals = {
   site: siteConfig,
   collections: decoratedCollections,
@@ -432,6 +450,8 @@ const globals = {
   formConfigured,
   emailConfigured,
   mentorsKnown,
+  brandLogo,
+  hasBrandLogo: Boolean(brandLogo),
   isPreview: placeholders.length > 0,
   placeholderCount: placeholders.length,
   heroHtml: picture(img('wedding-02'), {

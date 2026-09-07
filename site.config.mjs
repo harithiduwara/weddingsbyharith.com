@@ -19,6 +19,17 @@ export default {
   locale: 'en_LK',
   lang: 'en',
 
+  // Brand mark. Drop the file in src/assets/ and name it here.
+  //
+  // An SVG is strongly preferred: the build inlines it and the CSS paints it
+  // with `currentColor`, so one file works on the ivory header, on a dark
+  // photograph, and in dark mode. Harith's supplied mark is cream, which is
+  // designed for dark grounds and would be invisible on --paper otherwise.
+  //
+  // A PNG is rendered as <img> instead and cannot adapt, so it needs to be
+  // dark-on-transparent to be legible in the header.
+  brand: { logo: null },
+
   tagline: 'Wedding photography in Sri Lanka.',
   description:
     'Documentary wedding photography across Sri Lanka and wherever else you are ' +

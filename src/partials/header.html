@@ -1,6 +1,12 @@
 <header class="header">
   <div class="shell header__inner">
+    {{#if hasBrandLogo}}
+    <a class="brand brand--mark" href="/">
+      {{{brandLogo}}}<span class="sr-only">{{site.name}} — home</span>
+    </a>
+    {{else}}
     <a class="brand" href="/">Harith Iduwara<span>Weddings</span></a>
+    {{/if}}
 
     <nav class="nav" aria-label="Primary">
       <ul class="nav__list">

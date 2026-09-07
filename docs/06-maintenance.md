@@ -90,6 +90,28 @@ own entry:
 The portfolio index, home page, footer, sitemap and structured data all update
 themselves. No markup changes are required.
 
+### Use the brand logo in the header
+
+Put the file in `src/assets/` and name it in `site.config.mjs`:
+
+```js
+brand: { logo: 'logo.svg' },
+```
+
+**Send an SVG if you possibly can.** The build inlines it and the CSS paints it
+with `currentColor`, so a single file works on the ivory header, over a dark
+photograph, and in dark mode. The supplied mark is cream — designed for dark
+grounds — and would be invisible on the site's background as a fixed-colour
+image.
+
+A raster file is rendered as `<img>` instead and cannot adapt to the
+background, so it would need to be dark-on-transparent and would still look
+wrong in dark mode. If SVG is not available, a transparent PNG at roughly
+600 px wide is the fallback.
+
+The build fails loudly if the named file is missing, and falls back to the text
+wordmark when `logo` is `null`.
+
 ### Import weddings from Instagram
 
 The posts on `@weddingsbyharith` are already-published weddings with the couples
