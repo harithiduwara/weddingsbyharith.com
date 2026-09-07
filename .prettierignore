@@ -1,7 +1,0 @@
-dist/
-.cache/
-photos/
-src/styles/fonts.css
-src/assets/fonts/
-playwright-report/
-test-results/
