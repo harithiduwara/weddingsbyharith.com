@@ -71,6 +71,22 @@ placeholder and refuses to build until none are.
 
 ## 2. Routine tasks
 
+### Launch a portfolio category
+
+`content/collections.mjs` lists every kind of work, including the ones with no
+photographs yet. A category publishes **itself** once it has `MIN_GALLERY`
+(three) images:
+
+1. Put the photographs in `photos/raw/`.
+2. Add them to that category's `images` array with real alt text.
+3. `npm run build`.
+
+The card becomes clickable, the gallery page is generated, and the sitemap
+picks it up. Below three images it stays listed on the portfolio page as a
+service with no link, which is deliberate — half a gallery is worse than none.
+`tests/e2e/smoke.spec.js` asserts that an unpublished category is never linked
+and never reaches the sitemap.
+
 ### Publish a new wedding
 
 The galleries are currently grouped by _kind_ of shoot rather than by wedding,

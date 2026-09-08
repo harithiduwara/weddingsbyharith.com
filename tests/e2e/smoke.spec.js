@@ -40,6 +40,32 @@ test('FR-03: a collection page shows its full gallery', async ({ page }) => {
   await expect(page.locator('.collection__story p')).toHaveCount(3);
 });
 
+test('categories without photographs are listed but never linked', async ({ page }) => {
+  await page.goto('/portfolio/');
+
+  // Named on the page…
+  for (const name of ['Studio', 'Product', 'Food', 'Corporate', 'Events']) {
+    await expect(page.locator('.service .card__title', { hasText: name })).toHaveCount(1);
+  }
+
+  // …but with no gallery behind them, and no page to 404 into.
+  const hrefs = await page
+    .locator('a[href^="/portfolio/"]')
+    .evaluateAll((as) => as.map((a) => new URL(a.href).pathname));
+  for (const slug of ['studio', 'product', 'food', 'corporate', 'events']) {
+    expect(hrefs, `${slug} should not be linked`).not.toContain(`/portfolio/${slug}/`);
+    expect((await page.request.get(`/portfolio/${slug}/`)).status()).toBe(404);
+  }
+});
+
+test('the sitemap lists only galleries that exist', async ({ request }) => {
+  const xml = await (await request.get('/sitemap.xml')).text();
+  for (const slug of ['studio', 'product', 'food', 'corporate', 'events']) {
+    expect(xml).not.toContain(`/portfolio/${slug}/`);
+  }
+  expect(xml).toContain('/portfolio/weddings/');
+});
+
 test('FR-12: an unknown URL returns the custom 404', async ({ page }) => {
   const res = await page.goto('/no-such-page/');
   expect(res.status()).toBe(404);

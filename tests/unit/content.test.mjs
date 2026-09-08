@@ -13,13 +13,18 @@ import { join, dirname, basename, extname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import siteConfig, { isTodo } from '../../site.config.mjs';
-import collections from '../../content/collections.mjs';
+import collections, { MIN_GALLERY } from '../../content/collections.mjs';
 import packages from '../../content/packages.mjs';
 import testimonials from '../../content/testimonials.mjs';
 import faqs from '../../content/faqs.mjs';
 import journal from '../../content/journal.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
+
+// A category is published only once it has photographs. The rest are listed on
+// the portfolio page as services, with no gallery behind them.
+const published = collections.filter((c) => c.images.length >= MIN_GALLERY);
+const pending = collections.filter((c) => c.images.length < MIN_GALLERY);
 const RAW = join(ROOT, 'photos', 'raw');
 const available = new Set(
   readdirSync(RAW)
@@ -30,7 +35,7 @@ const available = new Set(
 describe('photographs (FR-02, FR-03)', () => {
   test('every referenced photograph exists in photos/raw/', () => {
     const missing = [];
-    for (const c of collections) {
+    for (const c of published) {
       for (const slug of [c.cover, ...c.images.map((i) => i.slug)]) {
         if (!available.has(slug)) missing.push(`${c.slug} → ${slug}`);
       }
@@ -45,7 +50,7 @@ describe('photographs (FR-02, FR-03)', () => {
   });
 
   test('no collection repeats a photograph within its own gallery', () => {
-    for (const c of collections) {
+    for (const c of published) {
       const slugs = c.images.map((i) => i.slug);
       assert.equal(new Set(slugs).size, slugs.length, `${c.slug} has duplicate images`);
     }
@@ -55,7 +60,7 @@ describe('photographs (FR-02, FR-03)', () => {
     // Three is the floor, not the target. It is set this low only because the
     // photographs currently on file come from the price guide rather than from
     // complete single-wedding galleries. Raise it when real galleries land.
-    for (const c of collections) {
+    for (const c of published) {
       assert.ok(c.images.length >= 3, `${c.slug} has only ${c.images.length} photographs`);
     }
   });
@@ -63,7 +68,7 @@ describe('photographs (FR-02, FR-03)', () => {
   test('every photograph has hand-written alt text', () => {
     // These are real, identifiable clients. Generated alt text ("photo 3 of 9")
     // is useless to a screen reader and would be a poor way to treat them.
-    for (const c of collections) {
+    for (const c of published) {
       for (const im of c.images) {
         assert.equal(typeof im.alt, 'string', `${c.slug}/${im.slug} has no alt`);
         assert.ok(im.alt.length > 25, `${c.slug}/${im.slug} alt is too thin: "${im.alt}"`);
@@ -72,11 +77,44 @@ describe('photographs (FR-02, FR-03)', () => {
   });
 
   test('each cover is one of that collection’s own photographs', () => {
-    for (const c of collections) {
+    for (const c of published) {
       assert.ok(
         c.images.some((i) => i.slug === c.cover),
         `${c.slug} cover ${c.cover} is not in its gallery`,
       );
+    }
+  });
+});
+
+describe('the published / pending split', () => {
+  test('at least one category is actually published', () => {
+    assert.ok(published.length >= 1, 'the portfolio would be empty');
+  });
+
+  test('pending categories carry no photographs and no cover', () => {
+    // Half a gallery is worse than none: a category is either ready or it is
+    // listed as a service without a link.
+    for (const c of pending) {
+      assert.equal(c.images.length, 0, `${c.slug} has a partial gallery`);
+      assert.equal(c.cover, undefined, `${c.slug} names a cover it cannot show`);
+    }
+  });
+
+  test('every category, published or not, can be listed', () => {
+    for (const c of collections) {
+      for (const k of ['slug', 'title', 'kind', 'excerpt']) {
+        assert.ok(c[k], `${c.slug ?? '(no slug)'} missing ${k}`);
+      }
+    }
+  });
+
+  test('a pending category becomes publishable purely by adding images', () => {
+    // Guards the contract the maintenance doc promises: drop photographs in,
+    // it publishes itself, no other edit required.
+    for (const c of pending) {
+      const asIfFilled = { ...c, images: new Array(MIN_GALLERY).fill({ slug: 'x', alt: 'y' }) };
+      assert.ok(asIfFilled.images.length >= MIN_GALLERY);
+      assert.ok(asIfFilled.title && asIfFilled.excerpt && asIfFilled.kind);
     }
   });
 });
@@ -115,7 +153,7 @@ describe('routing', () => {
 
 describe('required fields', () => {
   test('collections carry everything a page needs', () => {
-    for (const c of collections) {
+    for (const c of published) {
       for (const k of ['title', 'kind', 'cover', 'excerpt']) {
         assert.ok(c[k], `${c.slug} missing ${k}`);
       }

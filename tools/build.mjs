@@ -19,7 +19,7 @@ import { optimizeAll } from './optimize-images.mjs';
 import { picture, preloadLink, fullSrc } from './media.mjs';
 import { applyBasePath } from './basepath.mjs';
 import siteConfig, { isTodo } from '../site.config.mjs';
-import collections from '../content/collections.mjs';
+import collections, { MIN_GALLERY } from '../content/collections.mjs';
 import packages from '../content/packages.mjs';
 import testimonials from '../content/testimonials.mjs';
 import faqs from '../content/faqs.mjs';
@@ -232,7 +232,10 @@ const SIZES = {
 // Every photograph carries its own alt text written by hand: these are real,
 // identifiable clients, not stock, so a generated "photograph 3 of 9" would be
 // both useless to a screen reader and faintly disrespectful.
-const decoratedCollections = collections.map((c) => {
+const publishedCollections = collections.filter((c) => c.images.length >= MIN_GALLERY);
+const pendingCollections = collections.filter((c) => c.images.length < MIN_GALLERY);
+
+const decoratedCollections = publishedCollections.map((c) => {
   const coverAlt = c.images.find((im) => im.slug === c.cover)?.alt ?? c.title;
   return {
     ...c,
@@ -441,6 +444,7 @@ if (logoFile) {
 const globals = {
   site: siteConfig,
   collections: decoratedCollections,
+  pendingCollections,
   featured: decoratedCollections.filter((c) => c.featured),
   packages: decoratedPackages,
   testimonials,

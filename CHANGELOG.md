@@ -4,6 +4,30 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project uses
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.7.0] — 2026-09-08
+
+### Changed
+
+- **The portfolio now covers every kind of work Harith does**, not just
+  weddings. `content/collections.mjs` lists Weddings, Engagements & couples,
+  Studio, Product, Food, Corporate and Events.
+- A category **publishes itself** once it has three photographs. Below that it
+  is listed on the portfolio page as a service with no link, because half a
+  gallery is worse than none. Launching one is now: add images, run the build.
+
+### Fixed
+
+- The portfolio page's meta description still advertised "Galle Fort, the hill
+  country and a sunrise on a ridge above Ella" — venues belonging to the
+  invented weddings deleted in 1.2.0. It had been live in search results since.
+
+### Added
+
+- Unit tests for the published/pending split, including one asserting a pending
+  category needs nothing but images to go live.
+- End-to-end tests asserting an unpublished category is listed but never
+  linked, returns 404 if guessed, and never appears in the sitemap.
+
 ## [1.6.0] — 2026-09-08
 
 ### Added

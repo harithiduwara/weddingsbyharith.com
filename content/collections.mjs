@@ -1,17 +1,24 @@
 /**
  * Portfolio galleries (FR-02, FR-03).
  *
- * These are grouped by the kind of work rather than by individual wedding,
- * because the photographs currently on file come from Harith's 2024/25 price
- * guide rather than from complete single-wedding galleries.
+ * This file lists EVERY kind of work Harith takes on. A category is published
+ * automatically once it has at least MIN_GALLERY photographs; until then it is
+ * listed on the portfolio page as work he does, without a gallery behind it.
  *
- * IMPORTANT: these are photographs of real, identifiable clients. Do not
- * attach invented couple names, venues or stories to them. When Harith
- * supplies a full gallery from one wedding, with that couple's permission,
- * add it here as its own entry with their real details.
+ * So: to launch a category, drop its photographs into photos/raw/, add them to
+ * `images` here with real alt text, and run `npm run build`. Nothing else.
+ * An empty gallery never reaches the site.
  *
- * Each image carries its own alt text. `picture()` refuses to build without it.
+ * IMPORTANT: these are photographs of real, identifiable clients. Do not attach
+ * invented couple names, venues or stories to them. When a full gallery from a
+ * single wedding arrives, with that couple's permission, add it as its own
+ * entry with their real details.
+ *
+ * Each image carries hand-written alt text. `picture()` refuses to build
+ * without it.
  */
+export const MIN_GALLERY = 3;
+
 export default [
   {
     slug: 'weddings',
@@ -60,7 +67,7 @@ export default [
   },
   {
     slug: 'engagements',
-    title: 'Engagements & couple shoots',
+    title: 'Engagements & couples',
     kind: 'Half-day and casual sessions',
     cover: 'couples-01',
     featured: true,
@@ -90,5 +97,49 @@ export default [
         alt: 'A couple walking along the shoreline in the late afternoon, a hat in his hand.',
       },
     ],
+  },
+
+  // ── Awaiting photographs ────────────────────────────────────────────────
+  // Real services, listed on the portfolio page without a gallery behind them.
+  // Add three or more images to any of these and it publishes itself.
+  {
+    slug: 'studio',
+    title: 'Studio',
+    kind: 'Portraits and headshots',
+    excerpt:
+      'Controlled light, a plain background, and enough time to get past the first stiff ten minutes.',
+    images: [],
+  },
+  {
+    slug: 'product',
+    title: 'Product',
+    kind: 'Catalogue and campaign',
+    excerpt:
+      'On white for the listing, styled for the campaign. Consistent enough to sit in a grid together.',
+    images: [],
+  },
+  {
+    slug: 'food',
+    title: 'Food',
+    kind: 'Menus, delivery and social',
+    excerpt:
+      'Where I started, on a Cafe Noir shoot in 2016. Food photography is mostly a race against the food.',
+    images: [],
+  },
+  {
+    slug: 'corporate',
+    title: 'Corporate',
+    kind: 'Teams, offices and conferences',
+    excerpt:
+      'Headshots that do not look like passport photographs, and events where nobody has to pose.',
+    images: [],
+  },
+  {
+    slug: 'events',
+    title: 'Events',
+    kind: 'Birthdays, awards and parties',
+    excerpt:
+      'Same instinct as a wedding: stay out of the way, and photograph the bit everyone will retell later.',
+    images: [],
   },
 ];

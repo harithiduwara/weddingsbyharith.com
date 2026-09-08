@@ -1,7 +1,7 @@
 <!--
 {
   "title": "Portfolio",
-  "description": "Complete wedding galleries from across Sri Lanka — Galle Fort, the hill country and a sunrise on a ridge above Ella, each photographed start to finish.",
+  "description": "Wedding, engagement, studio, product, food, corporate and event photography in Sri Lanka. Selected galleries from Harith Iduwara Weddings.",
   "bodyClass": "page--portfolio",
   "breadcrumb": [{ "label": "Portfolio", "href": "/portfolio/" }]
 }
@@ -11,9 +11,8 @@
     <p class="eyebrow">Portfolio</p>
     <h1 class="pagehead__title">Selected work</h1>
     <p class="lede">
-      Grouped by the kind of shoot rather than by wedding. If you want to see one whole day start to
-      finish, which is the only honest way to judge a photographer, ask me and I will send you a
-      full gallery.
+      Grouped by the kind of shoot. If you want to see one whole wedding start to finish, which is
+      the only honest way to judge a photographer, ask me and I will send you the full gallery.
     </p>
   </div>
 </section>
@@ -35,4 +34,32 @@
   </div>
 </section>
 
-{{> cta-band }}
+{{#if pendingCollections}}
+<section class="section section--tight section--sunk">
+  <div class="shell">
+    <div class="section__head">
+      <h2>Also photographing</h2>
+      <p class="lede">
+        Weddings are most of what I shoot, not all of it. There are no galleries up for these yet —
+        ask and I will send you examples of whichever one you need.
+      </p>
+    </div>
+
+    <div class="grid-3">
+      {{#each pendingCollections}}
+      <div class="service reveal">
+        <h3 class="card__title">{{title}}</h3>
+        <p class="card__meta">{{kind}}</p>
+        <p class="card__excerpt">{{excerpt}}</p>
+      </div>
+      {{/each}}
+    </div>
+
+    <p class="mt-xl">
+      <a class="btn" href="{{servicesWhatsapp}}" target="_blank" rel="noopener noreferrer"
+        >Ask to see examples<span class="sr-only"> of non-wedding work, on WhatsApp</span></a
+      >
+    </p>
+  </div>
+</section>
+{{/if}} {{> cta-band }}
