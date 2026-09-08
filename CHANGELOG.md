@@ -4,6 +4,28 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project uses
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.9.0] — 2026-09-08
+
+### Fixed
+
+- **The header ignored the page gutter.** `.header__inner` carries `.shell` but
+  also set `width: 100%`, and components.css loads after layout.css, so the
+  header ran edge to edge. The brand sat 20px left of the content column on a
+  phone and 56px out on desktop, at every breakpoint, since the site was built.
+  Reported from a phone screenshot.
+- **Too much dead space under the hero on mobile.** 164px of padding beneath a
+  76px fixed header left ~88px blank above the fold, where the hero is a single
+  stacked column. Now 36px on small screens, unchanged on desktop.
+- `npm run dev` and `npm test` ran against whatever `dist/` happened to hold, so
+  a staging deploy left both broken until someone rebuilt by hand — the base
+  path made the local preview 404 its own stylesheet. `predev` and `pretest`
+  now rebuild first.
+
+### Added
+
+- Regression tests asserting the brand lines up with the content column at 320,
+  390, 768, 1024 and 1440px.
+
 ## [1.8.0] — 2026-09-08
 
 A proofread of every page of copy.

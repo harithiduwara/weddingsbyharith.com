@@ -179,12 +179,14 @@ body:not(.has-hero) .header::before {
   opacity: 0;
 }
 
+/* No width here. This element also carries .shell, and setting width:100%
+   silently defeated the page gutter — the brand sat flush against the screen
+   edge while everything below it was inset. */
 .header__inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: var(--sp-m);
-  width: 100%;
   position: relative;
 }
 
@@ -336,7 +338,12 @@ body:not(.has-hero) .header::before {
    photograph near its native size is both sharper and more distinctive. */
 
 .hero {
-  padding-block: calc(var(--header-h) + var(--sp-2xl)) var(--sp-3xl);
+  padding-block: calc(var(--header-h) + var(--sp-l)) var(--sp-2xl);
+}
+@media (min-width: 62rem) {
+  .hero {
+    padding-block: calc(var(--header-h) + var(--sp-2xl)) var(--sp-3xl);
+  }
 }
 
 .hero__grid {

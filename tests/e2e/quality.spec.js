@@ -25,6 +25,34 @@ test.describe('responsive layout', () => {
   }
 });
 
+/**
+ * The header carries both .shell and .header__inner. A `width: 100%` on the
+ * latter silently defeated the page gutter, so the brand sat flush against the
+ * screen edge while every other element was inset — 20px out on a phone, 56px
+ * on desktop. It survived unnoticed through many screenshots, so it gets a test.
+ */
+test.describe('the header aligns with the page content', () => {
+  for (const width of [320, 390, 768, 1024, 1440]) {
+    test(`brand lines up with the content column at ${width}px`, async ({ page }) => {
+      await page.setViewportSize({ width, height: 900 });
+      await page.goto('/');
+      const left = (sel) =>
+        page
+          .locator(sel)
+          .first()
+          .evaluate((el) => Math.round(el.getBoundingClientRect().left));
+
+      const brand = await left('.brand');
+      const content = await left('.hero__body > *');
+      expect(
+        Math.abs(brand - content),
+        `brand ${brand}px vs content ${content}px`,
+      ).toBeLessThanOrEqual(1);
+      expect(brand).toBeGreaterThan(0);
+    });
+  }
+});
+
 /** NFR-07: no third-party runtime requests. */
 test('the site makes no requests to any other origin', async ({ page }) => {
   const external = new Set();
