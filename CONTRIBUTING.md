@@ -21,6 +21,13 @@ Node 20.11+ is required (`engines` in `package.json`).
 Never commit to `main` directly, and never commit to `gh-pages` by hand — it is
 force-pushed by `npm run deploy` and any manual commit will be discarded.
 
+## If you are Claude
+
+`.claude/skills/site-change/SKILL.md` is the working agreement for this
+repository — the SDLC, the test gate, the proofread, the content-integrity
+rules, and the traps specific to this setup. It applies to every change,
+including the ones that look like one line.
+
 ## Definition of done
 
 A change is not done until all of these hold:
