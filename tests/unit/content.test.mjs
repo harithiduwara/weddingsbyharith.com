@@ -8,7 +8,7 @@
  */
 import { test, describe } from 'node:test';
 import assert from 'node:assert/strict';
-import { readdirSync, existsSync } from 'node:fs';
+import { readdirSync, existsSync, readFileSync } from 'node:fs';
 import { join, dirname, basename, extname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -227,5 +227,24 @@ describe('the placeholder gate (ADR-0003)', () => {
 
   test('the site URL and domain agree', () => {
     assert.equal(siteConfig.url, `https://${siteConfig.domain}`);
+  });
+});
+
+describe('the enquiry form is wired for assistive tech', () => {
+  // The form only renders once forms.endpoint is set, so this checks the
+  // template rather than the built page. An error message that is not
+  // programmatically tied to its field is never announced.
+  const tpl = readFileSync(join(ROOT, 'src', 'pages', 'contact.html'), 'utf8');
+
+  test('every field points at its own error element', () => {
+    const described = [...tpl.matchAll(/id="(f-[\w-]+)"[^>]*aria-describedby="([^"]+)"/g)];
+    assert.ok(described.length >= 5, 'expected every field to declare aria-describedby');
+    for (const [, id, describedBy] of described) {
+      assert.equal(describedBy, `${id}-error`);
+      assert.ok(
+        tpl.includes(`id="${describedBy}"`),
+        `${describedBy} is referenced but no element has that id`,
+      );
+    }
   });
 });

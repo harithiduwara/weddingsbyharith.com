@@ -13,7 +13,7 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const DIST = join(ROOT, 'dist');
-const PORT = Number(process.env.PORT) || 4321;
+const PORT = Number(process.env.PORT) || 4487;
 
 const TYPES = {
   '.html': 'text/html; charset=utf-8',
@@ -37,7 +37,7 @@ const isFile = (p) =>
     () => false,
   );
 
-createServer(async (req, res) => {
+const server = createServer(async (req, res) => {
   const url = new URL(req.url, `http://localhost:${PORT}`);
   // normalize() collapses any ../ before it can escape dist/.
   let path = join(DIST, normalize(decodeURIComponent(url.pathname)));
@@ -61,6 +61,21 @@ createServer(async (req, res) => {
   const notFound = join(DIST, '404.html');
   const body = (await isFile(notFound)) ? await readFile(notFound) : 'Not found';
   res.writeHead(404, { 'Content-Type': 'text/html; charset=utf-8' }).end(body);
-}).listen(PORT, () => {
+});
+
+server.on('error', (err) => {
+  if (err.code === 'EADDRINUSE') {
+    console.error(
+      `✗ Port ${PORT} is already in use by another process.\n` +
+        `  Free it, or run: PORT=<other> npm run dev\n` +
+        `  This matters because the tests reuse whatever answers on this port —\n` +
+        `  a stray server from another project would silently be tested instead.`,
+    );
+    process.exit(1);
+  }
+  throw err;
+});
+
+server.listen(PORT, () => {
   console.log(`Preview → http://localhost:${PORT}`);
 });

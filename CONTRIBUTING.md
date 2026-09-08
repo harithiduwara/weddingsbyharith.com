@@ -5,7 +5,7 @@
 ```bash
 npm ci
 npx playwright install chromium
-npm run dev          # http://localhost:4321
+npm run dev          # http://localhost:4487
 ```
 
 Node 20.11+ is required (`engines` in `package.json`).

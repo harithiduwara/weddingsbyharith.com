@@ -9,7 +9,7 @@ build that refuses to ship placeholder content.
 ```bash
 npm ci
 npm run build     # → dist/
-npm run dev       # → http://localhost:4321
+npm run dev       # → http://localhost:4487
 npm test          # unit + HTML validity + end-to-end
 
 npm run deploy           # publish to the custom domain

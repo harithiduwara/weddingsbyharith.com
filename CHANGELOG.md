@@ -4,6 +4,46 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project uses
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.12.0] — 2026-09-08
+
+A usability and accessibility pass, audited by measurement rather than opinion.
+
+### Fixed
+
+- **The gallery could not be advanced on a phone.** The lightbox arrows were
+  `opacity: 0` until hover, and a touch device cannot hover — so on mobile the
+  controls were permanently invisible, on the page the whole site exists for.
+  They now show wherever hovering is impossible, in 44×44 hit areas, and the
+  photograph can be swiped.
+- **The mobile drawer was not a modal.** Twenty focusable elements stayed in the
+  tab order behind it. It is now a `<dialog>` opened with `showModal()`, which
+  gives focus trapping and an inert background natively.
+- **The drawer had no way to close on a touch device.** Making it modal made the
+  toggle behind it inert, so a user without a keyboard could only leave by
+  choosing a link. It now has its own close button.
+- **Drawer state was tied to the dialog's `close` event, which does not fire
+  reliably.** When it silently did not, `aria-expanded` stayed `true` and the
+  page stayed scroll-locked with nothing open. State is now driven by a
+  `MutationObserver` on the `open` attribute, which every close path must change.
+- **Form validation messages were not tied to their fields.** Each input now
+  declares `aria-describedby`, so a screen reader announces the error with the
+  field instead of leaving it stranded in a live region.
+- **Footer navigation links were 23px tall**, below the 24px floor in WCAG 2.2
+  SC 2.5.8. Links inside a sentence are exempt from that rule; a list of
+  navigation links is not.
+
+### Changed
+
+- The dev server moved from port 4321 to 4487, and now exits with an explanation
+  if the port is taken. 4321 is a common default and was being held by another
+  project's server — Playwright reuses whatever answers there, so the entire
+  suite would have run against a different site without saying so.
+
+### Added
+
+- Regression tests for each of the above: drawer modality and cleanup, gallery
+  controls visible without hover at 44px, and navigation target sizes.
+
 ## [1.11.0] — 2026-09-08
 
 ### Changed

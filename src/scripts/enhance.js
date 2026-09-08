@@ -34,35 +34,61 @@
     io.observe(hero);
   })();
 
-  /* ── Mobile navigation drawer ──────────────────────────────────────── */
+  /* ── Mobile navigation drawer ──────────────────────────────────────────
+     A <dialog> rather than a styled div, because showModal() gives focus
+     trapping, inertness for the rest of the page and Escape-to-close for free.
+     Hand-rolling those left twenty elements behind the drawer still reachable
+     by Tab. */
   (function () {
     var toggle = $('.nav__toggle');
     var drawer = $('#nav-drawer');
-    if (!toggle || !drawer) return;
+    if (!toggle || !drawer || !drawer.showModal) return;
 
-    function setOpen(open) {
-      toggle.setAttribute('aria-expanded', String(open));
-      drawer.hidden = !open;
-      document.body.style.overflow = open ? 'hidden' : '';
-      if (open) {
-        var first = drawer.querySelector('a');
-        if (first) first.focus();
-      }
+    // State is reset in our own close path rather than only from the dialog's
+    // `close` event: that event does not fire reliably everywhere, and when it
+    // silently did not, the drawer left aria-expanded="true" and the page
+    // scroll-locked with nothing visibly open. The listeners below stay as a
+    // backstop for dismissals the platform initiates, such as Escape.
+    function syncClosed() {
+      toggle.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+
+    function open() {
+      drawer.showModal();
+      toggle.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+      var first = drawer.querySelector('a');
+      if (first) first.focus();
+    }
+
+    function close() {
+      if (drawer.open) drawer.close();
+      syncClosed();
+      toggle.focus();
     }
 
     toggle.addEventListener('click', function () {
-      setOpen(toggle.getAttribute('aria-expanded') !== 'true');
+      drawer.open ? close() : open();
     });
+
+    var closeBtn = $('.drawer__close', drawer);
+    if (closeBtn) closeBtn.addEventListener('click', close);
+
     drawer.addEventListener('click', function (e) {
-      if (e.target.tagName === 'A') setOpen(false);
+      // A link closes the drawer; so does the backdrop, which is the dialog
+      // element itself once its content is inset.
+      if (e.target.tagName === 'A' || e.target === drawer) close();
     });
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
-        setOpen(false);
-        toggle.focus();
-      }
-    });
-    setOpen(false);
+
+    // Watch the `open` attribute rather than the dialog's close/cancel events.
+    // Those did not fire reliably in testing, which left aria-expanded="true"
+    // and the page scroll-locked after an Escape. Every close path — Escape,
+    // the close button, a link, script — has to clear this attribute, so
+    // observing it catches all of them.
+    new MutationObserver(function () {
+      if (!drawer.open) syncClosed();
+    }).observe(drawer, { attributes: true, attributeFilter: ['open'] });
   })();
 
   /* ── Scroll reveal ─────────────────────────────────────────────────── */
@@ -166,6 +192,26 @@
       var link = links[index];
       if (link) link.focus();
     });
+
+    var startX = null;
+    dialog.addEventListener(
+      'touchstart',
+      function (e) {
+        startX = e.changedTouches[0].clientX;
+      },
+      { passive: true },
+    );
+    dialog.addEventListener(
+      'touchend',
+      function (e) {
+        if (startX === null) return;
+        var dx = e.changedTouches[0].clientX - startX;
+        startX = null;
+        // 45px is far enough to be a deliberate swipe rather than a tap wobble.
+        if (Math.abs(dx) > 45) show(dx < 0 ? index + 1 : index - 1);
+      },
+      { passive: true },
+    );
     // Click on the backdrop (i.e. outside the image) closes.
     dialog.addEventListener('click', function (e) {
       if (e.target === dialog || e.target.classList.contains('lightbox__stage')) dialog.close();

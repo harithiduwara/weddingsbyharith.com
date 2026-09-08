@@ -34,26 +34,40 @@
         <div class="form__row">
           <div class="field">
             <label for="f-name">Your names <span class="req" aria-hidden="true">*</span></label>
-            <input id="f-name" name="name" type="text" autocomplete="name" required />
-            <p class="field__error" aria-live="polite"></p>
+            <input
+              id="f-name"
+              aria-describedby="f-name-error"
+              name="name"
+              type="text"
+              autocomplete="name"
+              required
+            />
+            <p class="field__error" id="f-name-error" aria-live="polite"></p>
           </div>
           <div class="field">
             <label for="f-email">Email <span class="req" aria-hidden="true">*</span></label>
-            <input id="f-email" name="email" type="email" autocomplete="email" required />
-            <p class="field__error" aria-live="polite"></p>
+            <input
+              id="f-email"
+              aria-describedby="f-email-error"
+              name="email"
+              type="email"
+              autocomplete="email"
+              required
+            />
+            <p class="field__error" id="f-email-error" aria-live="polite"></p>
           </div>
         </div>
 
         <div class="form__row">
           <div class="field">
             <label for="f-date">Wedding date</label>
-            <input id="f-date" name="date" type="date" />
-            <p class="field__error" aria-live="polite"></p>
+            <input id="f-date" aria-describedby="f-date-error" name="date" type="date" />
+            <p class="field__error" id="f-date-error" aria-live="polite"></p>
           </div>
           <div class="field">
             <label for="f-venue">Venue, or roughly where</label>
-            <input id="f-venue" name="venue" type="text" />
-            <p class="field__error" aria-live="polite"></p>
+            <input id="f-venue" aria-describedby="f-venue-error" name="venue" type="text" />
+            <p class="field__error" id="f-venue-error" aria-live="polite"></p>
           </div>
         </div>
 
@@ -71,8 +85,14 @@
           <label for="f-message"
             >Tell me about the day <span class="req" aria-hidden="true">*</span></label
           >
-          <textarea id="f-message" name="message" required minlength="20"></textarea>
-          <p class="field__error" aria-live="polite"></p>
+          <textarea
+            id="f-message"
+            aria-describedby="f-message-error"
+            name="message"
+            required
+            minlength="20"
+          ></textarea>
+          <p class="field__error" id="f-message-error" aria-live="polite"></p>
         </div>
 
         <div class="hp" aria-hidden="true">

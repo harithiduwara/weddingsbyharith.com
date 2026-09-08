@@ -16,7 +16,7 @@ test.describe('every page renders', () => {
 test('FR-13: primary navigation reaches every section', async ({ page, isMobile }) => {
   await page.goto('/');
   if (isMobile) {
-    await page.getByRole('button', { name: /menu/i }).click();
+    await page.getByRole('button', { name: 'Menu', exact: true }).click();
     await expect(page.locator('#nav-drawer')).toBeVisible();
     await page.locator('#nav-drawer a', { hasText: 'Portfolio' }).click();
   } else {
