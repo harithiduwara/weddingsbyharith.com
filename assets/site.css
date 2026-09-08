@@ -645,7 +645,6 @@ body:not(.has-hero) .header::before {
  align-items: center;
  justify-content: space-between;
  gap: var(--sp-m);
- width: 100%;
  position: relative;
 }
 .brand {
@@ -777,7 +776,12 @@ body:not(.has-hero) .header::before {
  }
 }
 .hero {
+ padding-block: calc(var(--header-h) + var(--sp-l)) var(--sp-2xl);
+}
+@media (min-width: 62rem) {
+ .hero {
  padding-block: calc(var(--header-h) + var(--sp-2xl)) var(--sp-3xl);
+ }
 }
 .hero__grid {
  display: grid;
