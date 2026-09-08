@@ -4,6 +4,29 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project uses
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.6.0] — 2026-09-08
+
+### Added
+
+- **A "Beyond weddings" section on the Investment page** covering studio,
+  product, food, corporate and event shoots. These are described and quoted on
+  request rather than priced, because the price guide has no figures for them
+  and inventing any would be worse than none. One WhatsApp button asks for a
+  quote.
+- `about.otherServices` in `site.config.mjs`, so the list lives in one place.
+
+### Changed
+
+- The About page credentials line listed "weddings, corporate, food, product
+  and family", which no longer matched the services Harith actually names. It
+  now reads weddings, studio, product, food, corporate and events.
+
+### Note
+
+Harith mentioned **family shoots** in an earlier message but not in his latest
+list, so they are left out. Adding them back is one line in `site.config.mjs`.
+"Corporate" is spelled correctly on the site.
+
 ## [1.5.0] — 2026-09-08
 
 ### Changed

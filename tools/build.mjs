@@ -470,6 +470,9 @@ const globals = {
     sizes: SIZES.hero,
     className: 'photo--hero',
   }),
+  servicesWhatsapp: waLink(
+    "Hi Harith, I'd like a quote for a shoot that isn't a wedding. Here's what I need:",
+  ),
   // CSP needs the form relay's origin explicitly; '' when unconfigured.
   formOrigin: formConfigured ? new URL(siteConfig.forms.endpoint).origin : '',
   img: (slug, alt, sizes) => picture(img(slug), { alt, sizes }),

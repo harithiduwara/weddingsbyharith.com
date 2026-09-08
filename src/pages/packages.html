@@ -51,6 +51,34 @@
 {{/each}}
 
 <section class="section section--tight">
+  <div class="shell">
+    <div class="section__head">
+      <h2>Beyond weddings</h2>
+      <p class="lede">
+        Weddings are most of what I do, not all of it. These are quoted per job rather than
+        packaged, because a one-hour headshot session and a three-day product catalogue have nothing
+        in common except a camera.
+      </p>
+    </div>
+
+    <div class="grid-3">
+      {{#each site.about.otherServices}}
+      <div class="service reveal">
+        <h3 class="card__title">{{name}}</h3>
+        <p class="card__excerpt">{{note}}</p>
+      </div>
+      {{/each}}
+    </div>
+
+    <p class="mt-xl">
+      <a class="btn" href="{{servicesWhatsapp}}" target="_blank" rel="noopener noreferrer"
+        >Ask for a quote<span class="sr-only"> for non-wedding work, on WhatsApp</span></a
+      >
+    </p>
+  </div>
+</section>
+
+<section class="section section--tight">
   <div class="shell shell--narrow">
     <div class="section__head">
       <p class="eyebrow">Extras</p>

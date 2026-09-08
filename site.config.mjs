@@ -65,6 +65,15 @@ export default {
     firstWedding: 'December 2020',
     weddingsSince: 2020,
     shootsCovered: '1,000+',
+    // Weddings are the brand and the domain, so they lead everywhere. The rest
+    // is real work Harith takes on and had no mention on the site at all.
+    otherServices: [
+      { name: 'Studio shoots', note: 'Portraits and headshots, in a controlled space.' },
+      { name: 'Product shoots', note: 'Catalogue and campaign work, on white or styled.' },
+      { name: 'Food shoots', note: 'Menus, delivery apps and social. Where I started, in 2016.' },
+      { name: 'Corporate shoots', note: 'Team portraits, offices, conferences and launches.' },
+      { name: 'Event shoots', note: 'Birthdays, anniversaries, awards nights and parties.' },
+    ],
     teamSize: '1–3 photographers',
     // Harith has assisted and second-shot for internationally recognised
     // wedding photographers. Names to be supplied; see docs/06-maintenance.md.
