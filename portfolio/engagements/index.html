@@ -94,10 +94,14 @@
   </div>
 </header>
 
-<div class="drawer" id="nav-drawer" hidden>
+<dialog class="drawer" id="nav-drawer" role="dialog" aria-labelledby="nav-drawer-title">
+  <h2 class="sr-only" id="nav-drawer-title">Menu</h2>
+  <button class="drawer__close" type="button" aria-label="Close menu">
+    <span aria-hidden="true">&times;</span>
+  </button>
   <a href="/weddingsbyharith.com/portfolio/">Portfolio</a><a href="/weddingsbyharith.com/about/">About</a><a href="/weddingsbyharith.com/packages/">Investment</a><a href="/weddingsbyharith.com/journal/">Journal</a><a href="/weddingsbyharith.com/faq/">FAQ</a>
   <a href="/weddingsbyharith.com/contact/">Check your date</a>
-</div>
+</dialog>
 
     <main id="main"><section class="pagehead">
   <div class="shell">
@@ -251,10 +255,10 @@
     />
   </div>
   <button class="lightbox__nav lightbox__nav--prev" type="button" aria-label="Previous photograph">
-    ←
+    <span aria-hidden="true">←</span>
   </button>
   <button class="lightbox__nav lightbox__nav--next" type="button" aria-label="Next photograph">
-    →
+    <span aria-hidden="true">→</span>
   </button>
 </dialog>
 
