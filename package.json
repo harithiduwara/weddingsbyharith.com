@@ -33,7 +33,7 @@
     "@axe-core/playwright": "^4.10.1",
     "@playwright/test": "^1.49.1",
     "html-validate": "^8.27.0",
-    "linkinator": "^6.1.2",
+    "linkinator": "^8.1.0",
     "prettier": "^3.4.2"
   }
 }
