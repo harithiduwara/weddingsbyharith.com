@@ -656,6 +656,23 @@ body:not(.has-hero) .header::before {
  line-height: 1;
  white-space: nowrap;
 }
+.brand--mark {
+ display: inline-flex;
+ align-items: center;
+}
+.brand--mark svg {
+ display: block;
+ height: 2.6rem;
+ width: auto;
+ fill: currentColor;
+}
+.brand--mark svg * {
+ fill: inherit;
+}
+.brand--mark img {
+ height: 2.6rem;
+ width: auto;
+}
 .brand span {
  display: block;
  font-family: var(--font-sans);
