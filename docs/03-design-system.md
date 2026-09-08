@@ -64,12 +64,21 @@ Two conventions do the heavy lifting:
   without needing a second heading level.
 - **`.lede`** — one size up, `--ink-soft`, capped at `--measure` (62ch).
 
-### A typographic gotcha worth remembering
+### A correction worth keeping
 
-Jost's latin subset **has no U+00B7 (·)**. Literal middots in the markup
-rendered as blank gaps. Separators are now drawn as CSS pseudo-element dots
-(`.meta-list > span + span::before`), which also makes them themeable. Do not
-reintroduce literal `·` characters.
+An earlier version of this document claimed Jost's latin subset had no U+00B7
+and that literal middots rendered as blank gaps. **That was wrong.** Measured by
+rasterising each glyph and counting inked pixels, `·` renders in both Jost and
+Cormorant Garamond; a genuinely missing glyph inks the tofu box at roughly
+twenty times the coverage. What actually happened was a small, light-grey dot at
+13.6px being misread as absent in a downscaled screenshot.
+
+Literal `·` is therefore fine, and is used in the hero eyebrow and the footer.
+`.meta-list` separators come from a CSS `::before` carrying a real `·`
+character, so the separator stays part of the accessible text.
+
+The wider lesson: verify a rendering claim by measurement, not by looking at a
+scaled-down screenshot.
 
 ## 4. Space and layout
 

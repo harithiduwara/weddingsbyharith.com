@@ -144,7 +144,7 @@ export default {
       slug: 'homecoming',
       name: 'Homecoming',
       intro:
-        'The day after, at his family home. Shorter, louder, and usually where everybody finally relaxes.',
+        'The day after, usually at the groom’s family home. Shorter, louder, and where everybody finally relaxes.',
       tiers: [
         {
           slug: 'homecoming-i',

@@ -422,18 +422,14 @@ body:not(.has-hero) .header::before {
   color: var(--ink-faint);
 }
 
-/* Separators are drawn, not typed. Jost's latin subset has no U+00B7, so a
-   literal "·" rendered as a blank gap. */
+/* A real character rather than a drawn box. The box left the separator out of
+   the text entirely, so a screen reader read "Full-day coverage6 photographs".
+   Jost renders U+00B7 perfectly well — an earlier note here claimed otherwise
+   and was simply wrong. */
 .meta-list > span + span::before {
-  content: '';
-  display: inline-block;
-  width: 3px;
-  height: 3px;
-  border-radius: 50%;
-  background: currentColor;
-  vertical-align: 0.3em;
-  margin-inline: 0.7em;
-  opacity: 0.65;
+  content: '·';
+  margin-inline: 0.5em;
+  opacity: 0.6;
 }
 .card__excerpt {
   color: var(--ink-soft);

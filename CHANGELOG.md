@@ -4,6 +4,48 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project uses
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.8.0] — 2026-09-08
+
+A proofread of every page of copy.
+
+### Fixed
+
+- **Subject–verb disagreement**: "Eight groupings takes about fifteen minutes"
+  → "take".
+- **Missing commas before `and`** joining independent clauses, in two journal
+  sentences, and a missing comma on the non-restrictive "…into fewer rooms,
+  which is better for photographs".
+- `"documentary"` used straight quotes where the site uses curly everywhere
+  else. Inch marks in album sizes (`12"×24"`) are left straight, which is
+  correct.
+- "whatever was scheduled either side" → "on either side".
+- The rain article's excerpt ended "A short argument for stopping", leaving the
+  reader hanging.
+- The `<title>` read "…Wedding photography in Sri Lanka." with a trailing full
+  stop.
+- Preview ribbon said "5 item(s)".
+- **The home page contradicted itself**: a heading promising "Whole days, start
+  to finish" sat directly above a lede explaining the galleries are grouped by
+  kind of shoot. Left over from the old structure.
+- A placeholder testimonial claimed "Seven hundred photographs" when the largest
+  package delivers 500.
+- The homecoming description said "at his family home", assuming the couple.
+  Now "usually at the groom's family home", which is the tradition and states it
+  as such.
+- **`.meta-list` separators were a drawn box with empty `content`**, so a screen
+  reader read "Full-day coverage6 photographs" with no separation. Now a real
+  `·` character, which the accessibility tree exposes.
+
+### Corrected documentation
+
+An earlier claim that **Jost cannot render U+00B7** was wrong, and had been
+written into the design system, the maintenance guide and the changelog as
+fact. Rasterising each glyph and counting inked pixels shows `·` renders in both
+site fonts (30 inked pixels at 48px) while a genuinely missing glyph inks the
+tofu box at 614. The original symptom was a small, light-grey dot at 13.6px
+misread as absent in a downscaled screenshot. The 1.1.0 entry is annotated
+rather than rewritten.
+
 ## [1.7.0] — 2026-09-08
 
 ### Changed
@@ -272,8 +314,9 @@ someone could fall into again:
 - Scroll reveal could leave content permanently invisible if the
   IntersectionObserver never fired; it now fails open and never animates
   above-the-fold content.
-- Literal `·` separators rendered as blank gaps — Jost's latin subset has no
-  U+00B7. Separators are now drawn in CSS.
+- Literal `·` separators believed to render as blank gaps, attributed to Jost
+  lacking U+00B7; separators were redrawn in CSS. **This diagnosis was wrong —
+  see 1.8.0.**
 - The lightbox relied on `::backdrop` for its dark ground, putting near-white
   controls at 1.03:1 against a computed background.
 - The preview ribbon collided with the fixed header.

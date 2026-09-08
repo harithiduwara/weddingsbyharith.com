@@ -30,7 +30,7 @@ export default {
   // dark-on-transparent to be legible in the header.
   brand: { logo: null },
 
-  tagline: 'Wedding photography in Sri Lanka.',
+  tagline: 'Wedding photography in Sri Lanka',
   description:
     'Documentary wedding photography across Sri Lanka and wherever else you are ' +
     'getting married. Over a thousand shoots, photographed as they happened.',

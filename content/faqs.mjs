@@ -17,12 +17,12 @@ export default [
     a: 'Book it. I know it costs more and I know it feels like the day that matters is the first one, but the homecoming is where everybody finally relaxes. It is consistently the better set of photographs. You can add it to a single-day booking later if you would rather decide nearer the time.',
   },
   {
-    q: 'What does "documentary" mean in practice?',
+    q: 'What does \u201cdocumentary\u201d mean in practice?',
     a: 'I photograph what happens instead of arranging what happens. No shot list to grind through, no stopping the day to pose, and no lining forty people up in front of a hedge. Family groups are the exception and I do those gladly: quickly, in one place, from a list we agree in advance, because you will want them in twenty years.',
   },
   {
     q: 'What if it rains?',
-    a: 'It will, at some point, and it is genuinely fine. Overcast light is the best light there is, and a downpour pushes everyone into fewer rooms which is better for photographs, not worse. Buy ten plain umbrellas, agree an indoor spot for family groups in advance, then stop checking the forecast. It will not change what happens.',
+    a: 'It will, at some point, and it is genuinely fine. Overcast light is the best light there is, and a downpour pushes everyone into fewer rooms, which is better for photographs, not worse. Buy ten plain umbrellas, agree an indoor spot for family groups in advance, then stop checking the forecast. It will not change what happens.',
   },
   {
     q: 'How many photographs, and when do we get them?',

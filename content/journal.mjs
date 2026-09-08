@@ -7,13 +7,13 @@ export default [
     readingTime: 7,
     cover: 'wedding-04',
     excerpt:
-      'The nekath fixes your ceremony and the sun sets at six whatever you do. Everything else is negotiable, and most timelines fail in the same three places.',
+      'The nekath fixes your ceremony, and the sun sets at six whatever you do. Everything else is negotiable, and most timelines fail in the same three places.',
     tags: ['planning', 'timelines'],
     body: [
       ['h2', 'Two things you do not get to move'],
       [
         'p',
-        'Your auspicious time is fixed by somebody else, and the sun goes down at six. Near the equator it is six all year, give or take twenty minutes, which is a genuinely useful thing about getting married in Sri Lanka and almost nobody plans around it.',
+        'Your auspicious time is fixed by somebody else, and the sun goes down at six. Near the equator it is six all year, give or take twenty minutes, which is a genuinely useful thing about getting married in Sri Lanka, and almost nobody plans around it.',
       ],
       [
         'p',
@@ -40,12 +40,12 @@ export default [
       ['h2', 'Family groups: eight, not thirty'],
       [
         'p',
-        'Eight groupings takes about fifteen minutes. Thirty takes an hour and the hour comes straight out of your own reception. Write the list, cap it at eight, and pick a loud aunt who knows everyone by sight to call the names. Not your mother. Your mother should be in the photographs.',
+        'Eight groupings take about fifteen minutes. Thirty takes an hour, and the hour comes straight out of your own reception. Write the list, cap it at eight, and pick a loud aunt who knows everyone by sight to call the names. Not your mother. Your mother should be in the photographs.',
       ],
       ['h2', 'Leave a hole in the schedule'],
       [
         'p',
-        'Put twenty minutes after the meal with nothing in it at all. Something will happen in it. In my experience it is usually better than whatever was scheduled either side.',
+        'Put twenty minutes after the meal with nothing in it at all. Something will happen in it. In my experience it is usually better than whatever was scheduled on either side.',
       ],
     ],
   },
@@ -91,7 +91,7 @@ export default [
     readingTime: 5,
     cover: 'couples-02',
     excerpt:
-      'Rain is the thing couples worry about most and the thing I worry about least. A short argument for stopping.',
+      'Rain is the thing couples worry about most and the thing I worry about least. A short argument for stopping worrying.',
     tags: ['planning', 'weather'],
     body: [
       ['h2', 'You cannot dodge it, so stop trying'],

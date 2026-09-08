@@ -206,8 +206,9 @@ plain numbers; the build formats them (`350000` → `Rs 350,000`).
 
 Things that will waste an afternoon if you do not know them:
 
-- **Do not put a literal `·` in markup.** Jost's latin subset has no U+00B7 and
-  it renders as a blank gap. Use `.meta-list` spans; the dots are drawn in CSS.
+- **Literal `·` is fine.** An earlier note here said Jost could not render it;
+  that was a misdiagnosis, disproved by rasterising the glyph and counting
+  pixels. Use `.meta-list` spans where you want consistent separator spacing.
 - **`dist/assets/img` is deliberately not wiped** by a normal build — re-encoding
   50 photographs takes about a minute. `npm run build:clean` forces a full rebuild.
 - **Check new colours against `--paper-sunk`**, not `--paper`. It is the darker

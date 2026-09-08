@@ -27,7 +27,7 @@ export default [
   {
     placeholder: true,
     quote:
-      'Seven hundred photographs and not one of them is a row of relatives standing in front of a hedge. It looks like the day felt, which is all we asked for.',
+      'Five hundred photographs and not one of them is a row of relatives standing in front of a hedge. It looks like the day felt, which is all we asked for.',
     author: 'Placeholder — replace with a real client quote',
     meta: 'Venue, month year',
   },
