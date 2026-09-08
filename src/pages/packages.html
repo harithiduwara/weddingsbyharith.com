@@ -14,18 +14,12 @@
   </div>
 </section>
 
-{{#each packages.groups}}
+{{#each packages.pricedGroups}}
 <section class="section section--tight{{#if @index}} section--sunk{{/if}}">
   <div class="shell">
     <div class="section__head">
       <h2>{{name}}</h2>
       <p class="lede">{{intro}}</p>
-      {{#if quoteOnly}}
-      <p class="text-fine">
-        Quoted per job rather than packaged. These are the shapes people usually start from — tell
-        me what you actually need and I will price it.
-      </p>
-      {{/if}}
     </div>
 
     <div class="grid-3">
@@ -35,11 +29,7 @@
           <h3 class="card__title">{{name}}</h3>
           <p class="tier__hours meta-list"><span>{{hours}}</span><span>{{team}}</span></p>
         </div>
-        {{#if quoteOnly}}
-        <p class="tier__price tier__price--quote">Custom quote</p>
-        {{else}}
         <p class="tier__price"><small>from {{@root.packages.currency}}</small> {{priceDisplay}}</p>
-        {{/if}}
         <p class="card__excerpt">{{summary}}</p>
         <ul class="tier__list" role="list">
           {{#each includes}}
@@ -60,19 +50,20 @@
 </section>
 {{/each}}
 
-<section class="section section--tight">
+<section class="section section--tight section--sunk">
   <div class="shell">
     <div class="section__head">
-      <h2>Beyond weddings</h2>
+      <p class="eyebrow">Everything else</p>
+      <h2>Custom quotes</h2>
       <p class="lede">
-        Weddings are most of what I do, not all of it. These are quoted per job rather than
-        packaged, because a one-hour headshot session and a three-day product catalogue have nothing
-        in common except a camera.
+        Weddings are the only thing I package. Everything else I quote per job, because a one-hour
+        headshot session and a three-day product catalogue have nothing in common except a camera.
+        Tell me what you are planning and you will get a real number back.
       </p>
     </div>
 
     <div class="grid-3">
-      {{#each site.about.otherServices}}
+      {{#each packages.customQuoteItems}}
       <div class="service reveal">
         <h3 class="card__title">{{name}}</h3>
         <p class="card__excerpt">{{note}}</p>
@@ -82,7 +73,7 @@
 
     <p class="mt-xl">
       <a class="btn" href="{{servicesWhatsapp}}" target="_blank" rel="noopener noreferrer"
-        >Ask for a quote<span class="sr-only"> for non-wedding work, on WhatsApp</span></a
+        >Ask for a quote<span class="sr-only"> on WhatsApp</span></a
       >
     </p>
   </div>

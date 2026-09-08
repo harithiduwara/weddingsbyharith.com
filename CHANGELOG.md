@@ -4,6 +4,25 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project uses
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.11.0] — 2026-09-08
+
+### Changed
+
+- **"Custom quote" is said once, in its own section**, instead of appearing as a
+  label on seven separate cards. The Investment page is now: the four priced
+  wedding packages, one **Custom quotes** section, extras, and how booking works.
+- That section absorbs the old "Beyond weddings" block, so engagements,
+  homecomings, casual shoots, studio, product, food, corporate and events are
+  named together in one place with a single "Ask for a quote" button.
+
+Prices for the quoted groups remain in `content/packages.mjs` behind
+`quoteOnly`, unpublished but available as the basis for quoting.
+
+### Removed
+
+- The per-card `.tier__price--quote` style and the repeated per-group note,
+  both now unused.
+
 ## [1.10.0] — 2026-09-08
 
 ### Changed

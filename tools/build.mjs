@@ -298,6 +298,15 @@ const decoratedPackages = {
   fromDisplay: money.format(Math.min(...packages.groups[0].tiers.map((t) => t.price))),
 };
 
+// Only groups with published figures render as priced tiers. Everything else —
+// the quoted groups plus the non-wedding services — collapses into one custom
+// quote section, so "Custom quote" is said once rather than on every card.
+decoratedPackages.pricedGroups = decoratedPackages.groups.filter((g) => !g.quoteOnly);
+decoratedPackages.customQuoteItems = [
+  ...packages.groups.filter((g) => g.quoteOnly).map((g) => ({ name: g.name, note: g.intro })),
+  ...siteConfig.about.otherServices,
+];
+
 const decoratedJournal = journal
   .slice()
   .sort((a, b) => b.date.localeCompare(a.date))
@@ -475,9 +484,7 @@ const globals = {
     sizes: SIZES.hero,
     className: 'photo--hero',
   }),
-  servicesWhatsapp: waLink(
-    "Hi Harith, I'd like a quote for a shoot that isn't a wedding. Here's what I need:",
-  ),
+  servicesWhatsapp: waLink("Hi Harith, I'd like a custom quote. Here's what I'm planning:"),
   // CSP needs the form relay's origin explicitly; '' when unconfigured.
   formOrigin: formConfigured ? new URL(siteConfig.forms.endpoint).origin : '',
   img: (slug, alt, sizes) => picture(img(slug), { alt, sizes }),

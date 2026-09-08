@@ -83,42 +83,49 @@ test('FR-09: FAQ answers expand', async ({ page }) => {
   await expect(second.locator('.faq__a')).toBeVisible();
 });
 
-test('FR-06: pricing shows every package with formatted prices', async ({ page }) => {
+test('FR-06: the four wedding packages are priced', async ({ page }) => {
   await page.goto('/packages/');
-  // 4 wedding + 3 engagement + 2 homecoming + 2 casual
-  await expect(page.locator('.tier')).toHaveCount(11);
+  await expect(page.locator('.tier')).toHaveCount(4);
   await expect(page.locator('.tier__price').first()).toContainText('LKR 230,000');
   await expect(page.locator('.addons tbody tr')).toHaveCount(6);
 });
 
-test('only weddings publish figures; everything else is a custom quote', async ({ page }) => {
+test('custom quotes are one section, not a label on every card', async ({ page }) => {
   await page.goto('/packages/');
 
-  const priceTextFor = (heading) =>
-    page.evaluate((h) => {
-      const section = [...document.querySelectorAll('h2')]
-        .find((el) => el.textContent.trim() === h)
-        ?.closest('section');
-      return [...section.querySelectorAll('.tier__price')].map((p) =>
-        p.textContent.replace(/\s+/g, ' ').trim(),
-      );
-    }, heading);
+  // Every published figure belongs to a wedding package.
+  const prices = await page.locator('.tier__price').allTextContents();
+  expect(prices.length).toBe(4);
+  for (const p of prices) expect(p.replace(/\s+/g, ' ').trim()).toMatch(/^from LKR [\d,]+$/);
 
-  for (const p of await priceTextFor('Weddings')) expect(p).toMatch(/^from LKR [\d,]+$/);
+  // The phrase appears once, as a heading — not repeated across cards.
+  const body = await page.locator('main').innerText();
+  expect(body.match(/Custom quote/gi) ?? []).toHaveLength(1);
 
-  for (const group of ['Engagements', 'Homecoming', 'Casual shoots']) {
-    const prices = await priceTextFor(group);
-    expect(prices.length).toBeGreaterThan(0);
-    for (const p of prices) expect(p).toBe('Custom quote');
-    // No figure should leak into a quoted group.
-    expect(prices.join(' ')).not.toMatch(/LKR|\d{3}/);
+  // Everything Harith quotes for is named in that one section.
+  const section = page.locator('section', {
+    has: page.getByRole('heading', { name: 'Custom quotes' }),
+  });
+  const named = await section.locator('.service .card__title').allTextContents();
+  for (const name of [
+    'Engagements',
+    'Homecoming',
+    'Casual shoots',
+    'Studio shoots',
+    'Product shoots',
+    'Food shoots',
+    'Corporate shoots',
+    'Event shoots',
+  ]) {
+    expect(named).toContain(name);
   }
+  await expect(section.locator('a[href*="wa.me"]')).toHaveCount(1);
 });
 
 test('every package CTA opens a WhatsApp chat naming that package', async ({ page }) => {
   await page.goto('/packages/');
   const ctas = page.locator('.tier a.btn');
-  await expect(ctas).toHaveCount(11);
+  await expect(ctas).toHaveCount(4);
 
   const links = await ctas.evaluateAll((els) =>
     els.map((a) => ({
@@ -147,7 +154,7 @@ test('every package CTA opens a WhatsApp chat naming that package', async ({ pag
   }
 
   // Every package must produce its own distinct message.
-  expect(messages.size).toBe(11);
+  expect(messages.size).toBe(4);
 });
 
 test('FR-04: the lightbox opens, advances, and closes on Escape', async ({ page }) => {
