@@ -91,6 +91,30 @@ test('FR-06: pricing shows every package with formatted prices', async ({ page }
   await expect(page.locator('.addons tbody tr')).toHaveCount(6);
 });
 
+test('only weddings publish figures; everything else is a custom quote', async ({ page }) => {
+  await page.goto('/packages/');
+
+  const priceTextFor = (heading) =>
+    page.evaluate((h) => {
+      const section = [...document.querySelectorAll('h2')]
+        .find((el) => el.textContent.trim() === h)
+        ?.closest('section');
+      return [...section.querySelectorAll('.tier__price')].map((p) =>
+        p.textContent.replace(/\s+/g, ' ').trim(),
+      );
+    }, heading);
+
+  for (const p of await priceTextFor('Weddings')) expect(p).toMatch(/^from LKR [\d,]+$/);
+
+  for (const group of ['Engagements', 'Homecoming', 'Casual shoots']) {
+    const prices = await priceTextFor(group);
+    expect(prices.length).toBeGreaterThan(0);
+    for (const p of prices) expect(p).toBe('Custom quote');
+    // No figure should leak into a quoted group.
+    expect(prices.join(' ')).not.toMatch(/LKR|\d{3}/);
+  }
+});
+
 test('every package CTA opens a WhatsApp chat naming that package', async ({ page }) => {
   await page.goto('/packages/');
   const ctas = page.locator('.tier a.btn');

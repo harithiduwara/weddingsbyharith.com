@@ -282,6 +282,7 @@ const decoratedPackages = {
     ...g,
     tiers: g.tiers.map((t) => ({
       ...withPrice(t),
+      quoteOnly: Boolean(g.quoteOnly),
       // Phrased to read correctly for both "Gold" and "Package I", since the
       // non-wedding tiers are literally named "Package I", "Package II".
       whatsappHref: waLink(

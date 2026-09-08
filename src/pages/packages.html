@@ -20,6 +20,12 @@
     <div class="section__head">
       <h2>{{name}}</h2>
       <p class="lede">{{intro}}</p>
+      {{#if quoteOnly}}
+      <p class="text-fine">
+        Quoted per job rather than packaged. These are the shapes people usually start from — tell
+        me what you actually need and I will price it.
+      </p>
+      {{/if}}
     </div>
 
     <div class="grid-3">
@@ -29,7 +35,11 @@
           <h3 class="card__title">{{name}}</h3>
           <p class="tier__hours meta-list"><span>{{hours}}</span><span>{{team}}</span></p>
         </div>
+        {{#if quoteOnly}}
+        <p class="tier__price tier__price--quote">Custom quote</p>
+        {{else}}
         <p class="tier__price"><small>from {{@root.packages.currency}}</small> {{priceDisplay}}</p>
+        {{/if}}
         <p class="card__excerpt">{{summary}}</p>
         <ul class="tier__list" role="list">
           {{#each includes}}

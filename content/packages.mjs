@@ -13,6 +13,9 @@ export default {
   currency: 'LKR',
   symbol: 'LKR ',
   guideYear: '2024/25',
+  // Only weddings publish figures. Everything else is quoted per job — the
+  // prices below are retained as the basis for those quotes, not as a public
+  // price list. Remove `quoteOnly` from a group to publish its prices again.
   note: 'Every package here is customisable. If none of them is quite your wedding, say so and I will quote it properly.',
 
   groups: [
@@ -90,6 +93,7 @@ export default {
     },
     {
       slug: 'engagements',
+      quoteOnly: true,
       name: 'Engagements',
       intro:
         'For most couples this is the first time you have been photographed together on purpose. It is also the best rehearsal you will get.',
@@ -142,6 +146,7 @@ export default {
     },
     {
       slug: 'homecoming',
+      quoteOnly: true,
       name: 'Homecoming',
       intro:
         'The day after, usually at the groom’s family home. Shorter, louder, and where everybody finally relaxes.',
@@ -179,6 +184,7 @@ export default {
     },
     {
       slug: 'casual',
+      quoteOnly: true,
       name: 'Casual shoots',
       intro:
         'Birthdays, anniversaries, a family that is finally in the same country at the same time.',

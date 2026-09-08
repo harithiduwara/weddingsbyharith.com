@@ -4,6 +4,24 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project uses
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.10.0] — 2026-09-08
+
+### Changed
+
+- **Only weddings publish prices.** Engagements, Homecoming and Casual shoots
+  now show "Custom quote" with their inclusions still listed, and a note saying
+  they are quoted per job.
+
+The 2024/25 figures for those groups are **not deleted** — they stay in
+`content/packages.mjs` as the basis for quoting, hidden by a `quoteOnly: true`
+flag on the group. Removing that one line publishes a group's prices again.
+Extras stay priced, since they attach to the wedding packages.
+
+### Added
+
+- A test asserting weddings show `from LKR …`, every other group shows exactly
+  "Custom quote", and no figure leaks into a quoted group.
+
 ## [1.9.0] — 2026-09-08
 
 ### Fixed
