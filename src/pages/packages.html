@@ -1,7 +1,7 @@
 <!--
 {
   "title": "Investment",
-  "description": "Wedding, engagement, homecoming and casual shoot packages for Sri Lanka. Full prices published, from LKR 35,000 to LKR 230,000.",
+  "description": "Wedding photography packages for Sri Lanka, with the prices published: LKR 120,000 to LKR 230,000. Everything else I quote per job.",
   "bodyClass": "page--investment",
   "breadcrumb": [{ "label": "Investment", "href": "/packages/" }]
 }
@@ -16,42 +16,59 @@
 
 {{#each packages.pricedGroups}}
 <section class="section section--tight{{#if @index}} section--sunk{{/if}}">
-  <div class="shell">
+  <div class="shell shell--mid">
     <div class="section__head">
       <h2>{{name}}</h2>
       <p class="lede">{{intro}}</p>
     </div>
 
-    <div class="grid-3">
+    <div class="tier-list">
       {{#each tiers}}
-      <div class="tier reveal">
-        <div>
-          <h3 class="card__title">{{name}}</h3>
-          <p class="tier__hours meta-list"><span>{{hours}}</span><span>{{team}}</span></p>
+      <article class="tier reveal">
+        <div class="tier__head">
+          <div class="tier__ident">
+            <h3 class="tier__name">{{name}}</h3>
+            <p class="tier__hours meta-list"><span>{{hours}}</span><span>{{team}}</span></p>
+          </div>
+          <p class="tier__price">
+            <small>from {{@root.packages.currency}}</small>
+            {{priceDisplay}}
+          </p>
         </div>
-        <p class="tier__price"><small>from {{@root.packages.currency}}</small> {{priceDisplay}}</p>
-        <p class="card__excerpt">{{summary}}</p>
+
+        <p class="tier__summary">{{summary}}</p>
+
         <ul class="tier__list" role="list">
-          {{#each includes}}
+          {{#each distinctIncludes}}
           <li>{{this}}</li>
           {{/each}}
         </ul>
-        <a
-          class="btn btn--ghost btn--block"
-          href="{{whatsappHref}}"
-          target="_blank"
-          rel="noopener noreferrer"
-          >Ask about this one<span class="sr-only"> — {{name}}, on WhatsApp</span></a
-        >
-      </div>
+
+        <p class="tier__action">
+          <a class="btn btn--ghost" href="{{whatsappHref}}" target="_blank" rel="noopener noreferrer"
+            >Ask about this one<span class="sr-only"> — {{name}}, on WhatsApp</span></a
+          >
+        </p>
+      </article>
       {{/each}}
     </div>
+
+    {{#if sharedIncludes}}
+    <div class="tier-shared">
+      <p class="eyebrow">Whichever you choose</p>
+      <ul class="tier-shared__list" role="list">
+        {{#each sharedIncludes}}
+        <li>{{this}}</li>
+        {{/each}}
+      </ul>
+    </div>
+    {{/if}}
   </div>
 </section>
 {{/each}}
 
 <section class="section section--tight section--sunk">
-  <div class="shell">
+  <div class="shell shell--mid">
     <div class="section__head">
       <p class="eyebrow">Everything else</p>
       <h2>Custom quotes</h2>
@@ -62,12 +79,12 @@
       </p>
     </div>
 
-    <div class="grid-3">
+    <div class="service-list">
       {{#each packages.customQuoteItems}}
-      <div class="service reveal">
+      <article class="service reveal">
         <h3 class="card__title">{{name}}</h3>
         <p class="card__excerpt">{{note}}</p>
-      </div>
+      </article>
       {{/each}}
     </div>
 

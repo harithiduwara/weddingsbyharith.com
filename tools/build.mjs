@@ -276,12 +276,27 @@ const encodeStrict = (s) =>
   );
 const waLink = (text) => `https://wa.me/${siteConfig.contact.whatsapp}?text=${encodeStrict(text)}`;
 const withPrice = (t) => ({ ...t, priceDisplay: money.format(t.price) });
+
+// `includes` is the contractual list and stays whole in content/packages.mjs.
+// What the page shows is narrower, because three of the lines in every tier
+// said nothing about the choice between them: the hours and the team size are
+// already in the card's meta row, and anything every tier in the group carries
+// is a property of the group, not of the tier. Showing all of it four times
+// over was what forced every line to wrap.
+const restatesMeta = (t, line) => line === `${t.hours} of coverage` || line === t.team;
+const sharedAcrossTiers = (tiers) =>
+  tiers[0].includes.filter((line) => tiers.every((t) => t.includes.includes(line)));
+
 const decoratedPackages = {
   ...packages,
   groups: packages.groups.map((g) => ({
     ...g,
+    sharedIncludes: sharedAcrossTiers(g.tiers),
     tiers: g.tiers.map((t) => ({
       ...withPrice(t),
+      distinctIncludes: t.includes.filter(
+        (line) => !restatesMeta(t, line) && !sharedAcrossTiers(g.tiers).includes(line),
+      ),
       quoteOnly: Boolean(g.quoteOnly),
       // Phrased to read correctly for both "Gold" and "Package I", since the
       // non-wedding tiers are literally named "Package I", "Package II".

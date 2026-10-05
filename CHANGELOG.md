@@ -4,6 +4,61 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project uses
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.13.0] — 2026-10-05
+
+The Investment page reset as a price guide rather than a card grid. Scope was
+that one page; the tokens it needed are general and the rest of the site gets
+its own pass.
+
+### Changed
+
+- **The four wedding tiers are a ruled list, not four columns.** `.grid-3` put
+  them in 305 px columns inside the 84 rem shell, which wrapped _every_ line of
+  every inclusion onto two lines. They now sit in a 64 rem column as full-width
+  rows: name and hours on the left, price right-aligned, inclusions in two
+  columns. Measured after the change, no inclusion line wraps at all.
+- **The prices right-align to a single edge** and use `lining-nums tabular-nums`,
+  so four prices in four separate rows still stack into a column the eye can read
+  straight down. Below 40 rem the price wraps under the name and aligns left
+  instead — right-aligning it there stranded it in the corner.
+- **A tier now lists only what sets it apart.** `includes` stays whole in
+  `content/packages.mjs`, because it is the contractual list; the page derives a
+  narrower one. The hours and the team size were already printed in the row
+  above, and anything all four tiers carry is a property of the group, so it is
+  said once underneath them. Gold went from 9 lines to 6, Lite from 4 to 1 —
+  which is the product ladder, finally legible as one.
+
+### Fixed
+
+- **The custom-quote section had no styling at all.** `.service` matched no rule
+  anywhere in the stylesheet: no border, no padding, no background. Eight bare
+  paragraphs sat on a grid on a third of the page. They now carry the same ruled
+  list as the tiers. The rules are scoped to `.service-list`, because the
+  portfolio page reuses `.service` inside a plain `.grid-3` where per-item
+  bottom borders would draw underlines with gaps between them.
+- **Hairlines were measurably weaker on the sunk panel than on paper.** `--line`
+  is 1.31:1 against `--paper` but only 1.19:1 against `--paper-sunk`, so an
+  identical rule read fainter one section down. `--line-sunk` (1.30:1 on the
+  panel) is now substituted inside `.section--sunk`. Dark mode inverts the
+  relationship — the panel is darker than paper there, so the same line already
+  measures 1.36:1 — and is left alone.
+- **The page described prices it does not publish.** The meta description still
+  advertised "from LKR 35,000", a casual-shoot figure that has been `quoteOnly`
+  since 1.11.0. Published prices start at LKR 120,000.
+
+### Added
+
+- `--shell-mid` (64 rem) and `.shell--mid`, for content that needs more room
+  than prose and less than a gallery.
+- Two regression tests: that no tier repeats a line the whole group shares or
+  restates its own meta row, and that the four prices share a single edge.
+  Both verified to fail when the behaviour is reverted.
+
+### Removed
+
+- `.tier--popular`, `.tier__flag` and `.tier__list li.is-excluded` — dead rules
+  that no page had ever used.
+
 ## [1.12.0] — 2026-09-08
 
 A usability and accessibility pass, audited by measurement rather than opinion.

@@ -5,6 +5,9 @@
   margin-inline: auto;
 }
 
+.shell--mid {
+  width: min(100% - (var(--gutter) * 2), var(--shell-mid));
+}
 .shell--narrow {
   width: min(100% - (var(--gutter) * 2), var(--shell-narrow));
 }
@@ -20,6 +23,9 @@
 }
 .section--sunk {
   background: var(--paper-sunk);
+  /* Every rule drawn inside this panel switches to the weight that matches it;
+     see --line-sunk in tokens.css. */
+  --line: var(--line-sunk);
 }
 
 .section__head {

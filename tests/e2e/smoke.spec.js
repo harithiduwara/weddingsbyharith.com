@@ -90,6 +90,50 @@ test('FR-06: the four wedding packages are priced', async ({ page }) => {
   await expect(page.locator('.addons tbody tr')).toHaveCount(6);
 });
 
+test('a tier lists only what sets it apart from the others', async ({ page }) => {
+  await page.goto('/packages/');
+
+  const lists = await page
+    .locator('.tier__list')
+    .evaluateAll((uls) =>
+      uls.map((ul) => [...ul.querySelectorAll('li')].map((li) => li.textContent.trim())),
+    );
+  expect(lists).toHaveLength(4);
+
+  // Anything all four tiers carry is a property of the group, not of a tier.
+  // Repeating it inside every one of them is what pushed each column so narrow
+  // that every single inclusion wrapped onto a second line.
+  const sharedByAll = lists[0].filter((line) => lists.every((l) => l.includes(line)));
+  expect(sharedByAll).toEqual([]);
+
+  // Nor does a tier restate the hours and team already printed above it.
+  const metas = await page.locator('.tier__hours').allInnerTexts();
+  for (const [i, lines] of lists.entries()) {
+    const [hours, team] = metas[i].split('·').map((s) => s.trim());
+    expect(lines).not.toContain(`${hours} of coverage`);
+    expect(lines).not.toContain(team);
+  }
+
+  // It is still on the page — once, under the list it applies to.
+  const shared = await page.locator('.tier-shared__list li').allTextContents();
+  expect(shared).toContain('All high-resolution files on the USB');
+});
+
+test('the prices form a single column you can read down', async ({ page, isMobile }) => {
+  await page.goto('/packages/');
+
+  // Four tiers sit in four separate rows, so the thing that keeps them
+  // comparable at a glance is the prices sharing an edge: the right one on a
+  // wide screen, and the left one once the price wraps under the name.
+  const side = isMobile ? 'left' : 'right';
+  const edges = await page
+    .locator('.tier__price')
+    .evaluateAll((els, s) => els.map((e) => Math.round(e.getBoundingClientRect()[s])), side);
+
+  expect(edges).toHaveLength(4);
+  expect(new Set(edges).size).toBe(1);
+});
+
 test('custom quotes are one section, not a label on every card', async ({ page }) => {
   await page.goto('/packages/');
 

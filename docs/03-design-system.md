@@ -38,13 +38,22 @@ audit failed them**, and they are worth recording so nobody "tidies" them back:
   darkened alongside it to keep three visibly distinct steps.
 - `--clay` was `#96603d`, which measured **4.42:1** on `--paper-sunk` — under
   the 4.5:1 threshold by a hair, which is still under it.
-- `.tier__flag` reversed white out of `--clay`. That works in light mode and
-  fails at **2.45:1** in dark mode, where `--clay` is a light tone. It now uses
-  `var(--paper)`, which inverts with the theme.
+- Reversing white out of `--clay` works in light mode and fails at **2.45:1**
+  in dark mode, where `--clay` is a light tone. Anything sitting on the accent
+  must use `var(--paper)`, which inverts with the theme. (Found on a
+  `.tier__flag` that has since been removed; the rule outlived it.)
 
 **The binding constraint is always `--paper-sunk`**, not `--paper`: it is the
 darker of the two light grounds, so it produces the lower ratio. Check new
 colours against it.
+
+That applies to hairlines as well as to text, which is less obvious because
+nothing fails an audit over it. `--line` measures 1.31:1 on `--paper` and
+1.19:1 on `--paper-sunk`, so the same rule reads visibly weaker one section
+down the page. `--line-sunk` is the same weight re-measured against the panel,
+and `.section--sunk` substitutes it for `--line` throughout. Dark mode needs no
+equivalent: there the sunk panel is _darker_ than paper, so the line is already
+the stronger of the two.
 
 ## 3. Typography
 
@@ -86,7 +95,18 @@ A 1.5-ratio space scale (`--sp-3xs` … `--sp-3xl`), with the largest step fluid
 Layout primitives are composable rather than page-specific: `.shell`, `.section`,
 `.stack`, `.cluster`, `.split`, `.grid-3`.
 
-Line length is capped at `--measure` (62ch) everywhere prose appears.
+Three container widths, because two were not enough:
+
+| Token            | Width  | For                                  |
+| ---------------- | ------ | ------------------------------------ |
+| `--shell`        | 84 rem | Galleries and card grids             |
+| `--shell-mid`    | 64 rem | Rows that pair a label with a figure |
+| `--shell-narrow` | 46 rem | Continuous prose                     |
+
+`--shell-mid` exists because the pricing tiers need room for a name, a price and
+two columns of inclusions, and the full shell gave them so much that every line
+of copy broke. Line length is capped at `--measure` (62ch) everywhere prose
+appears.
 
 ## 5. The gallery
 
