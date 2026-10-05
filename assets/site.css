@@ -151,6 +151,7 @@
  --ink-soft: #4e4842;
  --ink-faint: #6f675e;
  --line: #e2d9cc;
+ --line-sunk: #dbd0c0;
  --line-strong: #cabfae;
  --clay: #8f5b39;
  --clay-deep: #74482c;
@@ -181,6 +182,7 @@
  --sp-3xl: clamp(4.5rem, 3rem + 7vw, 9rem);
  --measure: 62ch;
  --shell: 84rem;
+ --shell-mid: 64rem;
  --shell-narrow: 46rem;
  --gutter: clamp(1.25rem, 4vw, 3.5rem);
  --radius: 2px;
@@ -199,6 +201,7 @@
  --ink-soft: #b3aaa0;
  --ink-faint: #8f877e;
  --line: #2e2924;
+ --line-sunk: #2e2924;
  --line-strong: #453e37;
  --clay: #d09a72;
  --clay-deep: #e0b493;
@@ -394,6 +397,9 @@ figure {
  width: min(100% - (var(--gutter) * 2), var(--shell));
  margin-inline: auto;
 }
+.shell--mid {
+ width: min(100% - (var(--gutter) * 2), var(--shell-mid));
+}
 .shell--narrow {
  width: min(100% - (var(--gutter) * 2), var(--shell-narrow));
 }
@@ -408,6 +414,7 @@ figure {
 }
 .section--sunk {
  background: var(--paper-sunk);
+ --line: var(--line-sunk);
 }
 .section__head {
  display: grid;
@@ -958,35 +965,48 @@ body:not(.has-hero) .header::before {
 .quote-rail > * {
  scroll-snap-align: start;
 }
+.tier-list {
+ border-block-start: 1px solid var(--line-strong);
+}
 .tier {
  display: grid;
  gap: var(--sp-m);
- grid-template-rows: auto auto auto 1fr auto;
- align-content: start;
- padding: var(--sp-l);
- border: 1px solid var(--line);
- background: var(--paper-raised);
- position: relative;
+ padding-block: var(--sp-xl);
+ border-block-end: 1px solid var(--line);
 }
-.tier--popular {
- border-color: var(--clay);
+.tier__head {
+ display: flex;
+ flex-wrap: wrap;
+ align-items: baseline;
+ justify-content: space-between;
+ gap: var(--sp-s) var(--sp-l);
 }
-.tier__flag {
- position: absolute;
- inset-block-start: 0;
- inset-inline-start: var(--sp-l);
- transform: translateY(-50%);
- background: var(--clay);
- color: var(--paper);
+.tier__ident {
+ display: grid;
+ gap: var(--sp-3xs);
+}
+.tier__name {
+ font-family: var(--font-display);
+ font-size: var(--step-3);
+ line-height: 1.1;
+}
+.tier__hours {
  font-size: var(--step--1);
- letter-spacing: var(--tracking-wide);
+ letter-spacing: var(--tracking-mid);
  text-transform: uppercase;
- padding: 0.3em 0.9em;
+ color: var(--clay);
 }
 .tier__price {
  font-family: var(--font-display);
  font-size: var(--step-4);
  line-height: 1;
+ font-variant-numeric: lining-nums tabular-nums;
+}
+@media (min-width: 40rem) {
+ .tier__price {
+ margin-inline-start: auto;
+ text-align: end;
+ }
 }
 .tier__price small {
  display: block;
@@ -997,18 +1017,21 @@ body:not(.has-hero) .header::before {
  color: var(--ink-faint);
  margin-bottom: 0.4em;
 }
-.tier__hours {
- font-size: var(--step--1);
- letter-spacing: var(--tracking-mid);
- text-transform: uppercase;
- color: var(--clay);
+.tier__summary {
+ color: var(--ink-soft);
+ max-width: 52ch;
 }
 .tier__list {
  list-style: none;
  padding: 0;
  margin: 0;
  display: grid;
- gap: var(--sp-2xs);
+ gap: var(--sp-2xs) var(--sp-xl);
+}
+@media (min-width: 46rem) {
+ .tier__list {
+ grid-template-columns: 1fr 1fr;
+ }
 }
 .tier__list li {
  display: grid;
@@ -1021,23 +1044,52 @@ body:not(.has-hero) .header::before {
  content: '—';
  color: var(--clay);
 }
-.tier__list li.is-excluded {
- color: var(--ink-faint);
- text-decoration: line-through;
+.tier__action {
+ margin: 0;
 }
-.tier__list li.is-excluded::before {
- content: '×';
- color: var(--ink-faint);
- text-decoration: none;
+.tier-shared {
+ display: grid;
+ gap: var(--sp-2xs);
+ margin-block-start: var(--sp-l);
+}
+.tier-shared__list {
+ list-style: none;
+ padding: 0;
+ margin: 0;
+ display: flex;
+ flex-wrap: wrap;
+ gap: var(--sp-2xs) var(--sp-l);
+ font-size: var(--step-0);
+ color: var(--ink-soft);
+}
+.service-list {
+ display: grid;
+ grid-template-columns: repeat(auto-fit, minmax(min(18rem, 100%), 1fr));
+ gap: 0 var(--sp-2xl);
+ border-block-start: 1px solid var(--line-strong);
+}
+.service-list .service {
+ display: grid;
+ gap: var(--sp-3xs);
+ align-content: start;
+ padding-block: var(--sp-m);
+ border-block-end: 1px solid var(--line);
+}
+.service-list .card__title {
+ font-size: var(--step-1);
+}
+.service-list .card__excerpt {
+ font-size: var(--step-0);
 }
 .addons {
  width: 100%;
  border-collapse: collapse;
+ border-block-start: 1px solid var(--line-strong);
 }
 .addons th,
 .addons td {
  text-align: left;
- padding: var(--sp-xs) 0;
+ padding: var(--sp-s) 0;
  border-bottom: 1px solid var(--line);
 }
 .addons th {
@@ -1050,6 +1102,7 @@ body:not(.has-hero) .header::before {
 .addons td:last-child {
  text-align: right;
  white-space: nowrap;
+ font-variant-numeric: lining-nums tabular-nums;
 }
 .faq {
  border-top: 1px solid var(--line);
