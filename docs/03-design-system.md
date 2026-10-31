@@ -16,16 +16,21 @@ Every decision below follows from that.
 Tokens live in [`src/styles/tokens.css`](../src/styles/tokens.css). No component
 may hard-code a colour value.
 
-| Token            | Light     | Dark      | Role                      |
-| ---------------- | --------- | --------- | ------------------------- |
-| `--paper`        | `#faf7f2` | `#141210` | Page ground               |
-| `--paper-sunk`   | `#f2ece3` | `#0e0c0b` | Alternating section bands |
-| `--paper-raised` | `#ffffff` | `#1d1a17` | Cards, form fields        |
-| `--ink`          | `#1a1714` | `#f2ece4` | Headings, body            |
-| `--ink-soft`     | `#4e4842` | `#b3aaa0` | Secondary prose           |
-| `--ink-faint`    | `#6f675e` | `#8f877e` | Metadata, eyebrows        |
-| `--clay`         | `#8f5b39` | `#d09a72` | The single accent         |
-| `--clay-deep`    | `#74482c` | `#e0b493` | Accent hover              |
+| Token             | Light     | Dark      | Role                      |
+| ----------------- | --------- | --------- | ------------------------- |
+| `--paper`         | `#faf7f2` | `#141210` | Page ground               |
+| `--paper-sunk`    | `#f2ece3` | `#0e0c0b` | Alternating section bands |
+| `--paper-raised`  | `#ffffff` | `#1d1a17` | Cards, form fields        |
+| `--ink`           | `#1a1714` | `#f2ece4` | Headings, body            |
+| `--ink-soft`      | `#4e4842` | `#b3aaa0` | Secondary prose           |
+| `--ink-faint`     | `#6f675e` | `#8f877e` | Metadata, eyebrows        |
+| `--clay`          | `#8f5b39` | `#d09a72` | The single accent         |
+| `--clay-deep`     | `#74482c` | `#e0b493` | Accent hover              |
+| `--sage`          | `#e8eee9` | `#1a201c` | Testimonial panel         |
+| `--night`         | `#1a1714` | `#0b0a09` | Closing enquiry band      |
+| `--night-ink`     | `#f2ece4` | `#f2ece4` | Text on `--night`         |
+| `--night-soft`    | `#b3aaa0` | `#b3aaa0` | Secondary text on night   |
+| `--clay-on-night` | `#d09a72` | `#d09a72` | Accent inside the band    |
 
 ### Contrast is a constraint, not an aspiration
 
@@ -125,8 +130,22 @@ Notable behaviours:
 
 - **Header** is transparent over a hero and turns solid once it scrolls past;
   on any page without a hero it is solid from the start, including with
-  JavaScript disabled. The CTA button inverts with it — white-on-image over the
-  hero, dark-on-paper otherwise.
+  JavaScript disabled. Where the browser supports `backdrop-filter` the solid
+  bar is frosted paper at 82% rather than opaque. The CTA button inverts with
+  it — white-on-image over the hero, dark-on-paper otherwise.
+- **Buttons** are pills (`--radius-pill`). The ghost variant sits beside the
+  primary one in the hero.
+- **Home hero** layers two small frames over the corners of the main
+  photograph, each padded in `--paper` like a print on a table. They are sized
+  near their ~410 px sources at 2x, so neither is upscaled.
+- **Marquee** under the hero repeats the package group names. It is decorative,
+  `aria-hidden`, and stands still under reduced motion.
+- **Testimonial slider.** The rail is a scroll-snapping row that works with no
+  script. `enhance.js` adds arrows, dots and a counter, and reads its position
+  back from the scroll so swiping and the buttons cannot disagree.
+- **Closing band** (`cta-band`) is dark in both themes, with the landscape
+  photograph beside the text. It re-points `--clay` to `--clay-on-night`
+  locally, so focus rings and hovers inside it stay visible.
 - **Gallery item** is an `<a>` pointing at the full-size JPEG. The lightbox
   enhances it; without JavaScript the link still shows the photograph.
 - **FAQ** is native `<details>`/`<summary>` — keyboard accessible and functional
@@ -142,6 +161,10 @@ translate; nothing scales dramatically or bounces.
 `prefers-reduced-motion: reduce` collapses every animation and transition to
 0.01 ms. This is safe precisely because **motion is never used to convey
 information** — removing all of it loses nothing.
+
+The one exception to "nothing loops" is the marquee. It is decorative,
+`aria-hidden`, and `animation: none` under reduced motion. The test helper
+`settle()` skips infinite animations when waiting for a page to come to rest.
 
 The scroll-reveal effect has two safety properties worth preserving:
 

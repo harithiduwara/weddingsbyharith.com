@@ -314,6 +314,88 @@
     });
   })();
 
+  /* ── Testimonial slider ────────────────────────────────────────────────
+     The rail already scrolls and snaps on its own; this only adds arrows,
+     dots and a counter. Position is read back from the scroll, so swiping,
+     the keyboard and the buttons can never disagree. */
+  $$('.quote-rail').forEach(function (rail) {
+    var items = $$('.quote', rail);
+    if (items.length < 2) return;
+
+    var nav = document.createElement('div');
+    nav.className = 'slider-nav';
+    var pad = function (n) {
+      return (n < 10 ? '0' : '') + n;
+    };
+    var btn = function (label, glyph) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'slider-nav__btn';
+      b.setAttribute('aria-label', label);
+      b.setAttribute('aria-controls', rail.id);
+      b.innerHTML = '<span aria-hidden="true">' + glyph + '</span>';
+      return b;
+    };
+    var prev = btn('Previous quote', '←');
+    var next = btn('Next quote', '→');
+    var dots = document.createElement('div');
+    dots.className = 'slider-nav__dots';
+    var count = document.createElement('p');
+    count.className = 'slider-nav__count plain';
+    count.setAttribute('aria-live', 'polite');
+
+    var current = 0;
+    var go = function (i) {
+      var n = (i + items.length) % items.length;
+      rail.scrollTo({
+        left: items[n].offsetLeft - rail.offsetLeft,
+        behavior: reduced ? 'auto' : 'smooth',
+      });
+    };
+    var sync = function () {
+      var w = rail.clientWidth || 1;
+      current = Math.min(items.length - 1, Math.max(0, Math.round(rail.scrollLeft / w)));
+      $$('.slider-nav__dot', dots).forEach(function (d, k) {
+        d.setAttribute('aria-current', String(k === current));
+      });
+      count.textContent = pad(current + 1) + ' / ' + pad(items.length);
+    };
+
+    items.forEach(function (_, k) {
+      var d = document.createElement('button');
+      d.type = 'button';
+      d.className = 'slider-nav__dot';
+      d.setAttribute('aria-label', 'Quote ' + (k + 1));
+      d.addEventListener('click', function () {
+        go(k);
+      });
+      dots.appendChild(d);
+    });
+    prev.addEventListener('click', function () {
+      go(current - 1);
+    });
+    next.addEventListener('click', function () {
+      go(current + 1);
+    });
+
+    var t;
+    rail.addEventListener(
+      'scroll',
+      function () {
+        clearTimeout(t);
+        t = setTimeout(sync, 60);
+      },
+      { passive: true },
+    );
+
+    nav.appendChild(prev);
+    nav.appendChild(next);
+    nav.appendChild(dots);
+    nav.appendChild(count);
+    rail.parentNode.insertBefore(nav, rail.nextSibling);
+    sync();
+  });
+
   /* ── Current-year stamp ────────────────────────────────────────────── */
   $$('[data-year]').forEach(function (el) {
     el.textContent = String(new Date().getFullYear());

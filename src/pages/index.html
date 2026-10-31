@@ -10,16 +10,27 @@
   <div class="shell hero__grid">
     <div class="hero__body">
       <p class="eyebrow">Wedding photography · Sri Lanka</p>
-      <h1 class="hero__title">The day, as it actually happened.</h1>
+      <h1 class="hero__title">The day, as it <em>actually</em> happened.</h1>
       <p class="hero__sub">{{site.description}}</p>
       <p class="cluster">
         <a class="btn" href="/portfolio/">See the work</a>
-        <a class="link-arrow" href="/packages/">Prices</a>
+        <a class="btn btn--ghost" href="/packages/">Prices</a>
       </p>
     </div>
-    <figure class="hero__figure">{{{heroHtml}}}</figure>
+    <div class="hero__art">
+      <figure class="hero__figure">{{{heroHtml}}}</figure>
+      <div class="hero__layer hero__layer--a">{{{heroLayerAHtml}}}</div>
+      <div class="hero__layer hero__layer--b">{{{heroLayerBHtml}}}</div>
+    </div>
   </div>
 </section>
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee__track">
+    <span>{{#each packages.groups}}<span>{{name}}</span>{{/each}}<span>{{site.contact.baseRegion}}</span></span>
+    <span>{{#each packages.groups}}<span>{{name}}</span>{{/each}}<span>{{site.contact.baseRegion}}</span></span>
+  </div>
+</div>
 
 <section class="section" id="intro">
   <div class="shell">
@@ -42,7 +53,10 @@
         </p>
         <p><a class="link-arrow" href="/about/">How I work</a></p>
       </div>
-      <div class="reveal">{{{aboutHtml}}}</div>
+      <div class="framed reveal">
+        {{{aboutHtml}}}
+        <p class="framed__tag">Weddings since<b>{{site.about.weddingsSince}}</b></p>
+      </div>
     </div>
   </div>
 </section>
@@ -109,13 +123,13 @@
   </div>
 </section>
 
-<section class="section section--sunk">
+<section class="section section--sage">
   <div class="shell">
     <div class="section__head reveal">
       <p class="eyebrow">In their words</p>
       <h2>What couples say</h2>
     </div>
-    <div class="quote-rail" tabindex="0" role="group" aria-label="What couples say">
+    <div class="quote-rail" id="quotes" tabindex="0" role="group" aria-label="What couples say">
       {{#each testimonials}}
       <figure class="quote">
         <blockquote class="quote__text">{{quote}}</blockquote>

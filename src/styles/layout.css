@@ -28,6 +28,10 @@
   --line: var(--line-sunk);
 }
 
+.section--sage {
+  background: var(--sage);
+}
+
 .section__head {
   display: grid;
   gap: var(--sp-s);

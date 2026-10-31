@@ -489,6 +489,18 @@ const globals = {
     eager: true,
   }),
   heroPreload: preloadLink(img('wedding-02'), '(min-width: 62rem) 34rem, 100vw'),
+  // The two small frames layered over the hero. Sized near their sources'
+  // own ~410 px width at 2x, so neither is ever upscaled.
+  heroLayerAHtml: picture(img('couples-02'), {
+    alt: 'A couple walk hand in hand through the shallows at sunset, her in a yellow dress.',
+    sizes: '(min-width: 62rem) 11rem, 30vw',
+    className: 'photo--cover',
+  }),
+  heroLayerBHtml: picture(img('wedding-01'), {
+    alt: 'The groom kisses the bride’s temple as she smiles, a traditional headpiece in her hair.',
+    sizes: '(min-width: 62rem) 14rem, 40vw',
+    className: 'photo--cover',
+  }),
   aboutHtml: picture(img('wedding-05'), {
     alt: 'A close portrait in low light. The bride in a red saree, the groom just behind her.',
     sizes: SIZES.card,

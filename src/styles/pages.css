@@ -86,39 +86,81 @@ body:not(.has-hero) main {
   color: var(--ink-faint);
 }
 
-/* Closing call to action, set over a photograph. */
-.cta-band {
+/* A photograph with a small paper tag pinned to its lower edge. */
+.framed {
   position: relative;
-  isolation: isolate;
-  color: var(--on-image);
-  display: grid;
-  place-items: center;
-  text-align: center;
+}
+.framed__tag {
+  position: absolute;
+  inset-inline-start: 0;
+  inset-block-end: var(--sp-l);
+  margin: 0;
+  background: var(--paper);
+  padding: var(--sp-s) var(--sp-m);
+  font-size: var(--step--1);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.framed__tag b {
+  display: block;
+  font-family: var(--font-display);
+  font-size: var(--step-3);
+  font-weight: 300;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--ink);
+  line-height: 1.1;
+}
+
+/* Closing call to action: a dark band in both themes, with the one landscape
+   photograph set beside the text rather than stretched behind it. */
+.cta-band {
+  /* Re-points the accent, so focus rings and hovers inside stay visible. */
+  --clay: var(--clay-on-night);
+  --line-strong: var(--night-soft);
+  background: var(--night);
+  color: var(--night-ink);
   padding-block: var(--sp-3xl);
 }
-.cta-band__media {
-  position: absolute;
-  inset: 0;
-  z-index: -2;
+.cta-band__grid {
+  display: grid;
+  gap: var(--sp-xl);
+  align-items: center;
 }
-.cta-band__media .photo,
-.cta-band__media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.cta-band::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background: var(--overlay-deep);
+@media (min-width: 60rem) {
+  .cta-band__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--sp-2xl);
+  }
 }
 .cta-band__body {
   display: grid;
   gap: var(--sp-m);
-  justify-items: center;
-  max-width: 40ch;
+  max-width: 34rem;
+}
+.cta-band h2 {
+  font-size: var(--step-5);
+  line-height: 1.05;
+}
+.cta-band h2 em {
+  color: var(--clay);
+}
+.cta-band p,
+.cta-band .eyebrow {
+  color: var(--night-soft);
+}
+.cta-band .link-arrow {
+  color: var(--night-ink);
+  border-color: var(--night-soft);
+}
+.cta-band__media .photo {
+  aspect-ratio: 3 / 2;
+  background-color: var(--night);
+}
+.cta-band__media .photo > img {
+  height: 100%;
+  object-fit: cover;
 }
 
 /* ── Collection page ───────────────────────────────────────────────────── */

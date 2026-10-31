@@ -57,7 +57,7 @@
   letter-spacing: var(--tracking-wide);
   text-transform: uppercase;
   text-decoration: none;
-  border-radius: var(--radius);
+  border-radius: var(--radius-pill);
   transition:
     background var(--dur-fast) var(--ease),
     color var(--dur-fast) var(--ease),
@@ -107,6 +107,17 @@ body:not(.has-hero) .header__cta {
 body:not(.has-hero) .header__cta:hover {
   --btn-bg: var(--clay-deep);
   border-color: var(--clay-deep);
+}
+
+.btn--on-dark {
+  --btn-bg: var(--night-ink);
+  --btn-fg: var(--night);
+  border-color: var(--night-ink);
+}
+.btn--on-dark:hover {
+  --btn-bg: transparent;
+  --btn-fg: var(--night-ink);
+  border-color: var(--night-ink);
 }
 
 .btn--block {
@@ -174,6 +185,16 @@ body:not(.has-hero) .header {
   color: var(--ink);
   box-shadow: 0 1px 0 var(--line);
 }
+/* Frosted where the browser can blur behind it; the solid fallback above
+   stays legible everywhere else. */
+@supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+  .header.is-solid,
+  body:not(.has-hero) .header {
+    background: color-mix(in srgb, var(--paper) 82%, transparent);
+    -webkit-backdrop-filter: saturate(1.4) blur(14px);
+    backdrop-filter: saturate(1.4) blur(14px);
+  }
+}
 .header.is-solid::before,
 body:not(.has-hero) .header::before {
   opacity: 0;
@@ -193,7 +214,8 @@ body:not(.has-hero) .header::before {
 .brand {
   font-family: var(--font-display);
   font-size: var(--step-1);
-  letter-spacing: 0.01em;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
   text-decoration: none;
   line-height: 1;
   white-space: nowrap;
@@ -222,7 +244,7 @@ body:not(.has-hero) .header::before {
   display: block;
   font-family: var(--font-sans);
   font-size: 0.5em;
-  letter-spacing: var(--tracking-wide);
+  letter-spacing: 0.42em;
   text-transform: uppercase;
   opacity: 0.7;
   margin-top: 0.3em;
@@ -234,27 +256,34 @@ body:not(.has-hero) .header::before {
 .nav__list {
   display: flex;
   align-items: center;
-  gap: var(--sp-m);
+  gap: var(--sp-l);
   list-style: none;
   margin: 0;
   padding: 0;
 }
 .nav__link {
+  position: relative;
   font-size: var(--step--1);
-  letter-spacing: var(--tracking-mid);
+  letter-spacing: var(--tracking-wide);
   text-transform: uppercase;
   text-decoration: none;
   padding-block: 0.4em;
-  border-bottom: 1px solid transparent;
-  transition:
-    border-color var(--dur-fast) var(--ease),
-    opacity var(--dur-fast) var(--ease);
 }
-.nav__link:hover {
-  border-color: currentColor;
+.nav__link::after {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  inset-block-end: 0;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform var(--dur) var(--ease);
 }
-.nav__link[aria-current='page'] {
-  border-color: currentColor;
+.nav__link:hover::after,
+.nav__link[aria-current='page']::after {
+  transform: scaleX(1);
+  transform-origin: left;
 }
 
 .header__cta {
@@ -365,7 +394,7 @@ body:not(.has-hero) .header::before {
 }
 @media (min-width: 62rem) {
   .hero {
-    padding-block: calc(var(--header-h) + var(--sp-2xl)) var(--sp-3xl);
+    padding-block: calc(var(--header-h) + var(--sp-xl)) var(--sp-2xl);
   }
 }
 
@@ -389,6 +418,10 @@ body:not(.has-hero) .header::before {
 .hero__title {
   font-size: var(--step-6);
   max-width: 13ch;
+  line-height: 1.02;
+}
+.hero__title em {
+  color: var(--clay);
 }
 .hero__sub {
   font-size: var(--step-1);
@@ -398,15 +431,84 @@ body:not(.has-hero) .header::before {
 }
 
 /* Capped so the photograph is never asked to render much beyond its own
-   pixels, whatever the viewport does. */
-.hero__figure {
-  margin: 0;
+   pixels, whatever the viewport does. The two smaller frames are layered over
+   its corners and padded with the paper colour, like prints on a table. */
+.hero__art {
+  position: relative;
   max-width: 34rem;
+  width: 100%;
   margin-inline: auto;
+  padding-inline-end: 16%;
+  padding-block: 6% 8%;
 }
 @media (min-width: 62rem) {
-  .hero__figure {
+  .hero__art {
     margin-inline: auto 0;
+  }
+}
+.hero__figure {
+  margin: 0;
+  box-shadow: 0 2rem 3.5rem -2rem rgb(20 17 14 / 0.45);
+}
+.hero__layer {
+  position: absolute;
+  border: 0.45rem solid var(--paper);
+  background: var(--paper);
+  box-shadow: 0 1.5rem 3rem -1.5rem rgb(20 17 14 / 0.5);
+}
+.hero__layer .photo--cover {
+  aspect-ratio: 2 / 3;
+}
+.hero__layer--a {
+  width: 32%;
+  inset-block-start: 0;
+  inset-inline-end: 4%;
+}
+.hero__layer--b {
+  width: 42%;
+  inset-block-end: 0;
+  inset-inline-end: 0;
+}
+
+/* ── Marquee ───────────────────────────────────────────────────────────
+   Decorative and aria-hidden; the same words are the package groups listed
+   on the Investment page. Stops dead for reduced motion. */
+.marquee {
+  overflow: hidden;
+  white-space: nowrap;
+  border-block: 1px solid var(--line);
+  padding-block: var(--sp-m);
+}
+.marquee__track {
+  display: inline-flex;
+  animation: marquee 40s linear infinite;
+}
+.marquee__track > span {
+  display: inline-flex;
+}
+.marquee__track span span {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-display);
+  font-size: var(--step-3);
+  font-style: italic;
+  font-weight: 300;
+}
+.marquee__track span span::after {
+  content: '✦';
+  font-style: normal;
+  font-size: 0.45em;
+  color: var(--clay);
+  margin-inline: var(--sp-xl);
+}
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee__track {
+    animation: none;
   }
 }
 
@@ -521,6 +623,18 @@ body:not(.has-hero) .header::before {
   font-style: italic;
   font-weight: 300;
 }
+.quote-rail .quote__text {
+  font-size: var(--step-3);
+  font-style: normal;
+}
+.quote-rail .quote__text::before {
+  content: '“';
+  display: block;
+  font-size: 2.4em;
+  line-height: 0.6;
+  color: var(--clay);
+  margin-block-end: var(--sp-2xs);
+}
 .quote__attr {
   font-size: var(--step--1);
   letter-spacing: var(--tracking-mid);
@@ -542,8 +656,9 @@ body:not(.has-hero) .header::before {
 .quote-rail {
   display: grid;
   grid-auto-flow: column;
-  grid-auto-columns: min(88%, 34rem);
+  grid-auto-columns: 100%;
   gap: var(--sp-xl);
+  scroll-behavior: smooth;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   padding-block-end: var(--sp-m);
@@ -551,6 +666,60 @@ body:not(.has-hero) .header::before {
 }
 .quote-rail > * {
   scroll-snap-align: start;
+  max-width: 52rem;
+}
+/* With script, the rail becomes a one-at-a-time slider and hides its
+   scrollbar; the arrows, dots and counter below are created by enhance.js. */
+.js .quote-rail {
+  scrollbar-width: none;
+}
+.js .quote-rail::-webkit-scrollbar {
+  display: none;
+}
+.slider-nav {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-s);
+  margin-block-start: var(--sp-l);
+}
+.slider-nav__btn {
+  width: 3rem;
+  height: 3rem;
+  display: grid;
+  place-items: center;
+  /* --ink-faint, not a hairline: the outline is what marks this as a
+     control, so it needs 3:1 (4.68:1 at worst, on dark sage). */
+  border: 1px solid var(--ink-faint);
+  border-radius: var(--radius-pill);
+  font-size: var(--step-1);
+  transition: border-color var(--dur-fast) var(--ease);
+}
+.slider-nav__btn:hover {
+  border-color: var(--ink);
+}
+.slider-nav__dots {
+  display: flex;
+  gap: var(--sp-2xs);
+}
+.slider-nav__dot {
+  width: 1.75rem;
+  height: 2.75rem;
+  display: grid;
+  align-items: center;
+}
+.slider-nav__dot::before {
+  content: '';
+  height: 2px;
+  background: var(--line-strong);
+  transition: background var(--dur) var(--ease);
+}
+.slider-nav__dot[aria-current='true']::before {
+  background: var(--ink);
+}
+.slider-nav__count {
+  margin-inline-start: auto;
+  font-family: var(--font-display);
+  font-size: var(--step-2);
 }
 
 /* ── Pricing ───────────────────────────────────────────────────────────── */

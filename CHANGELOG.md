@@ -4,6 +4,43 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project uses
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.14.0] — 2026-10-31
+
+A visual refresh across every page. Content, prices, photographs and copy are
+unchanged; this is the frame around them. See
+[ADR-0007](docs/adr/0007-visual-refresh.md).
+
+### Changed
+
+- **Header** is frosted paper where the browser can blur behind it, the wordmark
+  is set in tracked capitals, and nav links draw an underline in on hover.
+- **Buttons are pills.** The hero pairs the primary button with a ghost one for
+  Prices, instead of a text link.
+- **Home hero** layers two small framed photographs over the corners of the main
+  one, and sets _actually_ in italic clay.
+- **A marquee** of the package group names runs under the hero. It is
+  `aria-hidden` and stops for reduced motion.
+- **The intro photograph** carries a small tag: _Weddings since 2020_, from
+  `site.about.weddingsSince`.
+- **Testimonials** sit on a new sage panel as a one-at-a-time slider with arrows,
+  dots and a counter. Without script they remain a swipeable row.
+- **The closing band** is dark in both themes, with the photograph beside the
+  text rather than behind an overlay, and the phone number beside the button.
+
+### Added
+
+- Tokens `--sage`, `--night`, `--night-ink`, `--night-soft`, `--clay-on-night`
+  and `--radius-pill`. Every pairing was measured; the figures are in
+  `tokens.css`.
+- `tests/e2e/design.spec.js`: slider behaviour with and without script, marquee
+  semantics and reduced motion, hero layers inside the viewport, and the closing
+  band dark in both themes.
+
+### Fixed
+
+- `settle()` in the e2e helpers waited for _every_ animation to finish, so an
+  infinite one would time it out. It now skips infinite animations only.
+
 ## [1.13.0] — 2026-10-05
 
 The Investment page reset as a price guide rather than a card grid. Scope was

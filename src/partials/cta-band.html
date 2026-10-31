@@ -1,12 +1,17 @@
 <section class="cta-band">
-  <div class="cta-band__media">{{{ctaHtml}}}</div>
-  <div class="shell cta-band__body">
-    <p class="eyebrow">Enquiries</p>
-    <h2>Tell me about your day</h2>
-    <p>
-      I only take a limited number of weddings a year, so that each one gets the whole of my
-      attention. If your date is free I would like to hear about it.
-    </p>
-    <a class="btn btn--on-image" href="/contact/">{{site.cta.label}}</a>
+  <div class="shell cta-band__grid">
+    <div class="cta-band__body">
+      <p class="eyebrow">Enquiries</p>
+      <h2>Tell me about <em>your</em> day</h2>
+      <p>
+        I only take a limited number of weddings a year, so that each one gets the whole of my
+        attention. If your date is free I would like to hear about it.
+      </p>
+      <p class="cluster">
+        <a class="btn btn--on-dark" href="/contact/">{{site.cta.label}}</a>
+        <a class="link-arrow" href="tel:{{site.contact.phoneHref}}">{{site.contact.phone}}</a>
+      </p>
+    </div>
+    <div class="cta-band__media">{{{ctaHtml}}}</div>
   </div>
 </section>

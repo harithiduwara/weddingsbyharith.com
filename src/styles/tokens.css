@@ -27,6 +27,18 @@
   --clay-deep: #74482c;
   --clay-wash: #f3e9e0;
 
+  /* Pale sage for testimonial panels: a cool rest beside the warm neutrals.
+     Measured: --ink 15.16:1, --ink-faint 4.72:1, --clay 4.79:1 on it.
+     Dark: --ink 14.12:1, --ink-faint 4.68:1, --clay 6.74:1. */
+  --sage: #e8eee9;
+  /* Ground for the dark closing band, in both themes. Measured on light /
+     dark --night: --night-ink 15.21 / 16.86, --night-soft 7.80 / 8.64,
+     --clay-on-night 7.26 / 8.05. */
+  --night: #1a1714;
+  --night-ink: #f2ece4;
+  --night-soft: #b3aaa0;
+  --clay-on-night: #d09a72;
+
   --overlay: rgb(20 17 14 / 0.42);
   --overlay-deep: rgb(20 17 14 / 0.66);
   --on-image: #fdfbf8;
@@ -69,6 +81,7 @@
   --shell-narrow: 46rem;
   --gutter: clamp(1.25rem, 4vw, 3.5rem);
   --radius: 2px;
+  --radius-pill: 999px;
 
   /* Motion — restrained. Nothing bounces at a wedding. */
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
@@ -97,6 +110,8 @@
     --clay: #d09a72;
     --clay-deep: #e0b493;
     --clay-wash: #241d18;
+    --sage: #1a201c;
+    --night: #0b0a09;
     --overlay: rgb(8 7 6 / 0.5);
     --overlay-deep: rgb(8 7 6 / 0.72);
   }

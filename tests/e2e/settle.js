@@ -31,8 +31,14 @@ export async function settle(page, { timeout = 8000 } = {}) {
   );
 
   // Let any remaining CSS animation (the image fade-in) reach its end state.
+  // Infinite loops (the decorative, aria-hidden marquee) never end, so they
+  // are skipped; every finite animation must still finish.
   await page.waitForFunction(
-    () => document.getAnimations().every((a) => a.playState !== 'running'),
+    () =>
+      document
+        .getAnimations()
+        .filter((a) => a.effect?.getTiming().iterations !== Infinity)
+        .every((a) => a.playState !== 'running'),
     null,
     { timeout },
   );
